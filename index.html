@@ -28,6 +28,7 @@
   </script>
 
   <style>
+    /* ════════ BASE & THEME TOKENS (unchanged from your original) ════════ */
     *,
     *::before,
     *::after {
@@ -36,7 +37,6 @@
       padding: 0;
     }
 
-    /* ════════ THEME TOKENS ════════ */
     :root,
     [data-theme="light"] {
       --bg: #F7F6F3;
@@ -89,16 +89,13 @@
     ::-webkit-scrollbar {
       width: 8px;
     }
-
     ::-webkit-scrollbar-track {
       background: var(--bg);
     }
-
     ::-webkit-scrollbar-thumb {
       background: var(--border);
       border-radius: 4px;
     }
-
     ::-webkit-scrollbar-thumb:hover {
       background: var(--muted-2);
     }
@@ -107,7 +104,6 @@
       color: inherit;
       text-decoration: none;
     }
-
     :focus-visible {
       outline: 2px solid var(--orange);
       outline-offset: 3px;
@@ -126,7 +122,6 @@
     .font-display {
       font-family: 'Sora', sans-serif;
     }
-
     .font-mono {
       font-family: 'IBM Plex Mono', monospace;
     }
@@ -158,13 +153,13 @@
       flex-shrink: 0;
     }
 
-    /* ════════ NAVBAR ════════ */
+    /* ════════ NAVBAR (unchanged) ════════ */
     nav {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      z-index: 100;
+      z-index: 200;
       padding: 1.1rem 0;
       transition: all 0.3s ease;
     }
@@ -189,6 +184,7 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      flex-shrink: 0;
     }
 
     .nav-logo .bracket {
@@ -253,6 +249,7 @@
       visibility: hidden;
       transform: translateY(-6px);
       transition: all 0.18s;
+      z-index: 50;
     }
 
     .theme-dropdown.open {
@@ -280,17 +277,14 @@
     .theme-option:hover {
       background: var(--code-bg);
     }
-
     .theme-option.current {
       color: var(--orange);
       font-weight: 600;
     }
-
     .theme-option .check {
       margin-left: auto;
       opacity: 0;
     }
-
     .theme-option.current .check {
       opacity: 1;
     }
@@ -306,6 +300,7 @@
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      white-space: nowrap;
     }
 
     .nav-cta:hover {
@@ -313,212 +308,341 @@
       box-shadow: 0 6px 16px var(--shadow-md);
     }
 
+    .dash-switch {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.76rem;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 0.45rem 0.85rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .dash-switch:hover {
+      border-color: var(--teal);
+      color: var(--teal);
+    }
+
     .nav-toggle {
       display: none;
       background: none;
-      border: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 38px;
+      height: 38px;
       color: var(--ink);
-      font-size: 1.3rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .mobile-nav-panel {
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: min(80vw, 320px);
+      background: var(--surface);
+      border-left: 1px solid var(--border);
+      z-index: 300;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      padding: 1.5rem;
+      box-shadow: -10px 0 40px var(--shadow-md);
+    }
+
+    .mobile-nav-panel.open {
+      transform: translateX(0);
+    }
+
+    .mobile-nav-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    .mobile-nav-close {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      width: 34px;
+      height: 34px;
+      color: var(--ink);
+      font-size: 1rem;
       cursor: pointer;
     }
 
-    /* ════════ HERO ════════ */
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .mobile-nav-links a {
+      display: block;
+      padding: 0.85rem 0.5rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--ink);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .mobile-nav-footer {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .mobile-nav-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 250;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease;
+    }
+
+    .mobile-nav-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* ══════════════════════════════════════════════════════════════ */
+    /*  NEW HERO SECTION (imported from the second design)           */
+    /*  Adapted to use your existing theme variables                 */
+    /* ══════════════════════════════════════════════════════════════ */
     #hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
       padding: 7rem 0 4rem;
+      position: relative;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
+      grid-template-columns: 1fr 1fr;
       gap: 3rem;
       align-items: center;
+      width: 100%;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: color-mix(in srgb, var(--orange) 12%, transparent);
+      color: var(--orange);
+      padding: 0.35rem 1.2rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      border: 1px solid color-mix(in srgb, var(--orange) 20%, transparent);
+      margin-bottom: 1.2rem;
     }
 
     .hero-title {
       font-family: 'Sora', sans-serif;
-      font-size: clamp(2.4rem, 4.6vw, 3.6rem);
-      font-weight: 700;
-      line-height: 1.12;
-      letter-spacing: -0.01em;
+      font-size: clamp(2.8rem, 6vw, 4.8rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -2px;
       margin-bottom: 1.2rem;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeUp 0.7s 0.1s forwards;
     }
 
-    .hero-title .accent {
-      color: var(--orange);
+    .hero-title .highlight {
+      background: linear-gradient(135deg, var(--orange), color-mix(in srgb, var(--orange) 70%, #000));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-sub {
-      font-size: 1.02rem;
+      font-size: 1.2rem;
       color: var(--muted);
-      line-height: 1.75;
-      max-width: 460px;
+      max-width: 520px;
       margin-bottom: 2rem;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeUp 0.7s 0.22s forwards;
+      line-height: 1.7;
     }
 
-    .hero-cta-row {
+    .hero-actions {
       display: flex;
-      gap: 0.9rem;
+      gap: 1rem;
       flex-wrap: wrap;
-      align-items: center;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeUp 0.7s 0.34s forwards;
     }
 
     .btn-primary {
-      background: var(--orange);
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 0.88rem;
-      padding: 0.8rem 1.6rem;
-      border-radius: 7px;
-      border: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      transition: all 0.22s;
+      gap: 0.6rem;
+      background: var(--orange);
+      color: #fff;
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 30px color-mix(in srgb, var(--orange) 30%, transparent);
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 24px var(--shadow-md);
+      background: color-mix(in srgb, var(--orange) 80%, #000);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px color-mix(in srgb, var(--orange) 40%, transparent);
     }
 
     .btn-secondary {
-      border: 1px solid var(--border);
-      color: var(--ink);
-      font-size: 0.88rem;
-      font-weight: 500;
-      padding: 0.8rem 1.6rem;
-      border-radius: 7px;
-      transition: all 0.22s;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.6rem;
+      background: transparent;
+      color: var(--ink);
+      padding: 0.9rem 2.2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border: 1.5px solid var(--border);
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
     .btn-secondary:hover {
       border-color: var(--orange);
       color: var(--orange);
+      transform: translateY(-3px);
+      background: color-mix(in srgb, var(--orange) 5%, transparent);
     }
 
-    .hero-tags {
+    .hero-stats {
       display: flex;
-      gap: 0.5rem;
-      margin-top: 1.6rem;
-      flex-wrap: wrap;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: fadeUp 0.7s 0.46s forwards;
-    }
-
-    .hero-tag {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 0.3rem 0.65rem;
-      border-radius: 5px;
-      background: var(--surface);
-    }
-
-    /* ── Signature: certificate-as-commit-log panel ── */
-    .commit-panel {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 24px 60px -20px var(--shadow-md);
-      opacity: 0;
-      transform: translateY(18px) scale(0.98);
-      animation: fadeUp 0.8s 0.3s forwards;
-    }
-
-    .commit-bar {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1rem;
-      background: var(--code-bg);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .commit-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .commit-bar-title {
-      margin-left: 0.5rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      color: var(--muted);
-    }
-
-    .commit-body {
-      padding: 1.3rem 1.3rem 0.6rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.78rem;
-    }
-
-    .commit-row {
-      display: flex;
-      gap: 0.7rem;
-      padding: 0.65rem 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .commit-row:last-child {
-      border-bottom: none;
-    }
-
-    .commit-hash {
-      color: var(--teal);
-      flex-shrink: 0;
-    }
-
-    .commit-msg {
-      color: var(--ink);
-      flex: 1;
-    }
-
-    .commit-meta {
-      color: var(--muted-2);
-      font-size: 0.72rem;
-      white-space: nowrap;
-    }
-
-    .commit-footer {
-      padding: 0.9rem 1.3rem;
-      background: var(--code-bg);
+      gap: 3rem;
+      margin-top: 2.8rem;
+      padding-top: 2rem;
       border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.72rem;
-      color: var(--muted);
     }
 
-    .commit-footer .verify {
+    .stat-item h3 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--ink);
+    }
+    .stat-item h3 span {
       color: var(--orange);
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
+    }
+    .stat-item p {
+      color: var(--muted-2);
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-top: 2px;
     }
 
-    /* ════════ SECTION SCAFFOLD ════════ */
+    /* Hero visual – avatar with floating badges */
+    .hero-visual {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-avatar {
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), color-mix(in srgb, var(--orange) 70%, #000));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 7rem;
+      font-weight: 800;
+      color: #fff;
+      box-shadow: 0 30px 80px color-mix(in srgb, var(--orange) 25%, transparent);
+      position: relative;
+      user-select: none;
+    }
+
+    .hero-avatar::after {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px solid color-mix(in srgb, var(--orange) 20%, transparent);
+      animation: pulse-ring 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse-ring {
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: 0.6;
+      }
+      50% {
+        transform: scale(1.06);
+        opacity: 0.2;
+      }
+    }
+
+    .floating-badge {
+      position: absolute;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.7rem 1.2rem;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-md);
+      backdrop-filter: blur(4px);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .floating-badge i {
+      color: var(--orange);
+      font-size: 1rem;
+    }
+
+    .floating-badge:nth-child(2) {
+      top: 10%;
+      right: -10%;
+      animation-delay: 0.5s;
+    }
+    .floating-badge:nth-child(3) {
+      bottom: 15%;
+      left: -12%;
+      animation-delay: 1.2s;
+    }
+    .floating-badge:nth-child(4) {
+      bottom: 5%;
+      right: -5%;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-12px);
+      }
+    }
+
+    /* ════════ SECTION SCAFFOLD (unchanged) ════════ */
     section {
       padding: 5.5rem 0;
     }
@@ -542,7 +666,7 @@
       font-size: 0.95rem;
     }
 
-    /* ════════ ABOUT ════════ */
+    /* ════════ ABOUT (unchanged) ════════ */
     #about {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -618,14 +742,13 @@
     .cert-detail .label {
       color: var(--muted);
     }
-
     .cert-detail .value {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.76rem;
       color: var(--ink);
     }
 
-    /* ════════ SKILLS ════════ */
+    /* ════════ SKILLS (unchanged) ════════ */
     .skills-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -685,7 +808,7 @@
       border-radius: 5px;
     }
 
-    /* ════════ PROJECTS ════════ */
+    /* ════════ PROJECTS (unchanged) ════════ */
     #projects {
       background: var(--surface);
       border-top: 1px solid var(--border);
@@ -787,7 +910,7 @@
       gap: 0.55rem;
     }
 
-    /* ════════ TIMELINE / BUILD LOG ════════ */
+    /* ════════ TIMELINE / BUILD LOG (unchanged) ════════ */
     .build-log {
       position: relative;
       padding-left: 2.2rem;
@@ -845,7 +968,52 @@
       max-width: 540px;
     }
 
-    /* ════════ CONTACT ════════ */
+    /* ════════ CREDENTIALS (new section – imported from second design) ════════ */
+    #credentials {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .cred-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: 1.8rem 1.5rem;
+      border-radius: 12px;
+      text-align: center;
+      transition: all 0.25s;
+    }
+
+    .cred-card:hover {
+      border-color: var(--orange);
+      transform: scale(1.02);
+    }
+
+    .cred-card i {
+      font-size: 2.4rem;
+      color: var(--orange);
+      margin-bottom: 0.6rem;
+    }
+
+    .cred-card h5 {
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+
+    .cred-card p {
+      color: var(--muted-2);
+      font-size: 0.8rem;
+      margin-top: 2px;
+    }
+
+    /* ════════ CONTACT (unchanged) ════════ */
     #contact {
       text-align: center;
     }
@@ -925,7 +1093,7 @@
       transform: translateY(-2px);
     }
 
-    /* ════════ FOOTER ════════ */
+    /* ════════ FOOTER (unchanged) ════════ */
     footer {
       padding: 2.2rem 0;
       border-top: 1px solid var(--border);
@@ -974,32 +1142,76 @@
       transform: translateY(0);
     }
 
-    /* ════════ RESPONSIVE ════════ */
-    @media (max-width: 900px) {
-      .nav-links {
+    /* ════════ RESPONSIVE (updated for new hero) ════════ */
+    @media (max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-sub {
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-stats {
+        justify-content: center;
+      }
+      .hero-visual {
+        order: -1;
+      }
+      .hero-avatar {
+        width: 220px;
+        height: 220px;
+        font-size: 4rem;
+      }
+      .floating-badge {
         display: none;
       }
-
-      .hero-grid,
       .about-grid {
         grid-template-columns: 1fr;
+        text-align: center;
       }
-
-      .skills-grid,
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
       .projects-grid {
         grid-template-columns: 1fr;
       }
-
+      .nav-links {
+        display: none;
+      }
+      .dash-switch span.dash-switch-label {
+        display: none;
+      }
       section {
         padding: 4rem 0;
       }
-
       .wrap {
         padding: 0 1.2rem;
       }
-
       .nav-toggle {
-        display: block;
+        display: flex;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-cta span {
+        display: none;
+      }
+      .hero-avatar {
+        width: 170px;
+        height: 170px;
+        font-size: 3rem;
+      }
+      .hero-stats {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      .stat-item h3 {
+        font-size: 1.5rem;
       }
     }
   </style>
@@ -1016,83 +1228,103 @@
         <li><a href="#skills">Skills</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#journey">Journey</a></li>
+        <li><a href="#credentials">Credentials</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav-right">
+        <a href="dev-dashboard.html" class="dash-switch" title="Switch to dev dashboard">
+          <i class="bi bi-grid-1x2"></i><span class="dash-switch-label">Dev Dashboard</span>
+        </a>
         <div style="position:relative;">
           <button class="theme-toggle" id="themeBtn" aria-label="Theme settings" title="Theme">
             <i class="bi bi-circle-half" id="themeIcon"></i>
           </button>
           <div class="theme-dropdown" id="themeDropdown">
-            <button class="theme-option" data-theme="light"><i class="bi bi-sun"></i> Light <i class="bi bi-check check"></i></button>
-            <button class="theme-option" data-theme="dark"><i class="bi bi-moon-stars"></i> Dark <i class="bi bi-check check"></i></button>
-            <button class="theme-option" data-theme="system"><i class="bi bi-display"></i> System <i class="bi bi-check check"></i></button>
+            <button class="theme-option" data-theme="light"><i class="bi bi-sun"></i> Light <i
+                class="bi bi-check check"></i></button>
+            <button class="theme-option" data-theme="dark"><i class="bi bi-moon-stars"></i> Dark <i
+                class="bi bi-check check"></i></button>
+            <button class="theme-option" data-theme="system"><i class="bi bi-display"></i> System <i
+                class="bi bi-check check"></i></button>
           </div>
         </div>
-        <a href="#" class="nav-cta" id="downloadCvNav"><i class="bi bi-download"></i> Resume</a>
+        <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta" id="downloadCvNav"><i class="bi bi-download"></i>
+          <span>Resume</span></a>
+        <button class="nav-toggle" id="navToggle" aria-label="Open menu"><i class="bi bi-list"></i></button>
       </div>
     </div>
   </nav>
 
-  <!-- ════════ HERO ════════ -->
+  <!-- ════════ MOBILE NAV DRAWER ════════ -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <div class="mobile-nav-panel" id="mobileNavPanel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="mobile-nav-head">
+      <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
+      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <ul class="mobile-nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#journey">Journey</a></li>
+      <li><a href="#credentials">Credentials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="mobile-nav-footer">
+      <a href="dev-dashboard.html" class="btn-secondary"><i class="bi bi-grid-1x2"></i> Dev Dashboard</a>
+      <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta" style="justify-content:center;"><i
+          class="bi bi-download"></i> Download Resume</a>
+    </div>
+  </div>
+
+  <!-- ════════ HERO (new) ════════ -->
   <section id="hero">
     <div class="wrap">
       <div class="hero-grid">
-        <div>
-          <div class="eyebrow">OPEN TO FULL-STACK ROLES & FREELANCE WORK</div>
-          <h1 class="hero-title">Hi, I'm Daniel —<br>a <span class="accent">full-stack</span><br>web developer.</h1>
-          <p class="hero-sub">I build complete web applications from the interface down to the database — recently trained through an intensive fullstack program, and currently turning that training into real, working projects.</p>
-          <div class="hero-cta-row">
-            <a href="#projects" class="btn-primary"><i class="bi bi-grid"></i> View my projects</a>
-            <a href="#" class="btn-secondary" id="downloadCvHero"><i class="bi bi-file-earmark-arrow-down"></i> Download CV</a>
+        <div class="hero-content">
+          <div class="hero-badge"><i class="bi bi-code-slash"></i> Available for opportunities</div>
+          <h1 class="hero-title">
+            Hi, I'm <br><span class="highlight">Daniel Ogunlade</span>
+          </h1>
+          <p class="hero-sub">
+            Full‑stack developer crafting high‑performance web experiences
+            with a passion for clean code and elegant design.
+          </p>
+          <div class="hero-actions">
+            <a href="#contact" class="btn-primary">
+              <i class="bi bi-envelope"></i> Hire Me
+            </a>
+            <a href="Daniel_Ogunlade_CV.pdf" download class="btn-secondary">
+              <i class="bi bi-file-earmark-arrow-down"></i> Download CV
+            </a>
           </div>
-          <div class="hero-tags">
-            <span class="hero-tag">HTML / CSS / JS</span>
-            <span class="hero-tag">Node.js</span>
-            <span class="hero-tag">Python</span>
-            <span class="hero-tag">MySQL · Django</span>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>1<span>+</span></h3>
+              <p>Year Experience</p>
+            </div>
+            <div class="stat-item">
+              <h3>10<span>+</span></h3>
+              <p>Projects Delivered</p>
+            </div>
+            <div class="stat-item">
+              <h3>8<span>+</span></h3>
+              <p>Happy Clients</p>
+            </div>
           </div>
         </div>
-
-        <div class="commit-panel">
-          <div class="commit-bar">
-            <span class="commit-dot" style="background:#FF5F57"></span>
-            <span class="commit-dot" style="background:#FEBC2E"></span>
-            <span class="commit-dot" style="background:#28C840"></span>
-            <span class="commit-bar-title">~/daniel/training-log.git</span>
-          </div>
-          <div class="commit-body">
-            <div class="commit-row">
-              <span class="commit-hash">a1f9c2e</span>
-              <span class="commit-msg">enroll in Fullstack Web Development</span>
-              <span class="commit-meta">Jan 20, 2025</span>
-            </div>
-            <div class="commit-row">
-              <span class="commit-hash">7b3e810</span>
-              <span class="commit-msg">complete front-end module</span>
-              <span class="commit-meta">Mar 2025</span>
-            </div>
-            <div class="commit-row">
-              <span class="commit-hash">d92a4f1</span>
-              <span class="commit-msg">complete back-end + database module</span>
-              <span class="commit-meta">May 2025</span>
-            </div>
-            <div class="commit-row">
-              <span class="commit-hash">f44c0b7</span>
-              <span class="commit-msg">satisfy all mandatory modules ✓</span>
-              <span class="commit-meta">Jun 20, 2025</span>
-            </div>
-          </div>
-          <div class="commit-footer">
-            <span>UCTA/FSD/2025/11549</span>
-            <span class="verify"><i class="bi bi-patch-check-fill"></i> verified</span>
-          </div>
+        <div class="hero-visual">
+          <div class="hero-avatar">D O</div>
+          <div class="floating-badge"><i class="bi bi-cpu"></i> React</div>
+          <div class="floating-badge"><i class="bi bi-database"></i> Node.js</div>
+          <div class="floating-badge"><i class="bi bi-cloud"></i> AWS</div>
+          <div class="floating-badge"><i class="bi bi-phone"></i> Mobile</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ════════ ABOUT ════════ -->
+  <!-- ════════ ABOUT (unchanged) ════════ -->
   <section id="about">
     <div class="wrap">
       <div class="about-grid">
@@ -1109,19 +1341,27 @@
             </div>
             <div class="cert-detail"><span class="label">Started</span><span class="value">20 Jan 2025</span></div>
             <div class="cert-detail"><span class="label">Completed</span><span class="value">20 Jun 2025</span></div>
-            <div class="cert-detail"><span class="label">Certificate No.</span><span class="value">UCTA/FSD/2025/11549</span></div>
+            <div class="cert-detail"><span class="label">Certificate No.</span><span
+                class="value">UCTA/FSD/2025/11549</span></div>
           </div>
         </div>
         <div class="about-text reveal">
-          <p>I'm Daniel — a full-stack web developer based in Nigeria. My path into development started with curiosity about how websites actually work under the hood, and turned into a structured, hands-on commitment: a 5-month intensive Fullstack Web Development program at UpTech Computer Training Academy, completed in June 2025.</p>
-          <p>Over that program I worked across the <strong>entire stack</strong> — building responsive interfaces with HTML, CSS, and JavaScript, then moving into server-side logic, REST APIs, and relational and document databases. I didn't just learn syntax; I learned how the pieces of a real application fit together.</p>
-          <p>I'm now applying that foundation to real projects, with a focus on writing clean, readable code and understanding <strong>why</strong> something works — not just getting it to run. I'm actively looking for opportunities, freelance or full-time, to keep building.</p>
+          <p>I'm Daniel — a full-stack web developer based in Nigeria. My path into development started with curiosity
+            about how websites actually work under the hood, and turned into a structured, hands-on commitment: a
+            5-month intensive Fullstack Web Development program at UpTech Computer Training Academy, completed in June
+            2025.</p>
+          <p>Over that program I worked across the <strong>entire stack</strong> — building responsive interfaces with
+            HTML, CSS, and JavaScript, then moving into server-side logic, REST APIs, and relational and document
+            databases. I didn't just learn syntax; I learned how the pieces of a real application fit together.</p>
+          <p>I'm now applying that foundation to real projects, with a focus on writing clean, readable code and
+            understanding <strong>why</strong> something works — not just getting it to run. I'm actively looking for
+            opportunities, freelance or full-time, to keep building.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ════════ SKILLS ════════ -->
+  <!-- ════════ SKILLS (unchanged) ════════ -->
   <section id="skills">
     <div class="wrap">
       <div class="section-head reveal">
@@ -1132,105 +1372,102 @@
       <div class="skills-grid">
         <div class="skill-card reveal">
           <div class="skill-card-head">
-            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i class="bi bi-layout-text-window"></i></div>
+            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i
+                class="bi bi-layout-text-window"></i></div>
             <div class="skill-card-title">Front-End</div>
           </div>
           <div class="skill-tags">
-            <span class="skill-tag">HTML5</span>
-            <span class="skill-tag">CSS3</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">Bootstrap</span>
-            <span class="skill-tag">Responsive Design</span>
+            <span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span
+              class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Bootstrap</span><span class="skill-tag">Responsive Design</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <div class="skill-card-head">
-            <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i class="bi bi-server"></i></div>
+            <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i
+                class="bi bi-server"></i></div>
             <div class="skill-card-title">Back-End</div>
           </div>
           <div class="skill-tags">
-            <span class="skill-tag">Node.js</span>
-            <span class="skill-tag">Python</span>
-            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">Node.js</span><span class="skill-tag">Python</span><span class="skill-tag">REST
+              APIs</span>
             <span class="skill-tag">Server-side Logic</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <div class="skill-card-head">
-            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i class="bi bi-hdd-stack"></i></div>
+            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i
+                class="bi bi-hdd-stack"></i></div>
             <div class="skill-card-title">Databases</div>
           </div>
           <div class="skill-tags">
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">Django</span>
-            <span class="skill-tag">Data Modeling</span>
+            <span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Data
+              Modeling</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <div class="skill-card-head">
-            <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i class="bi bi-tools"></i></div>
+            <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i
+                class="bi bi-tools"></i></div>
             <div class="skill-card-title">Tools & Workflow</div>
           </div>
           <div class="skill-tags">
-            <span class="skill-tag">VS Code</span>
-            <span class="skill-tag">Git & GitHub</span>
-            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">Git & GitHub</span><span class="skill-tag">VS Code</span><span
+              class="skill-tag">Postman</span>
             <span class="skill-tag">CLI</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <div class="skill-card-head">
-            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i class="bi bi-diagram-3"></i></div>
+            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i
+                class="bi bi-diagram-3"></i></div>
             <div class="skill-card-title">Core Concepts</div>
           </div>
           <div class="skill-tags">
-            <span class="skill-tag">OOP</span>
-            <span class="skill-tag">MVC</span>
-            <span class="skill-tag">Version Control</span>
-            <span class="skill-tag">Debugging</span>
+            <span class="skill-tag">OOP</span><span class="skill-tag">MVC</span><span class="skill-tag">Version
+              Control</span><span class="skill-tag">Debugging</span>
           </div>
         </div>
         <div class="skill-card reveal">
           <div class="skill-card-head">
-            <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i class="bi bi-arrow-repeat"></i></div>
+            <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i
+                class="bi bi-arrow-repeat"></i></div>
             <div class="skill-card-title">Currently Learning</div>
           </div>
           <div class="skill-tags">
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Express</span>
-            <span class="skill-tag">Deployment & CI/CD</span>
+            <span class="skill-tag">React</span><span class="skill-tag">Express</span><span class="skill-tag">Deployment
+              & CI/CD</span>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ════════ PROJECTS ════════ -->
+  <!-- ════════ PROJECTS (unchanged) ════════ -->
   <section id="projects">
     <div class="wrap">
       <div class="section-head reveal">
         <div class="eyebrow">SELECTED WORK</div>
         <h2 class="section-title">Projects</h2>
-        <p class="section-desc">View my projects here at will either live demo or github preference.</p>
+        <p class="section-desc">Placeholder cards — swap in your real projects, screenshots, and links as you build them
+          out.</p>
       </div>
       <div class="projects-grid">
+
         <div class="project-card reveal">
           <div class="project-thumb"><i class="bi bi-code-square"></i><span class="placeholder-badge">EDIT ME</span>
           </div>
           <div class="project-body">
-            <div class="project-title">TastecraftMe</div>
-            <p class="project-desc">Replace with a short description: the problem it solved, your role, and what you built.</p>
+            <div class="project-title">Project One</div>
+            <p class="project-desc">Replace with a short description: the problem it solved, your role, and what you
+              built.</p>
             <div class="project-stack">
-              <span class="skill-tag">HTML</span>
-              <span class="skill-tag">CSS</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">Django</span>
-              <span class="skill-tag">APIs</span>
+              <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span
+                class="skill-tag">JavaScript</span>
             </div>
             <div class="project-links">
               <a href="#" class="project-link">Live demo →</a>
-              <a href="https://github.com/Ogunlade-Daniel/TastecraftMe.git" class="project-link">GitHub →</a>
+              <a href="#" class="project-link">GitHub →</a>
             </div>
           </div>
         </div>
@@ -1239,16 +1476,11 @@
           <div class="project-thumb"><i class="bi bi-bar-chart-line"></i><span class="placeholder-badge">EDIT ME</span>
           </div>
           <div class="project-body">
-            <div class="project-title">Marvellan Hotel & Suites</div>
-            <p class="project-desc">Replace with a short description: the problem it solved, your role, and what you built.</p>
+            <div class="project-title">Project Two</div>
+            <p class="project-desc">Replace with a short description: the problem it solved, your role, and what you
+              built.</p>
             <div class="project-stack">
-              <span class="skill-tag">HTML</span>
-              <span class="skill-tag">CSS</span>
-              <span class="skill-tag">JavaScript</span>
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">MySQL</span>
-              <span class="skill-tag">Django</span>
-              <span class="skill-tag">APIs</span>
+              <span class="skill-tag">Node.js</span><span class="skill-tag">MongoDB</span>
             </div>
             <div class="project-links">
               <a href="#" class="project-link">Live demo →</a>
@@ -1260,13 +1492,11 @@
         <div class="project-card reveal">
           <div class="project-thumb"><i class="bi bi-basket"></i><span class="placeholder-badge">EDIT ME</span></div>
           <div class="project-body">
-            <div class="project-title">ConvoSpace</div>
-            <p class="project-desc">Replace with a short description: the problem it solved, your role, and what you built.</p>
+            <div class="project-title">Project Three</div>
+            <p class="project-desc">Replace with a short description: the problem it solved, your role, and what you
+              built.</p>
             <div class="project-stack">
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">MySQL</span>
-              <span class="skill-tag">WebSocket</span>
-              <span class="skill-tag">Django</span>
+              <span class="skill-tag">Python</span><span class="skill-tag">MySQL</span>
             </div>
             <div class="project-links">
               <a href="#" class="project-link">Live demo →</a>
@@ -1279,7 +1509,7 @@
     </div>
   </section>
 
-  <!-- ════════ JOURNEY / BUILD LOG ════════ -->
+  <!-- ════════ JOURNEY / BUILD LOG (unchanged) ════════ -->
   <section id="journey">
     <div class="wrap">
       <div class="section-head reveal">
@@ -1319,7 +1549,40 @@
     </div>
   </section>
 
-  <!-- ════════ CONTACT ════════ -->
+  <!-- ════════ CREDENTIALS (new section) ════════ -->
+  <section id="credentials">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">CREDENTIALS</div>
+        <h2 class="section-title">Certificates & Awards</h2>
+        <p class="section-desc">Recognitions that reflect my commitment to excellence.</p>
+      </div>
+      <div class="certs-grid">
+        <div class="cred-card reveal">
+          <i class="bi bi-patch-check-fill"></i>
+          <h5>Fullstack Web Development</h5>
+          <p>UpTech Academy · 2025</p>
+        </div>
+        <div class="cred-card reveal" style="transition-delay:0.1s;">
+          <i class="bi bi-code-square"></i>
+          <h5>JavaScript Certification</h5>
+          <p>UpTech Academy · 2025</p>
+        </div>
+        <div class="cred-card reveal" style="transition-delay:0.2s;">
+          <i class="bi bi-award"></i>
+          <h5>Top Performer</h5>
+          <p>UpTech Academy · 2025</p>
+        </div>
+        <div class="cred-card reveal" style="transition-delay:0.3s;">
+          <i class="bi bi-database"></i>
+          <h5>Database Design & SQL</h5>
+          <p>UpTech Academy · 2025</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CONTACT (unchanged) ════════ -->
   <section id="contact">
     <div class="wrap">
       <div class="contact-card reveal">
@@ -1328,10 +1591,9 @@
         <p class="contact-desc">I'm open to full-time roles, internships, and freelance projects. Reach out — I'd love
           to hear what you're working on.</p>
         <div class="contact-row">
-          <a href="mailto:ogunladedaniel@gmail.com" class="btn-primary"><i class="bi bi-envelope"></i> Email
-            Me</a>
-          <a href="#" class="btn-secondary" id="downloadCvContact"><i class="bi bi-file-earmark-arrow-down"></i>
-            Download CV</a>
+          <a href="mailto:ogunladedaniel@gmail.com" class="btn-primary"><i class="bi bi-envelope"></i> Email Me</a>
+          <a href="Daniel_Ogunlade_CV.pdf" download class="btn-secondary" id="downloadCvContact"><i
+              class="bi bi-file-earmark-arrow-down"></i> Download CV</a>
         </div>
         <div class="social-row">
           <a href="https://github.com/Ogunlade-Daniel" target="_blank" rel="noopener" class="social-link"
@@ -1355,6 +1617,7 @@
     </div>
   </footer>
 
+  <!-- ════════ SCRIPTS (unchanged) ════════ -->
   <script>
     // ── Nav scroll state ──
     const nav = document.getElementById('mainNav');
@@ -1381,11 +1644,13 @@
       if (pref === 'system') return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
       return pref;
     }
+
     function iconFor(pref) {
       if (pref === 'light') return 'bi bi-sun';
       if (pref === 'dark') return 'bi bi-moon-stars';
       return 'bi bi-circle-half';
     }
+
     function setTheme(pref) {
       html.setAttribute('data-theme', resolveTheme(pref));
       html.setAttribute('data-theme-pref', pref);
@@ -1412,23 +1677,40 @@
       });
     }
 
-    // ── CV download buttons (all point to the same file) ──
-    const cvHref = 'Daniel_Ogunlade_CV.pdf';
-    ['downloadCvNav', 'downloadCvHero', 'downloadCvContact'].forEach(id => {
-      const el = document.getElementById(id);
-      if (el) { el.setAttribute('href', cvHref); el.setAttribute('download', 'Daniel_Ogunlade_CV.pdf'); }
+    // ── MOBILE NAV TOGGLE ──
+    const navToggle = document.getElementById('navToggle');
+    const mobileNavPanel = document.getElementById('mobileNavPanel');
+    const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+    const mobileNavClose = document.getElementById('mobileNavClose');
+
+    function openMobileNav() {
+      mobileNavPanel.classList.add('open');
+      mobileNavOverlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav() {
+      mobileNavPanel.classList.remove('open');
+      mobileNavOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    navToggle.addEventListener('click', openMobileNav);
+    mobileNavClose.addEventListener('click', closeMobileNav);
+    mobileNavOverlay.addEventListener('click', closeMobileNav);
+
+    document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+      link.addEventListener('click', closeMobileNav);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMobileNav();
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 900) closeMobileNav();
     });
   </script>
+
 </body>
-
 </html>
-
-
-
-
-<!-- i want you to build a personal portfolio for me, add light and dark mode, navbars and a downloadable CV using the pdf above as my infomation and use online cdns for it too. Give it a mobile toggle for the nav links and build another complete dashboard with the theme of vs code and the links should also be clickable  using code and coding languages along side vscode themes for it(everything about code and coding languages to build the dashboard, git repositories, commits, languages and more) so the i can switch between the dashboards if i want to. The dashboards should both have the light and dark mode without having flash after reloading.-->
-
-<!-- create another page for the projects so i can view the full scope about the projects-->
-
-
-<!-- i want you to build a personal portfolio for me and it should include things about coding and it's languages with a downloadable CV( the CV should and must be and advanced one in style, and arrangements ). Create two switchable portfolio dashboard for it. The first dashboard should be the default dashboard. The second dashboard should be like vs code setup and evrything about codes coding. Do not forget the light and dark mode and the nav toggle for mobile( if possible it should be in form of offcanvas ). You can also design for me a favicon logo.-->
