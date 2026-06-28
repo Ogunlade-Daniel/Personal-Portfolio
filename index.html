@@ -89,13 +89,16 @@
     ::-webkit-scrollbar {
       width: 8px;
     }
+
     ::-webkit-scrollbar-track {
       background: var(--bg);
     }
+
     ::-webkit-scrollbar-thumb {
       background: var(--border);
       border-radius: 4px;
     }
+
     ::-webkit-scrollbar-thumb:hover {
       background: var(--muted-2);
     }
@@ -104,6 +107,7 @@
       color: inherit;
       text-decoration: none;
     }
+
     :focus-visible {
       outline: 2px solid var(--orange);
       outline-offset: 3px;
@@ -122,6 +126,7 @@
     .font-display {
       font-family: 'Sora', sans-serif;
     }
+
     .font-mono {
       font-family: 'IBM Plex Mono', monospace;
     }
@@ -277,14 +282,17 @@
     .theme-option:hover {
       background: var(--code-bg);
     }
+
     .theme-option.current {
       color: var(--orange);
       font-weight: 600;
     }
+
     .theme-option .check {
       margin-left: auto;
       opacity: 0;
     }
+
     .theme-option.current .check {
       opacity: 1;
     }
@@ -539,9 +547,11 @@
       font-weight: 800;
       color: var(--ink);
     }
+
     .stat-item h3 span {
       color: var(--orange);
     }
+
     .stat-item p {
       color: var(--muted-2);
       font-size: 0.85rem;
@@ -583,11 +593,13 @@
     }
 
     @keyframes pulse-ring {
+
       0%,
       100% {
         transform: scale(1);
         opacity: 0.6;
       }
+
       50% {
         transform: scale(1.06);
         opacity: 0.2;
@@ -621,11 +633,13 @@
       right: -10%;
       animation-delay: 0.5s;
     }
+
     .floating-badge:nth-child(3) {
       bottom: 15%;
       left: -12%;
       animation-delay: 1.2s;
     }
+
     .floating-badge:nth-child(4) {
       bottom: 5%;
       right: -5%;
@@ -633,10 +647,12 @@
     }
 
     @keyframes float {
+
       0%,
       100% {
         transform: translateY(0);
       }
+
       50% {
         transform: translateY(-12px);
       }
@@ -742,6 +758,7 @@
     .cert-detail .label {
       color: var(--muted);
     }
+
     .cert-detail .value {
       font-family: 'IBM Plex Mono', monospace;
       font-size: 0.76rem;
@@ -1148,50 +1165,64 @@
         grid-template-columns: 1fr;
         text-align: center;
       }
+
       .hero-sub {
         max-width: 100%;
         margin-left: auto;
         margin-right: auto;
       }
+
       .hero-actions {
         justify-content: center;
       }
+
       .hero-stats {
         justify-content: center;
       }
+
       .hero-visual {
         order: -1;
       }
+
       .hero-avatar {
         width: 220px;
         height: 220px;
         font-size: 4rem;
       }
+
       .floating-badge {
         display: none;
       }
+
       .about-grid {
         grid-template-columns: 1fr;
         text-align: center;
       }
+
       .skills-grid {
         grid-template-columns: 1fr;
       }
+
       .projects-grid {
         grid-template-columns: 1fr;
       }
+
       .nav-links {
         display: none;
       }
+
       .dash-switch span.dash-switch-label {
         display: none;
       }
+
       section {
         padding: 4rem 0;
       }
+
       .wrap {
         padding: 0 1.2rem;
       }
+
       .nav-toggle {
         display: flex;
       }
@@ -1201,15 +1232,18 @@
       .nav-cta span {
         display: none;
       }
+
       .hero-avatar {
         width: 170px;
         height: 170px;
         font-size: 3rem;
       }
+
       .hero-stats {
         gap: 1.5rem;
         flex-wrap: wrap;
       }
+
       .stat-item h3 {
         font-size: 1.5rem;
       }
@@ -1304,18 +1338,18 @@
               <p>Year Experience</p>
             </div>
             <div class="stat-item">
-              <h3>10<span>+</span></h3>
+              <h3>5<span>+</span></h3>
               <p>Projects Delivered</p>
             </div>
             <div class="stat-item">
-              <h3>8<span>+</span></h3>
+              <h3>3<span>+</span></h3>
               <p>Happy Clients</p>
             </div>
           </div>
         </div>
         <div class="hero-visual">
-          <div class="hero-avatar">D O</div>
-          <div class="floating-badge"><i class="bi bi-cpu"></i> React</div>
+          <div class="hero-avatar">DO</div>
+          <div class="floating-badge"><i class="bi bi-cpu"></i> Javascript</div>
           <div class="floating-badge"><i class="bi bi-database"></i> Node.js</div>
           <div class="floating-badge"><i class="bi bi-cloud"></i> AWS</div>
           <div class="floating-badge"><i class="bi bi-phone"></i> Mobile</div>
@@ -1324,7 +1358,7 @@
     </div>
   </section>
 
-  <!-- ════════ ABOUT (unchanged) ════════ -->
+  <!-- ════════ ABOUT ════════ -->
   <section id="about">
     <div class="wrap">
       <div class="about-grid">
@@ -1361,7 +1395,7 @@
     </div>
   </section>
 
-  <!-- ════════ SKILLS (unchanged) ════════ -->
+  <!-- ════════ SKILLS ════════ -->
   <section id="skills">
     <div class="wrap">
       <div class="section-head reveal">
@@ -1401,7 +1435,7 @@
             <div class="skill-card-title">Databases</div>
           </div>
           <div class="skill-tags">
-            <span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Data
+            <span class="skill-tag">MySQL</span><span class="skill-tag">Django</span><span class="skill-tag">Data
               Modeling</span>
           </div>
         </div>
@@ -1443,7 +1477,7 @@
     </div>
   </section>
 
-  <!-- ════════ PROJECTS (unchanged) ════════ -->
+  <!-- ════════ PROJECTS ════════ -->
   <section id="projects">
     <div class="wrap">
       <div class="section-head reveal">
@@ -1458,7 +1492,7 @@
           <div class="project-thumb"><i class="bi bi-code-square"></i><span class="placeholder-badge">EDIT ME</span>
           </div>
           <div class="project-body">
-            <div class="project-title">Project One</div>
+            <div class="project-title">TastecraftMe</div>
             <p class="project-desc">Replace with a short description: the problem it solved, your role, and what you
               built.</p>
             <div class="project-stack">
@@ -1509,7 +1543,7 @@
     </div>
   </section>
 
-  <!-- ════════ JOURNEY / BUILD LOG (unchanged) ════════ -->
+  <!-- ════════ JOURNEY / BUILD LOG ════════ -->
   <section id="journey">
     <div class="wrap">
       <div class="section-head reveal">
@@ -1549,7 +1583,7 @@
     </div>
   </section>
 
-  <!-- ════════ CREDENTIALS (new section) ════════ -->
+  <!-- ════════ CREDENTIALS ════════ -->
   <section id="credentials">
     <div class="wrap">
       <div class="section-head reveal">
@@ -1582,7 +1616,7 @@
     </div>
   </section>
 
-  <!-- ════════ CONTACT (unchanged) ════════ -->
+  <!-- ════════ CONTACT ════════ -->
   <section id="contact">
     <div class="wrap">
       <div class="contact-card reveal">
@@ -1591,7 +1625,7 @@
         <p class="contact-desc">I'm open to full-time roles, internships, and freelance projects. Reach out — I'd love
           to hear what you're working on.</p>
         <div class="contact-row">
-          <a href="mailto:ogunladedaniel@gmail.com" class="btn-primary"><i class="bi bi-envelope"></i> Email Me</a>
+          <a href="mailto:ogunladedaniel12@gmail.com" class="btn-primary"><i class="bi bi-envelope"></i> Email Me</a>
           <a href="Daniel_Ogunlade_CV.pdf" download class="btn-secondary" id="downloadCvContact"><i
               class="bi bi-file-earmark-arrow-down"></i> Download CV</a>
         </div>
@@ -1600,7 +1634,7 @@
             aria-label="GitHub"><i class="bi bi-github"></i></a>
           <a href="https://linkedin.com/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn"><i
               class="bi bi-linkedin"></i></a>
-          <a href="mailto:ogunladedaniel@gmail.com" class="social-link" aria-label="Email"><i
+          <a href="mailto:ogunladedaniel12@gmail.com" class="social-link" aria-label="Email"><i
               class="bi bi-envelope"></i></a>
         </div>
       </div>
@@ -1713,4 +1747,5 @@
   </script>
 
 </body>
+
 </html>
