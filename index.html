@@ -2,1749 +2,1783 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Daniel Ogunlade | Full-Stack Web Developer</title>
-
-  <!-- ── CDN FONTS ── -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet">
-
-  <!-- ── CDN ICONS ── -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
-  <!-- Theme pre-paint (avoid flash) -->
-  <script>
-    (function () {
-      var stored = localStorage.getItem('daniel-portfolio-theme') || 'system';
-      var resolved = stored === 'system'
-        ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')
-        : stored;
-      document.documentElement.setAttribute('data-theme', resolved);
-      document.documentElement.setAttribute('data-theme-pref', stored);
-    })();
-  </script>
-
-  <style>
-    /* ════════ BASE & THEME TOKENS (unchanged from your original) ════════ */
-    *,
-    *::before,
-    *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root,
-    [data-theme="light"] {
-      --bg: #F7F6F3;
-      --surface: #FFFFFF;
-      --ink: #15171C;
-      --muted: #5B6270;
-      --muted-2: #8A8F9C;
-      --border: #E5E3DD;
-      --orange: #FF6B35;
-      --orange-soft: #FFF0E8;
-      --teal: #0E8C7F;
-      --code-bg: #EFEDE7;
-      --shadow: rgba(21, 23, 28, 0.06);
-      --shadow-md: rgba(21, 23, 28, 0.12);
-    }
-
-    [data-theme="dark"] {
-      --bg: #14151A;
-      --surface: #1A1C23;
-      --ink: #EDEEF2;
-      --muted: #9CA1B0;
-      --muted-2: #686D7C;
-      --border: #2B2D36;
-      --orange: #FF7D4D;
-      --orange-soft: #2A1B12;
-      --teal: #3FCBB8;
-      --code-bg: #20222B;
-      --shadow: rgba(0, 0, 0, 0.35);
-      --shadow-md: rgba(0, 0, 0, 0.5);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      transition: background 0.25s ease, color 0.25s ease;
-      overflow-x: hidden;
-    }
-
-    ::selection {
-      background: var(--orange);
-      color: #fff;
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--bg);
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 4px;
-    }
-
-    ::-webkit-scrollbar-thumb:hover {
-      background: var(--muted-2);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    :focus-visible {
-      outline: 2px solid var(--orange);
-      outline-offset: 3px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    .font-display {
-      font-family: 'Sora', sans-serif;
-    }
-
-    .font-mono {
-      font-family: 'IBM Plex Mono', monospace;
-    }
-
-    .wrap {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 1.75rem;
-    }
-
-    .eyebrow {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.75rem;
-      color: var(--orange);
-      letter-spacing: 0.02em;
-      display: flex;
-      align-items: center;
-      gap: 0.55rem;
-      margin-bottom: 1rem;
-    }
-
-    .eyebrow::before {
-      content: '';
-      width: 7px;
-      height: 7px;
-      background: var(--orange);
-      border-radius: 1px;
-      transform: rotate(45deg);
-      flex-shrink: 0;
-    }
-
-    /* ════════ NAVBAR (unchanged) ════════ */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 200;
-      padding: 1.1rem 0;
-      transition: all 0.3s ease;
-    }
-
-    nav.scrolled {
-      background: color-mix(in srgb, var(--bg) 88%, transparent);
-      backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-      padding: 0.75rem 0;
-    }
-
-    nav .wrap {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .nav-logo {
-      font-family: 'Sora', sans-serif;
-      font-weight: 700;
-      font-size: 1.05rem;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      flex-shrink: 0;
-    }
-
-    .nav-logo .bracket {
-      color: var(--orange);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-size: 0.86rem;
-      color: var(--muted);
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .nav-links a:hover {
-      color: var(--ink);
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .theme-toggle {
-      width: 38px;
-      height: 38px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      position: relative;
-      flex-shrink: 0;
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--orange);
-      color: var(--orange);
-    }
-
-    .theme-dropdown {
-      position: absolute;
-      top: calc(100% + 8px);
-      right: 0;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      box-shadow: 0 12px 28px var(--shadow-md);
-      padding: 5px;
-      width: 150px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-6px);
-      transition: all 0.18s;
-      z-index: 50;
-    }
-
-    .theme-dropdown.open {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-    }
-
-    .theme-option {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      width: 100%;
-      border: none;
-      background: none;
-      padding: 7px 10px;
-      border-radius: 7px;
-      cursor: pointer;
-      font-size: 0.82rem;
-      color: var(--ink);
-      font-family: 'Inter', sans-serif;
-      transition: background 0.15s;
-    }
-
-    .theme-option:hover {
-      background: var(--code-bg);
-    }
-
-    .theme-option.current {
-      color: var(--orange);
-      font-weight: 600;
-    }
-
-    .theme-option .check {
-      margin-left: auto;
-      opacity: 0;
-    }
-
-    .theme-option.current .check {
-      opacity: 1;
-    }
-
-    .nav-cta {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.78rem;
-      background: var(--orange);
-      color: #fff;
-      padding: 0.55rem 1.15rem;
-      border-radius: 6px;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      white-space: nowrap;
-    }
-
-    .nav-cta:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 16px var(--shadow-md);
-    }
-
-    .dash-switch {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.76rem;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 0.45rem 0.85rem;
-      border-radius: 6px;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .dash-switch:hover {
-      border-color: var(--teal);
-      color: var(--teal);
-    }
-
-    .nav-toggle {
-      display: none;
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      width: 38px;
-      height: 38px;
-      color: var(--ink);
-      font-size: 1.1rem;
-      cursor: pointer;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .mobile-nav-panel {
-      position: fixed;
-      top: 0;
-      right: 0;
-      height: 100vh;
-      width: min(80vw, 320px);
-      background: var(--surface);
-      border-left: 1px solid var(--border);
-      z-index: 300;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      padding: 1.5rem;
-      box-shadow: -10px 0 40px var(--shadow-md);
-    }
-
-    .mobile-nav-panel.open {
-      transform: translateX(0);
-    }
-
-    .mobile-nav-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-    }
-
-    .mobile-nav-close {
-      background: none;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      width: 34px;
-      height: 34px;
-      color: var(--ink);
-      font-size: 1rem;
-      cursor: pointer;
-    }
-
-    .mobile-nav-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.3rem;
-    }
-
-    .mobile-nav-links a {
-      display: block;
-      padding: 0.85rem 0.5rem;
-      font-size: 1rem;
-      font-weight: 500;
-      color: var(--ink);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .mobile-nav-footer {
-      margin-top: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 0.7rem;
-    }
-
-    .mobile-nav-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      z-index: 250;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease;
-    }
-
-    .mobile-nav-overlay.open {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* ══════════════════════════════════════════════════════════════ */
-    /*  NEW HERO SECTION (imported from the second design)           */
-    /*  Adapted to use your existing theme variables                 */
-    /* ══════════════════════════════════════════════════════════════ */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 7rem 0 4rem;
-      position: relative;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: center;
-      width: 100%;
-    }
-
-    .hero-badge {
-      display: inline-block;
-      background: color-mix(in srgb, var(--orange) 12%, transparent);
-      color: var(--orange);
-      padding: 0.35rem 1.2rem;
-      border-radius: 50px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      border: 1px solid color-mix(in srgb, var(--orange) 20%, transparent);
-      margin-bottom: 1.2rem;
-    }
-
-    .hero-title {
-      font-family: 'Sora', sans-serif;
-      font-size: clamp(2.8rem, 6vw, 4.8rem);
-      font-weight: 800;
-      line-height: 1.08;
-      letter-spacing: -2px;
-      margin-bottom: 1.2rem;
-    }
-
-    .hero-title .highlight {
-      background: linear-gradient(135deg, var(--orange), color-mix(in srgb, var(--orange) 70%, #000));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-sub {
-      font-size: 1.2rem;
-      color: var(--muted);
-      max-width: 520px;
-      margin-bottom: 2rem;
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: var(--orange);
-      color: #fff;
-      padding: 0.9rem 2.2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 8px 30px color-mix(in srgb, var(--orange) 30%, transparent);
-    }
-
-    .btn-primary:hover {
-      background: color-mix(in srgb, var(--orange) 80%, #000);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px color-mix(in srgb, var(--orange) 40%, transparent);
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      background: transparent;
-      color: var(--ink);
-      padding: 0.9rem 2.2rem;
-      border-radius: 50px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: 1.5px solid var(--border);
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-secondary:hover {
-      border-color: var(--orange);
-      color: var(--orange);
-      transform: translateY(-3px);
-      background: color-mix(in srgb, var(--orange) 5%, transparent);
-    }
-
-    .hero-stats {
-      display: flex;
-      gap: 3rem;
-      margin-top: 2.8rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .stat-item h3 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--ink);
-    }
-
-    .stat-item h3 span {
-      color: var(--orange);
-    }
-
-    .stat-item p {
-      color: var(--muted-2);
-      font-size: 0.85rem;
-      font-weight: 500;
-      margin-top: 2px;
-    }
-
-    /* Hero visual – avatar with floating badges */
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    .hero-avatar {
-      width: 340px;
-      height: 340px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--orange), color-mix(in srgb, var(--orange) 70%, #000));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 7rem;
-      font-weight: 800;
-      color: #fff;
-      box-shadow: 0 30px 80px color-mix(in srgb, var(--orange) 25%, transparent);
-      position: relative;
-      user-select: none;
-    }
-
-    .hero-avatar::after {
-      content: '';
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      border: 2px solid color-mix(in srgb, var(--orange) 20%, transparent);
-      animation: pulse-ring 3s ease-in-out infinite;
-    }
-
-    @keyframes pulse-ring {
-
-      0%,
-      100% {
-        transform: scale(1);
-        opacity: 0.6;
-      }
-
-      50% {
-        transform: scale(1.06);
-        opacity: 0.2;
-      }
-    }
-
-    .floating-badge {
-      position: absolute;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 0.7rem 1.2rem;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 500;
-      color: var(--muted);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      box-shadow: var(--shadow-md);
-      backdrop-filter: blur(4px);
-      animation: float 5s ease-in-out infinite;
-    }
-
-    .floating-badge i {
-      color: var(--orange);
-      font-size: 1rem;
-    }
-
-    .floating-badge:nth-child(2) {
-      top: 10%;
-      right: -10%;
-      animation-delay: 0.5s;
-    }
-
-    .floating-badge:nth-child(3) {
-      bottom: 15%;
-      left: -12%;
-      animation-delay: 1.2s;
-    }
-
-    .floating-badge:nth-child(4) {
-      bottom: 5%;
-      right: -5%;
-      animation-delay: 2s;
-    }
-
-    @keyframes float {
-
-      0%,
-      100% {
-        transform: translateY(0);
-      }
-
-      50% {
-        transform: translateY(-12px);
-      }
-    }
-
-    /* ════════ SECTION SCAFFOLD (unchanged) ════════ */
-    section {
-      padding: 5.5rem 0;
-    }
-
-    .section-head {
-      margin-bottom: 2.6rem;
-      max-width: 560px;
-    }
-
-    .section-title {
-      font-family: 'Sora', sans-serif;
-      font-size: clamp(1.7rem, 3vw, 2.3rem);
-      font-weight: 700;
-      line-height: 1.2;
-    }
-
-    .section-desc {
-      color: var(--muted);
-      margin-top: 0.85rem;
-      line-height: 1.7;
-      font-size: 0.95rem;
-    }
-
-    /* ════════ ABOUT (unchanged) ════════ */
-    #about {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 3.2rem;
-      align-items: start;
-    }
-
-    .about-text p {
-      color: var(--muted);
-      line-height: 1.8;
-      margin-bottom: 1.1rem;
-      font-size: 0.95rem;
-    }
-
-    .about-text strong {
-      color: var(--ink);
-      font-weight: 500;
-    }
-
-    .cert-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.4rem;
-    }
-
-    .cert-card-head {
-      display: flex;
-      align-items: center;
-      gap: 0.7rem;
-      margin-bottom: 0.9rem;
-    }
-
-    .cert-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 8px;
-      background: var(--orange-soft);
-      color: var(--orange);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.05rem;
-      flex-shrink: 0;
-    }
-
-    .cert-card-title {
-      font-family: 'Sora', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-
-    .cert-card-sub {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 0.1rem;
-    }
-
-    .cert-detail {
-      display: flex;
-      justify-content: space-between;
-      padding: 0.5rem 0;
-      border-top: 1px solid var(--border);
-      font-size: 0.82rem;
-    }
-
-    .cert-detail .label {
-      color: var(--muted);
-    }
-
-    .cert-detail .value {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.76rem;
-      color: var(--ink);
-    }
-
-    /* ════════ SKILLS (unchanged) ════════ */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1rem;
-    }
-
-    .skill-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1.5rem;
-      transition: all 0.25s;
-    }
-
-    .skill-card:hover {
-      border-color: var(--orange);
-      transform: translateY(-3px);
-    }
-
-    .skill-card-head {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      margin-bottom: 1rem;
-    }
-
-    .skill-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 7px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    .skill-card-title {
-      font-family: 'Sora', sans-serif;
-      font-weight: 600;
-      font-size: 0.98rem;
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.4rem;
-    }
-
-    .skill-tag {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.7rem;
-      background: var(--code-bg);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      padding: 0.3rem 0.6rem;
-      border-radius: 5px;
-    }
-
-    /* ════════ PROJECTS (unchanged) ════════ */
-    #projects {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.2rem;
-    }
-
-    .project-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      transition: all 0.3s;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-card:hover {
-      border-color: var(--orange);
-      transform: translateY(-3px);
-    }
-
-    .project-thumb {
-      height: 150px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--code-bg);
-      border-bottom: 1px solid var(--border);
-      position: relative;
-    }
-
-    .project-thumb i {
-      font-size: 2.1rem;
-      color: var(--muted-2);
-    }
-
-    .project-thumb .placeholder-badge {
-      position: absolute;
-      top: 0.7rem;
-      right: 0.7rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.6rem;
-      background: var(--orange-soft);
-      color: var(--orange);
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-    }
-
-    .project-body {
-      padding: 1.3rem;
-      display: flex;
-      flex-direction: column;
-      flex: 1;
-    }
-
-    .project-title {
-      font-family: 'Sora', sans-serif;
-      font-weight: 600;
-      font-size: 1.02rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .project-desc {
-      color: var(--muted);
-      font-size: 0.85rem;
-      line-height: 1.6;
-      margin-bottom: 1rem;
-      flex: 1;
-    }
-
-    .project-stack {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.35rem;
-      margin-bottom: 1rem;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 1rem;
-    }
-
-    .project-link {
-      font-size: 0.8rem;
-      color: var(--orange);
-      display: flex;
-      align-items: center;
-      gap: 0.35rem;
-      transition: gap 0.2s;
-    }
-
-    .project-link:hover {
-      gap: 0.55rem;
-    }
-
-    /* ════════ TIMELINE / BUILD LOG (unchanged) ════════ */
-    .build-log {
-      position: relative;
-      padding-left: 2.2rem;
-    }
-
-    .build-log::before {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 6px;
-      bottom: 6px;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--orange), var(--border));
-    }
-
-    .log-item {
-      position: relative;
-      padding-bottom: 2.2rem;
-    }
-
-    .log-item:last-child {
-      padding-bottom: 0;
-    }
-
-    .log-dot {
-      position: absolute;
-      left: -2.2rem;
-      top: 4px;
-      width: 11px;
-      height: 11px;
-      border-radius: 50%;
-      background: var(--orange);
-      border: 2px solid var(--bg);
-      box-shadow: 0 0 0 1px var(--border);
-    }
-
-    .log-date {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 0.74rem;
-      color: var(--orange);
-      margin-bottom: 0.3rem;
-    }
-
-    .log-title {
-      font-family: 'Sora', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 600;
-    }
-
-    .log-desc {
-      color: var(--muted);
-      font-size: 0.88rem;
-      line-height: 1.7;
-      margin-top: 0.4rem;
-      max-width: 540px;
-    }
-
-    /* ════════ CREDENTIALS (new section – imported from second design) ════════ */
-    #credentials {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .certs-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .cred-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      padding: 1.8rem 1.5rem;
-      border-radius: 12px;
-      text-align: center;
-      transition: all 0.25s;
-    }
-
-    .cred-card:hover {
-      border-color: var(--orange);
-      transform: scale(1.02);
-    }
-
-    .cred-card i {
-      font-size: 2.4rem;
-      color: var(--orange);
-      margin-bottom: 0.6rem;
-    }
-
-    .cred-card h5 {
-      font-weight: 600;
-      font-size: 0.95rem;
-      color: var(--ink);
-    }
-
-    .cred-card p {
-      color: var(--muted-2);
-      font-size: 0.8rem;
-      margin-top: 2px;
-    }
-
-    /* ════════ CONTACT (unchanged) ════════ */
-    #contact {
-      text-align: center;
-    }
-
-    .contact-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 3.4rem 2rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .contact-card::before {
-      content: '';
-      position: absolute;
-      top: -40%;
-      left: -10%;
-      width: 60%;
-      height: 180%;
-      background: radial-gradient(circle, var(--orange-soft), transparent 65%);
-      opacity: 0.7;
-    }
-
-    .contact-title {
-      font-family: 'Sora', sans-serif;
-      font-size: clamp(1.7rem, 3.5vw, 2.4rem);
-      font-weight: 700;
-      margin-bottom: 0.9rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-desc {
-      color: var(--muted);
-      max-width: 460px;
-      margin: 0 auto 1.8rem;
-      line-height: 1.75;
-      position: relative;
-      z-index: 1;
-    }
-
-    .contact-row {
-      display: flex;
-      gap: 0.8rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 1.6rem;
-    }
-
-    .social-row {
-      display: flex;
-      gap: 0.8rem;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
-    }
-
-    .social-link {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.05rem;
-      transition: all 0.22s;
-      color: var(--muted);
-    }
-
-    .social-link:hover {
-      border-color: var(--orange);
-      color: var(--orange);
-      transform: translateY(-2px);
-    }
-
-    /* ════════ FOOTER (unchanged) ════════ */
-    footer {
-      padding: 2.2rem 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.8rem;
-    }
-
-    .footer-text {
-      font-size: 0.78rem;
-      color: var(--muted);
-      font-family: 'IBM Plex Mono', monospace;
-    }
-
-    .footer-link {
-      font-size: 0.78rem;
-      color: var(--muted);
-      transition: color 0.2s;
-    }
-
-    .footer-link:hover {
-      color: var(--orange);
-    }
-
-    /* ════════ ANIMATIONS ════════ */
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ════════ RESPONSIVE (updated for new hero) ════════ */
-    @media (max-width: 992px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .hero-sub {
-        max-width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-actions {
-        justify-content: center;
-      }
-
-      .hero-stats {
-        justify-content: center;
-      }
-
-      .hero-visual {
-        order: -1;
-      }
-
-      .hero-avatar {
-        width: 220px;
-        height: 220px;
-        font-size: 4rem;
-      }
-
-      .floating-badge {
-        display: none;
-      }
-
-      .about-grid {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .skills-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .nav-links {
-        display: none;
-      }
-
-      .dash-switch span.dash-switch-label {
-        display: none;
-      }
-
-      section {
-        padding: 4rem 0;
-      }
-
-      .wrap {
-        padding: 0 1.2rem;
-      }
-
-      .nav-toggle {
-        display: flex;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .nav-cta span {
-        display: none;
-      }
-
-      .hero-avatar {
-        width: 170px;
-        height: 170px;
-        font-size: 3rem;
-      }
-
-      .hero-stats {
-        gap: 1.5rem;
-        flex-wrap: wrap;
-      }
-
-      .stat-item h3 {
-        font-size: 1.5rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Daniel Ogunlade · Full‑Stack Developer</title>
+
+    <!-- ─── FONTS ─── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <!-- ─── ICONS ─── -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+
+    <!-- ─── THEME PRE‑PAINT ─── -->
+    <script>
+        (function() {
+            const stored = localStorage.getItem('daniel-portfolio-theme') || 'system';
+            const resolved = stored === 'system' ?
+                (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') :
+                stored;
+            document.documentElement.setAttribute('data-theme', resolved);
+            document.documentElement.setAttribute('data-theme-pref', stored);
+        })();
+    </script>
+
+    <style>
+        /* ═══════════════════════ BASE & TOKENS ═══════════════════════ */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root,
+        [data-theme="light"] {
+            --bg: #F7F6F3;
+            --surface: #FFFFFF;
+            --ink: #15171C;
+            --muted: #5B6270;
+            --muted-2: #8A8F9C;
+            --border: #E5E3DD;
+            --orange: #FF6B35;
+            --orange-soft: #FFF0E8;
+            --teal: #0E8C7F;
+            --code-bg: #EFEDE7;
+            --shadow: rgba(21, 23, 28, 0.06);
+            --shadow-md: rgba(21, 23, 28, 0.12);
+        }
+
+        [data-theme="dark"] {
+            --bg: #14151A;
+            --surface: #1A1C23;
+            --ink: #EDEEF2;
+            --muted: #9CA1B0;
+            --muted-2: #686D7C;
+            --border: #2B2D36;
+            --orange: #FF7D4D;
+            --orange-soft: #2A1B12;
+            --teal: #3FCBB8;
+            --code-bg: #20222B;
+            --shadow: rgba(0, 0, 0, 0.35);
+            --shadow-md: rgba(0, 0, 0, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            font-weight: 300;
+            transition: background 0.25s, color 0.25s;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--orange);
+            color: #fff;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--muted-2);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+        :focus-visible {
+            outline: 2px solid var(--orange);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        .font-display {
+            font-family: 'Sora', sans-serif;
+        }
+        .font-mono {
+            font-family: 'IBM Plex Mono', monospace;
+        }
+
+        .wrap {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.75rem;
+        }
+
+        .eyebrow {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--orange);
+            letter-spacing: 0.02em;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            margin-bottom: 1rem;
+        }
+        .eyebrow::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            background: var(--orange);
+            border-radius: 1px;
+            transform: rotate(45deg);
+            flex-shrink: 0;
+        }
+
+        /* ═══════════════════════ NAVBAR ═══════════════════════ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 200;
+            padding: 1.1rem 0;
+            transition: all 0.3s ease;
+        }
+        nav.scrolled {
+            background: color-mix(in srgb, var(--bg) 88%, transparent);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 0;
+        }
+        nav .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-logo {
+            font-family: 'Sora', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            flex-shrink: 0;
+        }
+        .nav-logo .bracket {
+            color: var(--orange);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            font-size: 0.86rem;
+            color: var(--muted);
+            transition: color 0.2s;
+            position: relative;
+        }
+        .nav-links a:hover {
+            color: var(--ink);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .theme-toggle {
+            width: 38px;
+            height: 38px;
+            border-radius: 9px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .theme-toggle:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+
+        .theme-dropdown {
+            position: absolute;
+            top: calc(100% + 8px);
+            right: 0;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: 0 12px 28px var(--shadow-md);
+            padding: 5px;
+            width: 150px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: all 0.18s;
+            z-index: 50;
+        }
+        .theme-dropdown.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .theme-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            width: 100%;
+            border: none;
+            background: none;
+            padding: 7px 10px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-size: 0.82rem;
+            color: var(--ink);
+            font-family: 'Inter', sans-serif;
+            transition: background 0.15s;
+        }
+        .theme-option:hover {
+            background: var(--code-bg);
+        }
+        .theme-option.current {
+            color: var(--orange);
+            font-weight: 600;
+        }
+        .theme-option .check {
+            margin-left: auto;
+            opacity: 0;
+        }
+        .theme-option.current .check {
+            opacity: 1;
+        }
+
+        .nav-cta {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.78rem;
+            background: var(--orange);
+            color: #fff;
+            padding: 0.55rem 1.15rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            white-space: nowrap;
+        }
+        .nav-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px var(--shadow-md);
+        }
+
+        .dash-switch {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.76rem;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 0.45rem 0.85rem;
+            border-radius: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .dash-switch:hover {
+            border-color: var(--teal);
+            color: var(--teal);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 38px;
+            height: 38px;
+            color: var(--ink);
+            font-size: 1.1rem;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* ─── Mobile drawer ─── */
+        .mobile-nav-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100vh;
+            width: min(80vw, 320px);
+            background: var(--surface);
+            border-left: 1px solid var(--border);
+            z-index: 300;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem;
+            box-shadow: -10px 0 40px var(--shadow-md);
+        }
+        .mobile-nav-panel.open {
+            transform: translateX(0);
+        }
+
+        .mobile-nav-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .mobile-nav-close {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 34px;
+            height: 34px;
+            color: var(--ink);
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+        .mobile-nav-links a {
+            display: block;
+            padding: 0.85rem 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--ink);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .mobile-nav-footer {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .mobile-nav-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 250;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease;
+        }
+        .mobile-nav-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ═══════════════════════ HERO — COMBINED ═══════════════════════ */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 0 3rem;
+            position: relative;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 3rem;
+            align-items: center;
+            width: 100%;
+        }
+
+        /* ─── Left content ─── */
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: color-mix(in srgb, var(--orange) 12%, transparent);
+            color: var(--orange);
+            padding: 0.35rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            border: 1px solid color-mix(in srgb, var(--orange) 20%, transparent);
+            font-family: 'IBM Plex Mono', monospace;
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeUp 0.7s 0.05s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(2.6rem, 5.2vw, 4.2rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -2px;
+            margin-bottom: 1.2rem;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.7s 0.12s forwards;
+        }
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--orange), color-mix(in srgb, var(--orange) 70%, #000));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: 1.05rem;
+            color: var(--muted);
+            max-width: 500px;
+            line-height: 1.75;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.7s 0.22s forwards;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 0.9rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.7s 0.34s forwards;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: var(--orange);
+            color: #fff;
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px color-mix(in srgb, var(--orange) 30%, transparent);
+        }
+        .btn-primary:hover {
+            background: color-mix(in srgb, var(--orange) 80%, #000);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px color-mix(in srgb, var(--orange) 40%, transparent);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            background: transparent;
+            color: var(--ink);
+            padding: 0.85rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.92rem;
+            border: 1.5px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-secondary:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+            transform: translateY(-3px);
+            background: color-mix(in srgb, var(--orange) 5%, transparent);
+        }
+
+        /* ─── Tech tags ─── */
+        .hero-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1.8rem;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.7s 0.46s forwards;
+        }
+        .hero-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 0.3rem 0.7rem;
+            border-radius: 5px;
+            background: var(--surface);
+        }
+
+        /* ─── Stats ─── */
+        .hero-stats {
+            display: flex;
+            gap: 2.8rem;
+            margin-top: 2.2rem;
+            padding-top: 1.8rem;
+            border-top: 1px solid var(--border);
+            opacity: 0;
+            transform: translateY(18px);
+            animation: fadeUp 0.7s 0.58s forwards;
+        }
+        .stat-item h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--ink);
+        }
+        .stat-item h3 span {
+            color: var(--orange);
+        }
+        .stat-item p {
+            color: var(--muted-2);
+            font-size: 0.82rem;
+            font-weight: 500;
+            margin-top: 2px;
+        }
+
+        /* ─── Right: Avatar + floating badges ─── */
+        .hero-visual {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.94);
+            animation: fadeUp 0.8s 0.2s forwards;
+        }
+
+        .hero-avatar {
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--orange), color-mix(in srgb, var(--orange) 70%, #000));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5.5rem;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 20px;
+            box-shadow: 0 30px 80px color-mix(in srgb, var(--orange) 25%, transparent);
+            position: relative;
+            user-select: none;
+            font-family: 'Sora', sans-serif;
+        }
+        .hero-avatar::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid color-mix(in srgb, var(--orange) 20%, transparent);
+            animation: pulse-ring 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse-ring {
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.06);
+                opacity: 0.2;
+            }
+        }
+
+        .floating-badge {
+            position: absolute;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 0.6rem 1.1rem;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: var(--shadow-md);
+            backdrop-filter: blur(4px);
+            animation: float 5s ease-in-out infinite;
+            white-space: nowrap;
+        }
+        .floating-badge i {
+            color: var(--orange);
+            font-size: 0.95rem;
+        }
+        .floating-badge:nth-child(2) {
+            top: 6%;
+            right: -8%;
+            animation-delay: 0.3s;
+        }
+        .floating-badge:nth-child(3) {
+            bottom: 18%;
+            left: -14%;
+            animation-delay: 1s;
+        }
+        .floating-badge:nth-child(4) {
+            bottom: 2%;
+            right: -6%;
+            animation-delay: 1.8s;
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* ─── Commit‑panel (the unique "training log" card) ─── */
+        .commit-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 24px 60px -20px var(--shadow-md);
+            opacity: 0;
+            transform: translateY(18px) scale(0.98);
+            animation: fadeUp 0.8s 0.35s forwards;
+            margin-top: 0.5rem;
+        }
+        .commit-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            background: var(--code-bg);
+            border-bottom: 1px solid var(--border);
+        }
+        .commit-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+        .commit-bar-title {
+            margin-left: 0.5rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+        .commit-body {
+            padding: 1.2rem 1.2rem 0.4rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.76rem;
+        }
+        .commit-row {
+            display: flex;
+            gap: 0.7rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .commit-row:last-child {
+            border-bottom: none;
+        }
+        .commit-hash {
+            color: var(--teal);
+            flex-shrink: 0;
+        }
+        .commit-msg {
+            color: var(--ink);
+            flex: 1;
+        }
+        .commit-meta {
+            color: var(--muted-2);
+            font-size: 0.7rem;
+            white-space: nowrap;
+        }
+        .commit-footer {
+            padding: 0.8rem 1.2rem;
+            background: var(--code-bg);
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+        }
+        .commit-footer .verify {
+            color: var(--orange);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* ═══════════════════════ ANIMATIONS ═══════════════════════ */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(26px);
+            transition: opacity 0.65s ease, transform 0.65s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ═══════════════════════ SECTION SCAFFOLD ═══════════════════════ */
+        section {
+            padding: 5.5rem 0;
+        }
+        .section-head {
+            margin-bottom: 2.6rem;
+            max-width: 560px;
+        }
+        .section-title {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(1.7rem, 3vw, 2.3rem);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .section-desc {
+            color: var(--muted);
+            margin-top: 0.85rem;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ═══════════════════════ ABOUT ═══════════════════════ */
+        #about {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .about-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 3.2rem;
+            align-items: start;
+        }
+        .about-text p {
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 1.1rem;
+            font-size: 0.95rem;
+        }
+        .about-text strong {
+            color: var(--ink);
+            font-weight: 500;
+        }
+
+        .cert-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.4rem;
+        }
+        .cert-card-head {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            margin-bottom: 0.9rem;
+        }
+        .cert-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            background: var(--orange-soft);
+            color: var(--orange);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            flex-shrink: 0;
+        }
+        .cert-card-title {
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+        .cert-card-sub {
+            font-size: 0.78rem;
+            color: var(--muted);
+            margin-top: 0.1rem;
+        }
+        .cert-detail {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 0;
+            border-top: 1px solid var(--border);
+            font-size: 0.82rem;
+        }
+        .cert-detail .label {
+            color: var(--muted);
+        }
+        .cert-detail .value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.76rem;
+            color: var(--ink);
+        }
+
+        /* ═══════════════════════ SKILLS ═══════════════════════ */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        .skill-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.25s;
+        }
+        .skill-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-3px);
+        }
+        .skill-card-head {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+        .skill-icon {
+            width: 34px;
+            height: 34px;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .skill-card-title {
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            font-size: 0.98rem;
+        }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+        }
+        .skill-tag {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            background: var(--code-bg);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            padding: 0.3rem 0.6rem;
+            border-radius: 5px;
+        }
+
+        /* ═══════════════════════ PROJECTS ═══════════════════════ */
+        #projects {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+        }
+        .project-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        .project-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-3px);
+        }
+        .project-thumb {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--code-bg);
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+        .project-thumb i {
+            font-size: 2.1rem;
+            color: var(--muted-2);
+        }
+        .project-thumb .placeholder-badge {
+            position: absolute;
+            top: 0.7rem;
+            right: 0.7rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.6rem;
+            background: var(--orange-soft);
+            color: var(--orange);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+        }
+        .project-body {
+            padding: 1.3rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .project-title {
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            font-size: 1.02rem;
+            margin-bottom: 0.5rem;
+        }
+        .project-desc {
+            color: var(--muted);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        .project-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.35rem;
+            margin-bottom: 1rem;
+        }
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .project-link {
+            font-size: 0.8rem;
+            color: var(--orange);
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: gap 0.2s;
+        }
+        .project-link:hover {
+            gap: 0.55rem;
+        }
+
+        /* ═══════════════════════ JOURNEY / TIMELINE ═══════════════════════ */
+        .build-log {
+            position: relative;
+            padding-left: 2.2rem;
+        }
+        .build-log::before {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 6px;
+            bottom: 6px;
+            width: 1px;
+            background: linear-gradient(to bottom, var(--orange), var(--border));
+        }
+        .log-item {
+            position: relative;
+            padding-bottom: 2.2rem;
+        }
+        .log-item:last-child {
+            padding-bottom: 0;
+        }
+        .log-dot {
+            position: absolute;
+            left: -2.2rem;
+            top: 4px;
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+            background: var(--orange);
+            border: 2px solid var(--bg);
+            box-shadow: 0 0 0 1px var(--border);
+        }
+        .log-date {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.74rem;
+            color: var(--orange);
+            margin-bottom: 0.3rem;
+        }
+        .log-title {
+            font-family: 'Sora', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+        .log-desc {
+            color: var(--muted);
+            font-size: 0.88rem;
+            line-height: 1.7;
+            margin-top: 0.4rem;
+            max-width: 540px;
+        }
+
+        /* ═══════════════════════ CREDENTIALS ═══════════════════════ */
+        #credentials {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+        .cred-card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            padding: 1.8rem 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.25s;
+        }
+        .cred-card:hover {
+            border-color: var(--orange);
+            transform: scale(1.02);
+        }
+        .cred-card i {
+            font-size: 2.4rem;
+            color: var(--orange);
+            margin-bottom: 0.6rem;
+        }
+        .cred-card h5 {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--ink);
+        }
+        .cred-card p {
+            color: var(--muted-2);
+            font-size: 0.8rem;
+            margin-top: 2px;
+        }
+
+        /* ═══════════════════════ CONTACT ═══════════════════════ */
+        #contact {
+            text-align: center;
+        }
+        .contact-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 3.4rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: -10%;
+            width: 60%;
+            height: 180%;
+            background: radial-gradient(circle, var(--orange-soft), transparent 65%);
+            opacity: 0.7;
+        }
+        .contact-title {
+            font-family: 'Sora', sans-serif;
+            font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+            font-weight: 700;
+            margin-bottom: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+        .contact-desc {
+            color: var(--muted);
+            max-width: 460px;
+            margin: 0 auto 1.8rem;
+            line-height: 1.75;
+            position: relative;
+            z-index: 1;
+        }
+        .contact-row {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 1.6rem;
+        }
+        .social-row {
+            display: flex;
+            gap: 0.8rem;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+        .social-link {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.05rem;
+            transition: all 0.22s;
+            color: var(--muted);
+        }
+        .social-link:hover {
+            border-color: var(--orange);
+            color: var(--orange);
+            transform: translateY(-2px);
+        }
+
+        /* ═══════════════════════ FOOTER ═══════════════════════ */
+        footer {
+            padding: 2.2rem 0;
+            border-top: 1px solid var(--border);
+        }
+        .footer-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .footer-text {
+            font-size: 0.78rem;
+            color: var(--muted);
+            font-family: 'IBM Plex Mono', monospace;
+        }
+        .footer-link {
+            font-size: 0.78rem;
+            color: var(--muted);
+            transition: color 0.2s;
+        }
+        .footer-link:hover {
+            color: var(--orange);
+        }
+
+        /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .hero-sub {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-actions {
+                justify-content: center;
+            }
+            .hero-tags {
+                justify-content: center;
+            }
+            .hero-stats {
+                justify-content: center;
+            }
+            .hero-visual {
+                order: -1;
+            }
+            .hero-avatar {
+                width: 200px;
+                height: 200px;
+                font-size: 4rem;
+            }
+            .floating-badge {
+                display: none;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+            }
+            .dash-switch span.dash-switch-label {
+                display: none;
+            }
+            section {
+                padding: 4rem 0;
+            }
+            .wrap {
+                padding: 0 1.2rem;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-cta span {
+                display: none;
+            }
+            .hero-avatar {
+                width: 160px;
+                height: 160px;
+                font-size: 3rem;
+            }
+            .hero-stats {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+            }
+            .stat-item h3 {
+                font-size: 1.5rem;
+            }
+            .commit-panel {
+                font-size: 0.7rem;
+            }
+            .commit-row {
+                flex-wrap: wrap;
+                gap: 0.3rem;
+            }
+            .commit-meta {
+                white-space: normal;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- ════════ NAV ════════ -->
-  <nav id="mainNav">
-    <div class="wrap">
-      <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
-      <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#journey">Journey</a></li>
-        <li><a href="#credentials">Credentials</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-      <div class="nav-right">
-        <a href="dev-dashboard.html" class="dash-switch" title="Switch to dev dashboard">
-          <i class="bi bi-grid-1x2"></i><span class="dash-switch-label">Dev Dashboard</span>
-        </a>
-        <div style="position:relative;">
-          <button class="theme-toggle" id="themeBtn" aria-label="Theme settings" title="Theme">
-            <i class="bi bi-circle-half" id="themeIcon"></i>
-          </button>
-          <div class="theme-dropdown" id="themeDropdown">
-            <button class="theme-option" data-theme="light"><i class="bi bi-sun"></i> Light <i
-                class="bi bi-check check"></i></button>
-            <button class="theme-option" data-theme="dark"><i class="bi bi-moon-stars"></i> Dark <i
-                class="bi bi-check check"></i></button>
-            <button class="theme-option" data-theme="system"><i class="bi bi-display"></i> System <i
-                class="bi bi-check check"></i></button>
-          </div>
-        </div>
-        <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta" id="downloadCvNav"><i class="bi bi-download"></i>
-          <span>Resume</span></a>
-        <button class="nav-toggle" id="navToggle" aria-label="Open menu"><i class="bi bi-list"></i></button>
-      </div>
-    </div>
-  </nav>
-
-  <!-- ════════ MOBILE NAV DRAWER ════════ -->
-  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
-  <div class="mobile-nav-panel" id="mobileNavPanel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
-    <div class="mobile-nav-head">
-      <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
-      <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
-    </div>
-    <ul class="mobile-nav-links">
-      <li><a href="#about">About</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#journey">Journey</a></li>
-      <li><a href="#credentials">Credentials</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="mobile-nav-footer">
-      <a href="dev-dashboard.html" class="btn-secondary"><i class="bi bi-grid-1x2"></i> Dev Dashboard</a>
-      <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta" style="justify-content:center;"><i
-          class="bi bi-download"></i> Download Resume</a>
-    </div>
-  </div>
-
-  <!-- ════════ HERO (new) ════════ -->
-  <section id="hero">
-    <div class="wrap">
-      <div class="hero-grid">
-        <div class="hero-content">
-          <div class="hero-badge"><i class="bi bi-code-slash"></i> Available for opportunities</div>
-          <h1 class="hero-title">
-            Hi, I'm <br><span class="highlight">Daniel Ogunlade</span>
-          </h1>
-          <p class="hero-sub">
-            Full‑stack developer crafting high‑performance web experiences
-            with a passion for clean code and elegant design.
-          </p>
-          <div class="hero-actions">
-            <a href="#contact" class="btn-primary">
-              <i class="bi bi-envelope"></i> Hire Me
-            </a>
-            <a href="Daniel_Ogunlade_CV.pdf" download class="btn-secondary">
-              <i class="bi bi-file-earmark-arrow-down"></i> Download CV
-            </a>
-          </div>
-          <div class="hero-stats">
-            <div class="stat-item">
-              <h3>1<span>+</span></h3>
-              <p>Year Experience</p>
+    <!-- ═══════════════════════ NAV ═══════════════════════ -->
+    <nav id="mainNav">
+        <div class="wrap">
+            <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#credentials">Credentials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="dev-dashboard.html" class="dash-switch" title="Dev Dashboard">
+                    <i class="bi bi-grid-1x2"></i><span class="dash-switch-label">Dev Dashboard</span>
+                </a>
+                <div style="position:relative;">
+                    <button class="theme-toggle" id="themeBtn" aria-label="Theme settings">
+                        <i class="bi bi-circle-half" id="themeIcon"></i>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown">
+                        <button class="theme-option" data-theme="light"><i class="bi bi-sun"></i> Light <i class="bi bi-check check"></i></button>
+                        <button class="theme-option" data-theme="dark"><i class="bi bi-moon-stars"></i> Dark <i class="bi bi-check check"></i></button>
+                        <button class="theme-option" data-theme="system"><i class="bi bi-display"></i> System <i class="bi bi-check check"></i></button>
+                    </div>
+                </div>
+                <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta"><i class="bi bi-download"></i> <span>Resume</span></a>
+                <button class="nav-toggle" id="navToggle" aria-label="Open menu"><i class="bi bi-list"></i></button>
             </div>
-            <div class="stat-item">
-              <h3>5<span>+</span></h3>
-              <p>Projects Delivered</p>
-            </div>
-            <div class="stat-item">
-              <h3>3<span>+</span></h3>
-              <p>Happy Clients</p>
-            </div>
-          </div>
         </div>
-        <div class="hero-visual">
-          <div class="hero-avatar">DO</div>
-          <div class="floating-badge"><i class="bi bi-cpu"></i> Javascript</div>
-          <div class="floating-badge"><i class="bi bi-database"></i> Node.js</div>
-          <div class="floating-badge"><i class="bi bi-cloud"></i> AWS</div>
-          <div class="floating-badge"><i class="bi bi-phone"></i> Mobile</div>
+    </nav>
+
+    <!-- ─── Mobile drawer ─── -->
+    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+    <div class="mobile-nav-panel" id="mobileNavPanel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+        <div class="mobile-nav-head">
+            <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
         </div>
-      </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#journey">Journey</a></li>
+            <li><a href="#credentials">Credentials</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="mobile-nav-footer">
+            <a href="dev-dashboard.html" class="btn-secondary"><i class="bi bi-grid-1x2"></i> Dev Dashboard</a>
+            <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta" style="justify-content:center;"><i class="bi bi-download"></i> Download Resume</a>
+        </div>
     </div>
-  </section>
 
-  <!-- ════════ ABOUT ════════ -->
-  <section id="about">
-    <div class="wrap">
-      <div class="about-grid">
-        <div class="reveal">
-          <div class="eyebrow">ABOUT ME</div>
-          <h2 class="section-title">From curious<br>beginner to<br>full-stack builder.</h2>
-          <div class="cert-card" style="margin-top:2rem;">
-            <div class="cert-card-head">
-              <div class="cert-icon"><i class="bi bi-patch-check-fill"></i></div>
-              <div>
-                <div class="cert-card-title">Fullstack Web Development</div>
-                <div class="cert-card-sub">UpTech Computer Training Academy</div>
-              </div>
+    <!-- ═══════════════════════ HERO — COMBINED ═══════════════════════ -->
+    <section id="hero">
+        <div class="wrap">
+            <div class="hero-grid">
+
+                <!-- ─── LEFT ─── -->
+                <div>
+                    <div class="hero-badge"><i class="bi bi-code-slash"></i> Open for full‑stack roles &amp; freelance</div>
+
+                    <h1 class="hero-title">
+                        Hi, I'm <span class="highlight">Daniel Ogunlade</span>
+                    </h1>
+
+                    <p class="hero-sub">
+                        Full‑stack developer crafting high‑performance web experiences
+                        with a passion for clean code and elegant design.
+                    </p>
+
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn-primary"><i class="bi bi-grid"></i> View my projects</a>
+                        <a href="Daniel_Ogunlade_CV.pdf" download class="btn-secondary"><i class="bi bi-file-earmark-arrow-down"></i> Download CV</a>
+                    </div>
+
+                    <div class="hero-tags">
+                        <span class="hero-tag">HTML / CSS / JS</span>
+                        <span class="hero-tag">Node.js</span>
+                        <span class="hero-tag">Python</span>
+                        <span class="hero-tag">MySQL · Django</span>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3>1<span>+</span></h3>
+                            <p>Year Experience</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>5<span>+</span></h3>
+                            <p>Projects Delivered</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>3<span>+</span></h3>
+                            <p>Happy Clients</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ─── RIGHT: Avatar + commit panel ─── -->
+                <div>
+                    <div class="hero-visual">
+                        <div class="hero-avatar">DO</div>
+                        <div class="floating-badge"><i class="bi bi-cpu"></i> JavaScript</div>
+                        <div class="floating-badge"><i class="bi bi-database"></i> Node.js</div>
+                        <div class="floating-badge"><i class="bi bi-cloud"></i> AWS</div>
+                        <div class="floating-badge"><i class="bi bi-phone"></i> Responsive</div>
+                    </div>
+
+                    <!-- Commit‑log panel (training story) -->
+                    <div class="commit-panel">
+                        <div class="commit-bar">
+                            <span class="commit-dot" style="background:#FF5F57"></span>
+                            <span class="commit-dot" style="background:#FEBC2E"></span>
+                            <span class="commit-dot" style="background:#28C840"></span>
+                            <span class="commit-bar-title">~/daniel/training-log.git</span>
+                        </div>
+                        <div class="commit-body">
+                            <div class="commit-row">
+                                <span class="commit-hash">a1f9c2e</span>
+                                <span class="commit-msg">enroll in Fullstack Web Development</span>
+                                <span class="commit-meta">Jan 20, 2025</span>
+                            </div>
+                            <div class="commit-row">
+                                <span class="commit-hash">7b3e810</span>
+                                <span class="commit-msg">complete front‑end module</span>
+                                <span class="commit-meta">Mar 2025</span>
+                            </div>
+                            <div class="commit-row">
+                                <span class="commit-hash">d92a4f1</span>
+                                <span class="commit-msg">complete back‑end + database module</span>
+                                <span class="commit-meta">May 2025</span>
+                            </div>
+                            <div class="commit-row">
+                                <span class="commit-hash">f44c0b7</span>
+                                <span class="commit-msg">satisfy all mandatory modules ✓</span>
+                                <span class="commit-meta">Jun 20, 2025</span>
+                            </div>
+                        </div>
+                        <div class="commit-footer">
+                            <span>UCTA/FSD/2025/11549</span>
+                            <span class="verify"><i class="bi bi-patch-check-fill"></i> verified</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="cert-detail"><span class="label">Started</span><span class="value">20 Jan 2025</span></div>
-            <div class="cert-detail"><span class="label">Completed</span><span class="value">20 Jun 2025</span></div>
-            <div class="cert-detail"><span class="label">Certificate No.</span><span
-                class="value">UCTA/FSD/2025/11549</span></div>
-          </div>
         </div>
-        <div class="about-text reveal">
-          <p>I'm Daniel — a full-stack web developer based in Nigeria. My path into development started with curiosity
-            about how websites actually work under the hood, and turned into a structured, hands-on commitment: a
-            5-month intensive Fullstack Web Development program at UpTech Computer Training Academy, completed in June
-            2025.</p>
-          <p>Over that program I worked across the <strong>entire stack</strong> — building responsive interfaces with
-            HTML, CSS, and JavaScript, then moving into server-side logic, REST APIs, and relational and document
-            databases. I didn't just learn syntax; I learned how the pieces of a real application fit together.</p>
-          <p>I'm now applying that foundation to real projects, with a focus on writing clean, readable code and
-            understanding <strong>why</strong> something works — not just getting it to run. I'm actively looking for
-            opportunities, freelance or full-time, to keep building.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ════════ SKILLS ════════ -->
-  <section id="skills">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div class="eyebrow">TOOLKIT</div>
-        <h2 class="section-title">What I work with</h2>
-        <p class="section-desc">Grouped by where the work actually happens in a real application.</p>
-      </div>
-      <div class="skills-grid">
-        <div class="skill-card reveal">
-          <div class="skill-card-head">
-            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i
-                class="bi bi-layout-text-window"></i></div>
-            <div class="skill-card-title">Front-End</div>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span
-              class="skill-tag">JavaScript</span>
-            <span class="skill-tag">Bootstrap</span><span class="skill-tag">Responsive Design</span>
-          </div>
-        </div>
-        <div class="skill-card reveal">
-          <div class="skill-card-head">
-            <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i
-                class="bi bi-server"></i></div>
-            <div class="skill-card-title">Back-End</div>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">Node.js</span><span class="skill-tag">Python</span><span class="skill-tag">REST
-              APIs</span>
-            <span class="skill-tag">Server-side Logic</span>
-          </div>
-        </div>
-        <div class="skill-card reveal">
-          <div class="skill-card-head">
-            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i
-                class="bi bi-hdd-stack"></i></div>
-            <div class="skill-card-title">Databases</div>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">MySQL</span><span class="skill-tag">Django</span><span class="skill-tag">Data
-              Modeling</span>
-          </div>
-        </div>
-        <div class="skill-card reveal">
-          <div class="skill-card-head">
-            <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i
-                class="bi bi-tools"></i></div>
-            <div class="skill-card-title">Tools & Workflow</div>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">Git & GitHub</span><span class="skill-tag">VS Code</span><span
-              class="skill-tag">Postman</span>
-            <span class="skill-tag">CLI</span>
-          </div>
-        </div>
-        <div class="skill-card reveal">
-          <div class="skill-card-head">
-            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i
-                class="bi bi-diagram-3"></i></div>
-            <div class="skill-card-title">Core Concepts</div>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">OOP</span><span class="skill-tag">MVC</span><span class="skill-tag">Version
-              Control</span><span class="skill-tag">Debugging</span>
-          </div>
-        </div>
-        <div class="skill-card reveal">
-          <div class="skill-card-head">
-            <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i
-                class="bi bi-arrow-repeat"></i></div>
-            <div class="skill-card-title">Currently Learning</div>
-          </div>
-          <div class="skill-tags">
-            <span class="skill-tag">React</span><span class="skill-tag">Express</span><span class="skill-tag">Deployment
-              & CI/CD</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════ PROJECTS ════════ -->
-  <section id="projects">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div class="eyebrow">SELECTED WORK</div>
-        <h2 class="section-title">Projects</h2>
-        <p class="section-desc">Placeholder cards — swap in your real projects, screenshots, and links as you build them
-          out.</p>
-      </div>
-      <div class="projects-grid">
-
-        <div class="project-card reveal">
-          <div class="project-thumb"><i class="bi bi-code-square"></i><span class="placeholder-badge">EDIT ME</span>
-          </div>
-          <div class="project-body">
-            <div class="project-title">TastecraftMe</div>
-            <p class="project-desc">Replace with a short description: the problem it solved, your role, and what you
-              built.</p>
-            <div class="project-stack">
-              <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span
-                class="skill-tag">JavaScript</span>
+    <!-- ═══════════════════════ ABOUT ═══════════════════════ -->
+    <section id="about">
+        <div class="wrap">
+            <div class="about-grid">
+                <div class="reveal">
+                    <div class="eyebrow">ABOUT ME</div>
+                    <h2 class="section-title">From curious<br />beginner to<br />full‑stack builder.</h2>
+                    <div class="cert-card" style="margin-top:2rem;">
+                        <div class="cert-card-head">
+                            <div class="cert-icon"><i class="bi bi-patch-check-fill"></i></div>
+                            <div>
+                                <div class="cert-card-title">Fullstack Web Development</div>
+                                <div class="cert-card-sub">UpTech Computer Training Academy</div>
+                            </div>
+                        </div>
+                        <div class="cert-detail"><span class="label">Started</span><span class="value">20 Jan 2025</span></div>
+                        <div class="cert-detail"><span class="label">Completed</span><span class="value">20 Jun 2025</span></div>
+                        <div class="cert-detail"><span class="label">Certificate No.</span><span class="value">UCTA/FSD/2025/11549</span></div>
+                    </div>
+                </div>
+                <div class="about-text reveal">
+                    <p>I'm Daniel — a full‑stack web developer based in Nigeria. My path into development started with curiosity
+                        about how websites actually work under the hood, and turned into a structured, hands‑on commitment: a
+                        5‑month intensive Fullstack Web Development program at UpTech Computer Training Academy, completed in June
+                        2025.</p>
+                    <p>Over that program I worked across the <strong>entire stack</strong> — building responsive interfaces with
+                        HTML, CSS, and JavaScript, then moving into server‑side logic, REST APIs, and relational and document
+                        databases. I didn't just learn syntax; I learned how the pieces of a real application fit together.</p>
+                    <p>I'm now applying that foundation to real projects, with a focus on writing clean, readable code and
+                        understanding <strong>why</strong> something works — not just getting it to run. I'm actively looking for
+                        opportunities, freelance or full‑time, to keep building.</p>
+                </div>
             </div>
-            <div class="project-links">
-              <a href="#" class="project-link">Live demo →</a>
-              <a href="#" class="project-link">GitHub →</a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ SKILLS ═══════════════════════ -->
+    <section id="skills">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <div class="eyebrow">TOOLKIT</div>
+                <h2 class="section-title">What I work with</h2>
+                <p class="section-desc">Grouped by where the work actually happens in a real application.</p>
             </div>
-          </div>
-        </div>
-
-        <div class="project-card reveal">
-          <div class="project-thumb"><i class="bi bi-bar-chart-line"></i><span class="placeholder-badge">EDIT ME</span>
-          </div>
-          <div class="project-body">
-            <div class="project-title">Project Two</div>
-            <p class="project-desc">Replace with a short description: the problem it solved, your role, and what you
-              built.</p>
-            <div class="project-stack">
-              <span class="skill-tag">Node.js</span><span class="skill-tag">MongoDB</span>
+            <div class="skills-grid">
+                <div class="skill-card reveal">
+                    <div class="skill-card-head">
+                        <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i class="bi bi-layout-text-window"></i></div>
+                        <div class="skill-card-title">Front‑End</div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">HTML5</span><span class="skill-tag">CSS3</span><span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">Bootstrap</span><span class="skill-tag">Responsive Design</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal">
+                    <div class="skill-card-head">
+                        <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i class="bi bi-server"></i></div>
+                        <div class="skill-card-title">Back‑End</div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Node.js</span><span class="skill-tag">Python</span><span class="skill-tag">REST APIs</span>
+                        <span class="skill-tag">Server‑side Logic</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal">
+                    <div class="skill-card-head">
+                        <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i class="bi bi-hdd-stack"></i></div>
+                        <div class="skill-card-title">Databases</div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">MySQL</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Data Modeling</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal">
+                    <div class="skill-card-head">
+                        <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i class="bi bi-tools"></i></div>
+                        <div class="skill-card-title">Tools &amp; Workflow</div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Git &amp; GitHub</span><span class="skill-tag">VS Code</span><span class="skill-tag">Postman</span>
+                        <span class="skill-tag">CLI</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal">
+                    <div class="skill-card-head">
+                        <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i class="bi bi-diagram-3"></i></div>
+                        <div class="skill-card-title">Core Concepts</div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">OOP</span><span class="skill-tag">MVC</span><span class="skill-tag">Version Control</span><span class="skill-tag">Debugging</span>
+                    </div>
+                </div>
+                <div class="skill-card reveal">
+                    <div class="skill-card-head">
+                        <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i class="bi bi-arrow-repeat"></i></div>
+                        <div class="skill-card-title">Currently Learning</div>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">React</span><span class="skill-tag">Express</span><span class="skill-tag">Deployment &amp; CI/CD</span>
+                    </div>
+                </div>
             </div>
-            <div class="project-links">
-              <a href="#" class="project-link">Live demo →</a>
-              <a href="#" class="project-link">GitHub →</a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ PROJECTS ═══════════════════════ -->
+    <section id="projects">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <div class="eyebrow">SELECTED WORK</div>
+                <h2 class="section-title">Projects</h2>
+                <p class="section-desc">Placeholder cards — swap in your real projects, screenshots, and links as you build them out.</p>
             </div>
-          </div>
-        </div>
+            <div class="projects-grid">
 
-        <div class="project-card reveal">
-          <div class="project-thumb"><i class="bi bi-basket"></i><span class="placeholder-badge">EDIT ME</span></div>
-          <div class="project-body">
-            <div class="project-title">Project Three</div>
-            <p class="project-desc">Replace with a short description: the problem it solved, your role, and what you
-              built.</p>
-            <div class="project-stack">
-              <span class="skill-tag">Python</span><span class="skill-tag">MySQL</span>
+                <div class="project-card reveal">
+                    <div class="project-thumb"><i class="bi bi-code-square"></i><span class="placeholder-badge">EDIT ME</span></div>
+                    <div class="project-body">
+                        <div class="project-title">CUSCAF Platform</div>
+                        <p class="project-desc">Online payment &amp; registration system for Crawford University Science Conference and Fair.</p>
+                        <div class="project-stack">
+                            <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">PHP</span><span class="skill-tag">MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live demo →</a>
+                            <a href="#" class="project-link">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-thumb"><i class="bi bi-bar-chart-line"></i><span class="placeholder-badge">EDIT ME</span></div>
+                    <div class="project-body">
+                        <div class="project-title">Food Distribution Platform</div>
+                        <p class="project-desc">Logistics and inventory management web app for food distribution networks.</p>
+                        <div class="project-stack">
+                            <span class="skill-tag">Node.js</span><span class="skill-tag">MongoDB</span><span class="skill-tag">Express</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live demo →</a>
+                            <a href="#" class="project-link">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <div class="project-thumb"><i class="bi bi-basket"></i><span class="placeholder-badge">EDIT ME</span></div>
+                    <div class="project-body">
+                        <div class="project-title">Sports Management System</div>
+                        <p class="project-desc">Team and event management dashboard for university sports clubs.</p>
+                        <div class="project-stack">
+                            <span class="skill-tag">Python</span><span class="skill-tag">MySQL</span><span class="skill-tag">Bootstrap</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="project-link">Live demo →</a>
+                            <a href="#" class="project-link">GitHub →</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div class="project-links">
-              <a href="#" class="project-link">Live demo →</a>
-              <a href="#" class="project-link">GitHub →</a>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ JOURNEY ═══════════════════════ -->
+    <section id="journey">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <div class="eyebrow">TIMELINE</div>
+                <h2 class="section-title">My journey so far</h2>
             </div>
-          </div>
+            <div class="build-log">
+                <div class="log-item reveal">
+                    <div class="log-dot"></div>
+                    <div class="log-date">JANUARY 2025</div>
+                    <div class="log-title">Started Fullstack Web Development at UCTA</div>
+                    <p class="log-desc">Began the structured program at UpTech Computer Training Academy, starting from front‑end fundamentals — HTML, CSS, and JavaScript.</p>
+                </div>
+                <div class="log-item reveal">
+                    <div class="log-dot" style="background:var(--teal)"></div>
+                    <div class="log-date">MARCH – MAY 2025</div>
+                    <div class="log-title">Moved into back‑end &amp; database modules</div>
+                    <p class="log-desc">Learned server‑side programming, REST API design, and how to model and query relational and document databases.</p>
+                </div>
+                <div class="log-item reveal">
+                    <div class="log-dot" style="background:var(--orange)"></div>
+                    <div class="log-date">JUNE 20, 2025</div>
+                    <div class="log-title">Completed the program — Certificate UCTA/FSD/2025/11549</div>
+                    <p class="log-desc">Satisfactorily completed all mandatory course modules and was awarded the Certificate of Completion in Fullstack Web Development.</p>
+                </div>
+                <div class="log-item reveal">
+                    <div class="log-dot" style="background:var(--muted-2)"></div>
+                    <div class="log-date">NOW</div>
+                    <div class="log-title">Building real projects &amp; looking for opportunities</div>
+                    <p class="log-desc">Currently building out a project portfolio and open to full‑time roles or freelance work as a full‑stack developer.</p>
+                </div>
+            </div>
         </div>
+    </section>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ════════ JOURNEY / BUILD LOG ════════ -->
-  <section id="journey">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div class="eyebrow">TIMELINE</div>
-        <h2 class="section-title">My journey so far</h2>
-      </div>
-      <div class="build-log">
-        <div class="log-item reveal">
-          <div class="log-dot"></div>
-          <div class="log-date">JANUARY 2025</div>
-          <div class="log-title">Started Fullstack Web Development at UCTA</div>
-          <p class="log-desc">Began the structured program at UpTech Computer Training Academy, starting from front-end
-            fundamentals — HTML, CSS, and JavaScript.</p>
+    <!-- ═══════════════════════ CREDENTIALS ═══════════════════════ -->
+    <section id="credentials">
+        <div class="wrap">
+            <div class="section-head reveal">
+                <div class="eyebrow">CREDENTIALS</div>
+                <h2 class="section-title">Certificates &amp; Awards</h2>
+                <p class="section-desc">Recognitions that reflect my commitment to excellence.</p>
+            </div>
+            <div class="certs-grid">
+                <div class="cred-card reveal">
+                    <i class="bi bi-patch-check-fill"></i>
+                    <h5>Fullstack Web Development</h5>
+                    <p>UpTech Academy · 2025</p>
+                </div>
+                <div class="cred-card reveal" style="transition-delay:0.1s;">
+                    <i class="bi bi-code-square"></i>
+                    <h5>JavaScript Certification</h5>
+                    <p>UpTech Academy · 2025</p>
+                </div>
+                <div class="cred-card reveal" style="transition-delay:0.2s;">
+                    <i class="bi bi-award"></i>
+                    <h5>Top Performer</h5>
+                    <p>UpTech Academy · 2025</p>
+                </div>
+                <div class="cred-card reveal" style="transition-delay:0.3s;">
+                    <i class="bi bi-database"></i>
+                    <h5>Database Design &amp; SQL</h5>
+                    <p>UpTech Academy · 2025</p>
+                </div>
+            </div>
         </div>
-        <div class="log-item reveal">
-          <div class="log-dot" style="background:var(--teal)"></div>
-          <div class="log-date">MARCH – MAY 2025</div>
-          <div class="log-title">Moved into back-end & database modules</div>
-          <p class="log-desc">Learned server-side programming, REST API design, and how to model and query relational
-            and document databases.</p>
+    </section>
+
+    <!-- ═══════════════════════ CONTACT ═══════════════════════ -->
+    <section id="contact">
+        <div class="wrap">
+            <div class="contact-card reveal">
+                <div class="eyebrow" style="justify-content:center;">LET'S WORK TOGETHER</div>
+                <h2 class="contact-title">Have a project in mind?<br />Let's build it.</h2>
+                <p class="contact-desc">I'm open to full‑time roles, internships, and freelance projects. Reach out — I'd love to hear what you're working on.</p>
+                <div class="contact-row">
+                    <a href="mailto:ogunladedaniel12@gmail.com" class="btn-primary"><i class="bi bi-envelope"></i> Email Me</a>
+                    <a href="Daniel_Ogunlade_CV.pdf" download class="btn-secondary"><i class="bi bi-file-earmark-arrow-down"></i> Download CV</a>
+                </div>
+                <div class="social-row">
+                    <a href="https://github.com/Ogunlade-Daniel" target="_blank" rel="noopener" class="social-link" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                    <a href="https://linkedin.com/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+                    <a href="mailto:ogunladedaniel12@gmail.com" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
+                </div>
+            </div>
         </div>
-        <div class="log-item reveal">
-          <div class="log-dot" style="background:var(--orange)"></div>
-          <div class="log-date">JUNE 20, 2025</div>
-          <div class="log-title">Completed the program — Certificate UCTA/FSD/2025/11549</div>
-          <p class="log-desc">Satisfactorily completed all mandatory course modules and was awarded the Certificate of
-            Completion in Fullstack Web Development.</p>
+    </section>
+
+    <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+    <footer>
+        <div class="wrap">
+            <div class="footer-row">
+                <div class="footer-text">© 2026 Daniel Ogunlade — built with HTML, CSS &amp; JS</div>
+                <a href="#hero" class="footer-link">Back to top ↑</a>
+            </div>
         </div>
-        <div class="log-item reveal">
-          <div class="log-dot" style="background:var(--muted-2)"></div>
-          <div class="log-date">NOW</div>
-          <div class="log-title">Building real projects & looking for opportunities</div>
-          <p class="log-desc">Currently building out a project portfolio and open to full-time roles or freelance work
-            as a full-stack developer.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- ════════ CREDENTIALS ════════ -->
-  <section id="credentials">
-    <div class="wrap">
-      <div class="section-head reveal">
-        <div class="eyebrow">CREDENTIALS</div>
-        <h2 class="section-title">Certificates & Awards</h2>
-        <p class="section-desc">Recognitions that reflect my commitment to excellence.</p>
-      </div>
-      <div class="certs-grid">
-        <div class="cred-card reveal">
-          <i class="bi bi-patch-check-fill"></i>
-          <h5>Fullstack Web Development</h5>
-          <p>UpTech Academy · 2025</p>
-        </div>
-        <div class="cred-card reveal" style="transition-delay:0.1s;">
-          <i class="bi bi-code-square"></i>
-          <h5>JavaScript Certification</h5>
-          <p>UpTech Academy · 2025</p>
-        </div>
-        <div class="cred-card reveal" style="transition-delay:0.2s;">
-          <i class="bi bi-award"></i>
-          <h5>Top Performer</h5>
-          <p>UpTech Academy · 2025</p>
-        </div>
-        <div class="cred-card reveal" style="transition-delay:0.3s;">
-          <i class="bi bi-database"></i>
-          <h5>Database Design & SQL</h5>
-          <p>UpTech Academy · 2025</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    <!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+    <script>
+        // ── Nav scroll state ──
+        const nav = document.getElementById('mainNav');
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 30));
 
-  <!-- ════════ CONTACT ════════ -->
-  <section id="contact">
-    <div class="wrap">
-      <div class="contact-card reveal">
-        <div class="eyebrow" style="justify-content:center;">LET'S WORK TOGETHER</div>
-        <h2 class="contact-title">Have a project in mind?<br>Let's build it.</h2>
-        <p class="contact-desc">I'm open to full-time roles, internships, and freelance projects. Reach out — I'd love
-          to hear what you're working on.</p>
-        <div class="contact-row">
-          <a href="mailto:ogunladedaniel12@gmail.com" class="btn-primary"><i class="bi bi-envelope"></i> Email Me</a>
-          <a href="Daniel_Ogunlade_CV.pdf" download class="btn-secondary" id="downloadCvContact"><i
-              class="bi bi-file-earmark-arrow-down"></i> Download CV</a>
-        </div>
-        <div class="social-row">
-          <a href="https://github.com/Ogunlade-Daniel" target="_blank" rel="noopener" class="social-link"
-            aria-label="GitHub"><i class="bi bi-github"></i></a>
-          <a href="https://linkedin.com/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn"><i
-              class="bi bi-linkedin"></i></a>
-          <a href="mailto:ogunladedaniel12@gmail.com" class="social-link" aria-label="Email"><i
-              class="bi bi-envelope"></i></a>
-        </div>
-      </div>
-    </div>
-  </section>
+        // ── Scroll reveal ──
+        const revealEls = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((e, i) => {
+                if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), (i % 3) * 90);
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => obs.observe(el));
 
-  <!-- ════════ FOOTER ════════ -->
-  <footer>
-    <div class="wrap">
-      <div class="footer-row">
-        <div class="footer-text">© 2026 Daniel Ogunlade — built with HTML, CSS & JS</div>
-        <a href="#hero" class="footer-link">Back to top ↑</a>
-      </div>
-    </div>
-  </footer>
+        // ── Theme ──
+        const THEME_KEY = 'daniel-portfolio-theme';
+        const html = document.documentElement;
+        const themeBtn = document.getElementById('themeBtn');
+        const themeDropdown = document.getElementById('themeDropdown');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeOptions = document.querySelectorAll('.theme-option');
 
-  <!-- ════════ SCRIPTS (unchanged) ════════ -->
-  <script>
-    // ── Nav scroll state ──
-    const nav = document.getElementById('mainNav');
-    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 30));
+        function resolveTheme(pref) {
+            if (pref === 'system') return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            return pref;
+        }
 
-    // ── Scroll reveal ──
-    const revealEls = document.querySelectorAll('.reveal');
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), (i % 3) * 90);
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(el => obs.observe(el));
+        function iconFor(pref) {
+            if (pref === 'light') return 'bi bi-sun';
+            if (pref === 'dark') return 'bi bi-moon-stars';
+            return 'bi bi-circle-half';
+        }
 
-    // ── THEME: light / dark / system ──
-    const THEME_KEY = 'daniel-portfolio-theme';
-    const html = document.documentElement;
-    const themeBtn = document.getElementById('themeBtn');
-    const themeDropdown = document.getElementById('themeDropdown');
-    const themeIcon = document.getElementById('themeIcon');
-    const themeOptions = document.querySelectorAll('.theme-option');
+        function setTheme(pref) {
+            html.setAttribute('data-theme', resolveTheme(pref));
+            html.setAttribute('data-theme-pref', pref);
+            localStorage.setItem(THEME_KEY, pref);
+            themeIcon.className = iconFor(pref);
+            themeOptions.forEach(o => o.classList.toggle('current', o.dataset.theme === pref));
+        }
+        setTheme(html.getAttribute('data-theme-pref') || localStorage.getItem(THEME_KEY) || 'system');
 
-    function resolveTheme(pref) {
-      if (pref === 'system') return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-      return pref;
-    }
+        themeOptions.forEach(opt => opt.addEventListener('click', () => {
+            setTheme(opt.dataset.theme);
+            themeDropdown.classList.remove('open');
+        }));
+        themeBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeDropdown.classList.toggle('open');
+        });
+        document.addEventListener('click', () => themeDropdown.classList.remove('open'));
 
-    function iconFor(pref) {
-      if (pref === 'light') return 'bi bi-sun';
-      if (pref === 'dark') return 'bi bi-moon-stars';
-      return 'bi bi-circle-half';
-    }
+        if (window.matchMedia) {
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                const pref = localStorage.getItem(THEME_KEY) || 'system';
+                if (pref === 'system') setTheme('system');
+            });
+        }
 
-    function setTheme(pref) {
-      html.setAttribute('data-theme', resolveTheme(pref));
-      html.setAttribute('data-theme-pref', pref);
-      localStorage.setItem(THEME_KEY, pref);
-      themeIcon.className = iconFor(pref);
-      themeOptions.forEach(o => o.classList.toggle('current', o.dataset.theme === pref));
-    }
-    setTheme(html.getAttribute('data-theme-pref') || localStorage.getItem(THEME_KEY) || 'system');
+        // ── Mobile nav ──
+        const navToggle = document.getElementById('navToggle');
+        const mobileNavPanel = document.getElementById('mobileNavPanel');
+        const mobileNavOverlay = document.getElementById('mobileNavOverlay');
+        const mobileNavClose = document.getElementById('mobileNavClose');
 
-    themeOptions.forEach(opt => opt.addEventListener('click', () => {
-      setTheme(opt.dataset.theme);
-      themeDropdown.classList.remove('open');
-    }));
-    themeBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      themeDropdown.classList.toggle('open');
-    });
-    document.addEventListener('click', () => themeDropdown.classList.remove('open'));
+        function openMobileNav() {
+            mobileNavPanel.classList.add('open');
+            mobileNavOverlay.classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
 
-    if (window.matchMedia) {
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        const pref = localStorage.getItem(THEME_KEY) || 'system';
-        if (pref === 'system') setTheme('system');
-      });
-    }
+        function closeMobileNav() {
+            mobileNavPanel.classList.remove('open');
+            mobileNavOverlay.classList.remove('open');
+            document.body.style.overflow = '';
+        }
 
-    // ── MOBILE NAV TOGGLE ──
-    const navToggle = document.getElementById('navToggle');
-    const mobileNavPanel = document.getElementById('mobileNavPanel');
-    const mobileNavOverlay = document.getElementById('mobileNavOverlay');
-    const mobileNavClose = document.getElementById('mobileNavClose');
+        navToggle.addEventListener('click', openMobileNav);
+        mobileNavClose.addEventListener('click', closeMobileNav);
+        mobileNavOverlay.addEventListener('click', closeMobileNav);
 
-    function openMobileNav() {
-      mobileNavPanel.classList.add('open');
-      mobileNavOverlay.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
+        document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+            link.addEventListener('click', closeMobileNav);
+        });
 
-    function closeMobileNav() {
-      mobileNavPanel.classList.remove('open');
-      mobileNavOverlay.classList.remove('open');
-      document.body.style.overflow = '';
-    }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeMobileNav();
+        });
 
-    navToggle.addEventListener('click', openMobileNav);
-    mobileNavClose.addEventListener('click', closeMobileNav);
-    mobileNavOverlay.addEventListener('click', closeMobileNav);
-
-    document.querySelectorAll('.mobile-nav-links a').forEach(link => {
-      link.addEventListener('click', closeMobileNav);
-    });
-
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMobileNav();
-    });
-
-    window.addEventListener('resize', () => {
-      if (window.innerWidth > 900) closeMobileNav();
-    });
-  </script>
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) closeMobileNav();
+        });
+    </script>
 
 </body>
 
