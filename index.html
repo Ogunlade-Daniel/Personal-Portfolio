@@ -16,7 +16,7 @@
     <!-- ─── THEME PRE‑PAINT ─── -->
     <script>
         (function() {
-            const stored = localStorage.getItem('daniel-portfolio-theme') || 'system';
+            const stored = localStorage.getItem('portfolio-theme') || 'system';
             const resolved = stored === 'system' ?
                 (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') :
                 stored;
@@ -736,135 +736,6 @@
             gap: 0.3rem;
         }
 
-        /* ═══════════════════════ RESPONSIVE (consolidated) ═══════════════════════ */
-        @media (max-width: 992px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-                text-align: center;
-            }
-
-            /* ─── FLIP THE ORDER: visual on top, text below ─── */
-            .hero-grid > div:first-child { /* text column */
-                order: 2;
-            }
-            .hero-grid > div:last-child { /* visual column (avatar + commit) */
-                order: 1;
-            }
-
-            /* ─── Stack avatar above commit panel ─── */
-            .hero-visual {
-                flex-direction: column !important;
-                align-items: center;
-                gap: 1.5rem;
-            }
-
-            /* ─── Avatar: SAME GRADIENT as desktop ─── */
-            .hero-avatar {
-                width: 220px;
-                height: 220px;
-                font-size: 4.5rem;
-                flex-shrink: 0;
-                background: linear-gradient(135deg, var(--orange), #CC4400) !important;
-            }
-
-            /* ─── Hide commit panel on mobile (cleaner) ─── */
-            .commit-panel {
-                display: none;
-            }
-
-            .floating-badge {
-                display: none;
-            }
-
-            .hero-sub {
-                max-width: 100%;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-actions {
-                justify-content: center;
-            }
-            .hero-tags {
-                justify-content: center;
-            }
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .about-grid {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                display: none;
-            }
-            .dash-switch span.dash-switch-label {
-                display: none;
-            }
-            section {
-                padding: 4rem 0;
-            }
-            .wrap {
-                padding: 0 1.2rem;
-            }
-            .nav-toggle {
-                display: flex;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .nav-cta span {
-                display: none;
-            }
-
-            .hero-avatar {
-                width: 170px;
-                height: 170px;
-                font-size: 3.5rem;
-                background: linear-gradient(135deg, var(--orange), #CC4400) !important;
-            }
-
-            .hero-title {
-                font-size: clamp(2rem, 10vw, 2.8rem) !important;
-                margin-top: 0.5rem;
-            }
-
-            .hero-stats {
-                gap: 1.5rem;
-                flex-wrap: wrap;
-            }
-            .stat-item h3 {
-                font-size: 1.5rem;
-            }
-
-            .commit-panel {
-                display: none;
-            }
-            .commit-row {
-                flex-wrap: wrap;
-                gap: 0.3rem;
-            }
-            .commit-meta {
-                white-space: normal;
-            }
-        }
-
-        /* ═══════════════════════ ANIMATIONS ═══════════════════════ */
-        @keyframes fadeUp {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
         .reveal {
             opacity: 0;
             transform: translateY(26px);
@@ -1303,8 +1174,41 @@
         @media (max-width: 992px) {
             .hero-grid {
                 grid-template-columns: 1fr;
+                gap: 2rem;
                 text-align: center;
             }
+
+            /* ─── FLIP THE ORDER: visual on top, text below ─── */
+            .hero-grid > div:first-child { /* text column */
+                order: 2;
+            }
+            .hero-grid > div:last-child { /* visual column (avatar + commit) */
+                order: 1;
+            }
+            .hero-visual {
+                flex-direction: column !important;
+                align-items: center;
+                gap: 1.5rem;
+            }
+
+            /* ─── Avatar: SAME GRADIENT as desktop ─── */
+            .hero-avatar {
+                width: 220px;
+                height: 220px;
+                font-size: 4.5rem;
+                flex-shrink: 0;
+                background: linear-gradient(135deg, var(--orange), #CC4400) !important;
+            }
+
+            /* ─── Hide commit panel on mobile (cleaner) ─── */
+            .commit-panel {
+                display: none;
+            }
+
+            .floating-badge {
+                display: none;
+            }
+
             .hero-sub {
                 max-width: 100%;
                 margin-left: auto;
@@ -1318,17 +1222,6 @@
             }
             .hero-stats {
                 justify-content: center;
-            }
-            .hero-visual {
-                order: -1;
-            }
-            .hero-avatar {
-                width: 200px;
-                height: 200px;
-                font-size: 4rem;
-            }
-            .floating-badge {
-                display: none;
             }
 
             .about-grid {
@@ -1363,11 +1256,19 @@
             .nav-cta span {
                 display: none;
             }
+
             .hero-avatar {
-                width: 160px;
-                height: 160px;
-                font-size: 3rem;
+                width: 170px;
+                height: 170px;
+                font-size: 3.5rem;
+                background: linear-gradient(135deg, var(--orange), #CC4400) !important;
             }
+
+            .hero-title {
+                font-size: clamp(2rem, 10vw, 2.8rem) !important;
+                margin-top: 0.5rem;
+            }
+
             .hero-stats {
                 gap: 1.5rem;
                 flex-wrap: wrap;
@@ -1375,8 +1276,9 @@
             .stat-item h3 {
                 font-size: 1.5rem;
             }
+
             .commit-panel {
-                font-size: 0.7rem;
+                display: none;
             }
             .commit-row {
                 flex-wrap: wrap;
@@ -1384,6 +1286,14 @@
             }
             .commit-meta {
                 white-space: normal;
+            }
+        }
+
+        /* ═══════════════════════ ANIMATIONS ═══════════════════════ */
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
             }
         }
     </style>
@@ -1822,7 +1732,7 @@
         revealEls.forEach(el => obs.observe(el));
 
         // ── Theme ──
-        const THEME_KEY = 'daniel-portfolio-theme';
+        const THEME_KEY = 'portfolio-theme';
         const html = document.documentElement;
         const themeBtn = document.getElementById('themeBtn');
         const themeDropdown = document.getElementById('themeDropdown');
