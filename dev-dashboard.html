@@ -1563,8 +1563,24 @@
 
         async function fetchJson(url) {
             const response = await fetch(url, { headers: { Accept: 'application/vnd.github.v3+json', ...authHeaders } });
+            if (!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+            return response.json();
+        }
+
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        async function fetchCommitActivity(url, retries = 5) {
+            const response = await fetch(url, { headers: { Accept: 'application/vnd.github.v3+json', ...authHeaders } });
             if (response.status === 202) {
-                return [];
+                if (retries <= 0) {
+                    return [];
+                }
+                await sleep(1200);
+                return fetchCommitActivity(url, retries - 1);
             }
             if (!response.ok) {
                 throw new Error(`${response.status} ${response.statusText}`);
@@ -1695,7 +1711,7 @@
                 }).join('');
 
                 const weeklyCounts = await Promise.all(activeRepos.map(async repo => {
-                    const stats = await fetchJson(`${GITHUB_API}/repos/${GITHUB_USERNAME}/${repo.name}/stats/commit_activity`);
+                    const stats = await fetchCommitActivity(`${GITHUB_API}/repos/${GITHUB_USERNAME}/${repo.name}/stats/commit_activity`);
                     return Array.isArray(stats) && stats.length ? stats.map(item => item.total) : [];
                 }));
                 for (let i = 0; i < 26; i++) {
