@@ -1711,7 +1711,7 @@
                 }).join('');
 
                 const weeklyCounts = await Promise.all(activeRepos.map(async repo => {
-                    const stats = await fetchCommitActivity(`${GITHUB_API}/repos/${GITHUB_USERNAME}/${repo.name}/stats/commit_activity`);
+                    const stats = await fetchJson(`${GITHUB_API}/repos/${GITHUB_USERNAME}/${repo.name}/stats/commit_activity`);
                     return Array.isArray(stats) && stats.length ? stats.map(item => item.total) : [];
                 }));
                 for (let i = 0; i < 26; i++) {
