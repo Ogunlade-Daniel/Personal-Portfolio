@@ -373,6 +373,47 @@
             line-height: 1.7;
         }
 
+        .profile-banner {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-top: 1.4rem;
+            padding: 1.3rem 1.4rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+        }
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 18px;
+            object-fit: cover;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+        .profile-info {
+            min-width: 0;
+        }
+        .profile-name {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+        .profile-username {
+            color: var(--orange);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+        }
+        .profile-bio {
+            color: var(--muted);
+            line-height: 1.6;
+            max-width: 700px;
+        }
+
         /* ════════ STAT CARDS ════════ */
         .stats-row {
             display: grid;
@@ -1224,6 +1265,13 @@
             <h1 class="dash-title">Code, commits &amp; languages.</h1>
             <p class="dash-sub">A live‑feeling snapshot of how I actually work — language breakdown, repository activity,
                 and recent commits. Pick an editor theme above to match your own VS Code setup.</p>
+            <div class="profile-banner">
+                <img id="githubAvatar" class="profile-avatar" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub avatar">
+                <div class="profile-info">
+                    <div class="profile-name"><span id="githubName">Loading GitHub profile…</span><span id="githubUsername" class="profile-username">@Ogunlade-Daniel</span></div>
+                    <p id="githubBio" class="profile-bio">Fetching profile bio from GitHub.</p>
+                </div>
+            </div>
         </header>
 
         <!-- ════════ STATS ════════ -->
@@ -1234,35 +1282,35 @@
                     <div class="stat-card-icon" style="background:var(--orange-soft);color:var(--orange);"><i
                             class="bi bi-folder2-open"></i></div>
                 </div>
-                <div class="stat-card-value">3</div>
-                <div class="stat-card-meta">1 updated this month</div>
+                <div id="reposCount" class="stat-card-value">0</div>
+                <div id="reposMeta" class="stat-card-meta">Loading from GitHub…</div>
             </div>
             <div class="stat-card">
                 <div class="stat-card-top">
-                    <span class="stat-card-label">Commits (year)</span>
+                    <span class="stat-card-label">Stars</span>
+                    <div class="stat-card-icon" style="background:rgba(255,107,53,0.12);color:var(--orange);"><i
+                            class="bi bi-star"></i></div>
+                </div>
+                <div id="starsCount" class="stat-card-value">0</div>
+                <div id="starsMeta" class="stat-card-meta">Loaded from GitHub</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-card-top">
+                    <span class="stat-card-label">Followers</span>
                     <div class="stat-card-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i
-                            class="bi bi-git"></i></div>
+                            class="bi bi-people"></i></div>
                 </div>
-                <div class="stat-card-value">36</div>
-                <div class="stat-card-meta">~30 this month</div>
+                <div id="followersCount" class="stat-card-value">0</div>
+                <div id="followersMeta" class="stat-card-meta">GitHub profile</div>
             </div>
             <div class="stat-card">
                 <div class="stat-card-top">
-                    <span class="stat-card-label">Longest streak</span>
-                    <div class="stat-card-icon" style="background:var(--orange-soft);color:var(--orange);"><i
-                            class="bi bi-fire"></i></div>
-                </div>
-                <div class="stat-card-value">21 <span style="font-size:0.95rem;color:var(--muted);">days</span></div>
-                <div class="stat-card-meta">June 2026</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-card-top">
-                    <span class="stat-card-label">Languages used</span>
+                    <span class="stat-card-label">Languages</span>
                     <div class="stat-card-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i
                             class="bi bi-code-slash"></i></div>
                 </div>
-                <div class="stat-card-value">6</div>
-                <div class="stat-card-meta">across all repos</div>
+                <div id="languagesCount" class="stat-card-value">0</div>
+                <div id="languagesMeta" class="stat-card-meta">Primary GitHub languages</div>
             </div>
         </div>
 
@@ -1353,58 +1401,20 @@
                 <div class="panel-head">
                     <div>
                         <div class="panel-title"><i class="bi bi-github"></i> Repositories</div>
-                        <div class="panel-sub">Edit these with your real repos and links</div>
+                        <div class="panel-sub">Public repos loaded directly from GitHub</div>
                     </div>
                 </div>
-                <div class="repo-list">
-                    <a href="#" class="repo-item">
-                        <div class="repo-icon"><i class="bi bi-folder2-open"></i></div>
+                <div id="repoList" class="repo-list">
+                    <div class="repo-item">
+                        <div class="repo-icon"><i class="bi bi-github"></i></div>
                         <div class="repo-info">
-                            <div class="repo-name">tastecraftme</div>
-                            <div class="repo-desc">Real‑time food ordering system</div>
+                            <div class="repo-name">Loading repositories…</div>
+                            <div class="repo-desc">Fetching your GitHub repos now</div>
                             <div class="repo-meta">
-                                <span><span class="repo-lang-dot" style="background:#3572A5;"></span> Python</span>
-                                <span><i class="bi bi-star"></i> 12</span>
-                                <span><i class="bi bi-diagram-2"></i> 4 forks</span>
+                                <span><i class="bi bi-clock-history"></i> Please wait</span>
                             </div>
                         </div>
-                    </a>
-                    <a href="#" class="repo-item">
-                        <div class="repo-icon"><i class="bi bi-folder2-open"></i></div>
-                        <div class="repo-info">
-                            <div class="repo-name">convospace</div>
-                            <div class="repo-desc">Real‑time chat app built with Django Channels</div>
-                            <div class="repo-meta">
-                                <span><span class="repo-lang-dot" style="background:#3572A5;"></span> Python</span>
-                                <span><i class="bi bi-star"></i> 8</span>
-                                <span><i class="bi bi-diagram-2"></i> 2 forks</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="repo-item">
-                        <div class="repo-icon"><i class="bi bi-folder2-open"></i></div>
-                        <div class="repo-info">
-                            <div class="repo-name">marvellan-hotel</div>
-                            <div class="repo-desc">online hotel booking system, Django</div>
-                            <div class="repo-meta">
-                                <span><span class="repo-lang-dot" style="background:#3572A5;"></span> JavaScript</span>
-                                <span><i class="bi bi-star"></i> 5</span>
-                                <span><i class="bi bi-diagram-2"></i> 1 fork</span>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="#" class="repo-item">
-                        <div class="repo-icon"><i class="bi bi-folder2-open"></i></div>
-                        <div class="repo-info">
-                            <div class="repo-name">uctd-fsd-coursework</div>
-                            <div class="repo-desc">Coursework &amp; exercises from the UCTA fullstack program</div>
-                            <div class="repo-meta">
-                                <span><span class="repo-lang-dot" style="background:#3572A5;"></span> Python</span>
-                                <span><i class="bi bi-star"></i> 2</span>
-                                <span><i class="bi bi-diagram-2"></i> 0 forks</span>
-                            </div>
-                        </div>
-                    </a>
+                    </div>
                 </div>
             </div>
 
@@ -1412,46 +1422,15 @@
                 <div class="panel-head">
                     <div>
                         <div class="panel-title"><i class="bi bi-clock-history"></i> Recent commits</div>
-                        <div class="panel-sub">Latest activity across repos</div>
+                        <div class="panel-sub">Latest commit activity from GitHub</div>
                     </div>
                 </div>
-                <div class="commit-feed">
+                <div id="commitFeed" class="commit-feed">
                     <div class="feed-item">
                         <div class="feed-dot"></div>
                         <div class="feed-body">
-                            <div class="feed-msg">Fix WebSocket reconnect backoff timing</div>
-                            <div class="feed-meta"><span class="feed-hash">f44c0b7</span> · convospace · 2h ago</div>
-                        </div>
-                    </div>
-                    <div class="feed-item">
-                        <div class="feed-dot"></div>
-                        <div class="feed-body">
-                            <div class="feed-msg">Add language stats panel to dashboard</div>
-                            <div class="feed-meta"><span class="feed-hash">d92a4f1</span> · pulse-analytics · 1d ago
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feed-item">
-                        <div class="feed-dot"></div>
-                        <div class="feed-body">
-                            <div class="feed-msg">Refactor auth middleware for clarity</div>
-                            <div class="feed-meta"><span class="feed-hash">7b3e810</span> · northbound-storefront · 3d
-                                ago</div>
-                        </div>
-                    </div>
-                    <div class="feed-item">
-                        <div class="feed-dot"></div>
-                        <div class="feed-body">
-                            <div class="feed-msg">Complete database module exercises</div>
-                            <div class="feed-meta"><span class="feed-hash">a1f9c2e</span> · uctd-fsd-coursework · 5d ago
-                            </div>
-                        </div>
-                    </div>
-                    <div class="feed-item">
-                        <div class="feed-dot"></div>
-                        <div class="feed-body">
-                            <div class="feed-msg">Set up CI pipeline for tests</div>
-                            <div class="feed-meta"><span class="feed-hash">9c12e4a</span> · convospace · 1w ago</div>
+                            <div class="feed-msg">Loading recent commits…</div>
+                            <div class="feed-meta">Please wait while we fetch GitHub activity</div>
                         </div>
                     </div>
                 </div>
@@ -1563,49 +1542,180 @@
             vsThemeDropdown.classList.remove('open');
         });
 
-        // ── Language bars ──
-        const languages = [
-            { name: 'JavaScript', pct: 38, color: '#F1E05A' },
-            { name: 'Python', pct: 27, color: '#3572A5' },
-            { name: 'HTML', pct: 16, color: '#E34C26' },
-            { name: 'CSS', pct: 12, color: '#563D7C' },
-            { name: 'SQL', pct: 5, color: '#00758F' },
-            { name: 'Other', pct: 2, color: '#8A8F9C' },
-        ];
+        // ── GitHub integration ──
+        const GITHUB_API = 'https://api.github.com';
+        const GITHUB_USERNAME = 'Ogunlade-Daniel';
+        const GITHUB_TOKEN = '';
+        const authHeaders = GITHUB_TOKEN ? { Authorization: `token ${GITHUB_TOKEN}` } : {};
+
+        const stats = {
+            reposCount: document.getElementById('reposCount'),
+            reposMeta: document.getElementById('reposMeta'),
+            starsCount: document.getElementById('starsCount'),
+            starsMeta: document.getElementById('starsMeta'),
+            followersCount: document.getElementById('followersCount'),
+            languagesCount: document.getElementById('languagesCount'),
+        };
         const langList = document.getElementById('langList');
-        languages.forEach(l => {
-            langList.insertAdjacentHTML('beforeend', `
-              <div class="lang-row">
-                <span class="lang-dot" style="background:${l.color}"></span>
-                <span class="lang-name">${l.name}</span>
-                <div class="lang-track"><div class="lang-fill" style="width:${l.pct}%;background:${l.color}"></div></div>
-                <span class="lang-pct">${l.pct}%</span>
-              </div>`);
-        });
-
-        // ── Commit contribution graph ──
+        const repoListEl = document.getElementById('repoList');
+        const commitFeedEl = document.getElementById('commitFeed');
         const commitGraph = document.getElementById('commitGraph');
-        const totalCells = 26 * 7;
-        let seed = 42;
 
-        function nextRandom() {
-            seed = (seed * 9301 + 49297) % 233280;
-            return seed / 233280;
-        }
-        for (let i = 0; i < totalCells; i++) {
-            const r = nextRandom();
-            let level = 0;
-            if (r > 0.85) level = 4;
-            else if (r > 0.7) level = 3;
-            else if (r > 0.5) level = 2;
-            else if (r > 0.3) level = 1;
-            const cell = document.createElement('div');
-            cell.className = 'commit-cell';
-            cell.dataset.level = level;
-            commitGraph.appendChild(cell);
+        async function fetchJson(url) {
+            const response = await fetch(url, { headers: { Accept: 'application/vnd.github.v3+json', ...authHeaders } });
+            if (response.status === 202) {
+                return [];
+            }
+            if (!response.ok) {
+                throw new Error(`${response.status} ${response.statusText}`);
+            }
+            return response.json();
         }
 
-        // Color the graph based on current theme
+        function buildLanguageRow(name, pct, color) {
+            return `
+              <div class="lang-row">
+                <span class="lang-dot" style="background:${color}"></span>
+                <span class="lang-name">${name}</span>
+                <div class="lang-track"><div class="lang-fill" style="width:${pct}%;background:${color}"></div></div>
+                <span class="lang-pct">${pct}%</span>
+              </div>`;
+        }
+
+        function formatRepo(repo) {
+            const langColor = '#3572A5';
+            return `
+              <a href="${repo.html_url}" class="repo-item" target="_blank" rel="noreferrer noopener">
+                <div class="repo-icon"><i class="bi bi-folder2-open"></i></div>
+                <div class="repo-info">
+                  <div class="repo-name">${repo.name}</div>
+                  <div class="repo-desc">${repo.description || 'No description provided.'}</div>
+                  <div class="repo-meta">
+                    <span><span class="repo-lang-dot" style="background:${langColor};"></span> ${repo.language || 'Unknown'}</span>
+                    <span><i class="bi bi-star"></i> ${repo.stargazers_count}</span>
+                    <span><i class="bi bi-diagram-2"></i> ${repo.forks_count} forks</span>
+                  </div>
+                </div>
+              </a>`;
+        }
+
+        function formatCommit(commit, repoName) {
+            const shortSha = commit.sha.slice(0, 7);
+            const message = commit.commit.message.split('\n')[0];
+            const age = new Date(commit.commit.author.date);
+            const diffMs = Date.now() - age.getTime();
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const ago = diffDays === 0 ? 'today' : `${diffDays}d ago`;
+            return `
+              <div class="feed-item">
+                <div class="feed-dot"></div>
+                <div class="feed-body">
+                  <div class="feed-msg">${message}</div>
+                  <div class="feed-meta"><span class="feed-hash">${shortSha}</span> · ${repoName} · ${ago}</div>
+                </div>
+              </div>`;
+        }
+
+        function buildCommitGraph(counts) {
+            commitGraph.innerHTML = '';
+            const totalCells = 26 * 7;
+            const max = Math.max(...counts, 1);
+            for (let i = 0; i < totalCells; i++) {
+                const raw = counts[i] || 0;
+                let level = 0;
+                const normalized = raw / max;
+                if (normalized > 0.75) level = 4;
+                else if (normalized > 0.5) level = 3;
+                else if (normalized > 0.25) level = 2;
+                else if (normalized > 0.1) level = 1;
+                const cell = document.createElement('div');
+                cell.className = 'commit-cell';
+                cell.dataset.level = level;
+                commitGraph.appendChild(cell);
+            }
+            paintGraphLevels();
+        }
+
+        async function loadGithubDashboard() {
+            try {
+                const profile = await fetchJson(`${GITHUB_API}/users/${GITHUB_USERNAME}`);
+                const repos = await fetchJson(`${GITHUB_API}/users/${GITHUB_USERNAME}/repos?per_page=100&sort=updated`);
+                const activeRepos = repos.filter(repo => !repo.fork && !repo.private).slice(0, 6);
+                const languageTotals = {};
+                const commitCounts = [];
+                let totalStars = 0;
+
+                activeRepos.forEach(repo => {
+                    totalStars += repo.stargazers_count;
+                });
+
+                stats.reposCount.textContent = repos.length;
+                stats.starsCount.textContent = totalStars;
+                stats.followersCount.textContent = profile.followers;
+                stats.languagesCount.textContent = activeRepos.length;
+                stats.reposMeta.textContent = `${activeRepos.length} public repos shown`;
+
+                document.getElementById('githubAvatar').src = profile.avatar_url;
+                document.getElementById('githubName').textContent = profile.name || profile.login;
+                document.getElementById('githubUsername').textContent = `@${profile.login}`;
+                document.getElementById('githubBio').textContent = profile.bio || 'No bio available yet.';
+
+                repoListEl.innerHTML = activeRepos.map(formatRepo).join('');
+
+                const commitPromises = activeRepos.map(async repo => {
+                    const commitData = await fetchJson(`${GITHUB_API}/repos/${GITHUB_USERNAME}/${repo.name}/commits?per_page=1`);
+                    return { repo, commit: commitData[0] };
+                });
+                const commitResults = await Promise.allSettled(commitPromises);
+                commitFeedEl.innerHTML = commitResults
+                    .filter(result => result.status === 'fulfilled' && result.value.commit)
+                    .slice(0, 5)
+                    .map(result => formatCommit(result.value.commit, result.value.repo.name)).join('');
+
+                if (!commitFeedEl.innerHTML) {
+                    commitFeedEl.innerHTML = `<div class="feed-item"><div class="feed-dot"></div><div class="feed-body"><div class="feed-msg">No recent commits found</div><div class="feed-meta">Check your public repositories</div></div></div>`;
+                }
+
+                const languagePromises = activeRepos.map(repo => fetchJson(`${GITHUB_API}/repos/${GITHUB_USERNAME}/${repo.name}/languages`));
+                const languagesData = await Promise.all(languagePromises);
+                languagesData.forEach(data => {
+                    Object.entries(data).forEach(([name, bytes]) => {
+                        languageTotals[name] = (languageTotals[name] || 0) + bytes;
+                    });
+                });
+
+                const sortedLanguages = Object.entries(languageTotals)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 6);
+                const totalBytes = sortedLanguages.reduce((sum, [, bytes]) => sum + bytes, 0);
+                langList.innerHTML = sortedLanguages.map(([name, bytes]) => {
+                    const pct = Math.round((bytes / totalBytes) * 100);
+                    const color = name === 'JavaScript' ? '#F1E05A' : name === 'Python' ? '#3572A5' : name === 'HTML' ? '#E34C26' : name === 'CSS' ? '#563D7C' : '#8A8F9C';
+                    return buildLanguageRow(name, pct, color);
+                }).join('');
+
+                const weeklyCounts = await Promise.all(activeRepos.map(async repo => {
+                    const stats = await fetchJson(`${GITHUB_API}/repos/${GITHUB_USERNAME}/${repo.name}/stats/commit_activity`);
+                    return Array.isArray(stats) && stats.length ? stats.map(item => item.total) : [];
+                }));
+                for (let i = 0; i < 26; i++) {
+                    let weekTotal = 0;
+                    weeklyCounts.forEach(repoStats => {
+                        if (repoStats[i] != null) weekTotal += repoStats[i];
+                    });
+                    commitCounts.push(weekTotal);
+                }
+                buildCommitGraph(commitCounts);
+            } catch (error) {
+                console.warn('GitHub load failed', error);
+                stats.reposMeta.textContent = 'Unable to load GitHub data';
+                commitFeedEl.innerHTML = `<div class="feed-item"><div class="feed-dot"></div><div class="feed-body"><div class="feed-msg">Unable to load activity</div><div class="feed-meta">${error.message}</div></div></div>`;
+            }
+        }
+
+        loadGithubDashboard();
+
+        // ── Commit contribution graph paint helper ──
         function paintGraphLevels() {
             const styles = getComputedStyle(html);
             const orange = styles.getPropertyValue('--orange').trim();
@@ -1615,12 +1725,14 @@
                 const level = cell.dataset.level;
                 if (level === '0') {
                     cell.style.background = codeBg;
+                    cell.style.opacity = 1;
                 } else {
                     cell.style.background = orange;
                     cell.style.opacity = levelOpacity[level];
                 }
             });
         }
+
         paintGraphLevels();
 
         // Repaint when theme changes
