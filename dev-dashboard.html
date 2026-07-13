@@ -1200,6 +1200,20 @@
                 font-size: 0.6rem;
             }
         }
+
+        /* BOTTOM-RIGHT UI */
+        .br-bottom{ position: fixed; right:20px; bottom:20px; display:flex; flex-direction:column; gap:12px; z-index:700; align-items:flex-end }
+        .br-btn{ width:56px; height:56px; border-radius:12px; background:var(--surface); border:1px solid var(--border); box-shadow:0 10px 30px var(--shadow-md); display:inline-grid; place-items:center; cursor:pointer; position:relative; overflow:hidden; color:var(--ink); transition:transform .12s, box-shadow .12s }
+        .br-btn .bi{ color:var(--orange); font-size:1.25rem }
+        .br-contact-panel{ position:absolute; right:70px; bottom:0; width:340px; max-width:calc(100vw - 100px); background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:12px; box-shadow:0 20px 60px var(--shadow-md); transform:translateY(12px) scale(.98); opacity:0; visibility:hidden; transition:transform .16s, opacity .14s, visibility .16s }
+        .br-contact-panel.open{ transform:translateY(0) scale(1); opacity:1; visibility:visible }
+        .br-contact-panel form{ display:flex; flex-direction:column; gap:8px }
+        .br-contact-panel input, .br-contact-panel textarea{ width:100%; padding:8px 10px; border:1px solid var(--border); border-radius:8px; background:var(--bg); color:var(--ink) }
+        .br-contact-panel textarea{ min-height:84px }
+        .br-close{ position:absolute; top:8px; right:8px; background:none; border:1px solid var(--border); border-radius:8px; padding:6px; cursor:pointer }
+        .br-send{ background:var(--orange); color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer }
+        .br-back{ position:relative }
+        .br-back::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:var(--progress,0%); background:linear-gradient(90deg,var(--orange), color-mix(in srgb,var(--orange) 70%, #000)); opacity:.12; transition:width .12s linear; pointer-events:none }
     </style>
 </head>
 
@@ -1469,6 +1483,30 @@
             </div>
         </div>
     </footer>
+
+    <!-- BOTTOM-RIGHT CONTROLS -->
+    <div class="br-bottom" aria-hidden="false">
+        <div style="position:relative;">
+            <div id="contactPanel" class="br-contact-panel" role="dialog" aria-label="Contact form">
+                <button class="br-close" id="brClose" aria-label="Close"><i class="bi bi-x-lg"></i></button>
+                <form id="brContactForm">
+                    <input type="text" id="brName" name="name" placeholder="Your name" required />
+                    <input type="email" id="brEmail" name="email" placeholder="Your email" required />
+                    <textarea id="brMessage" name="message" placeholder="Message" required></textarea>
+                    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:6px;">
+                        <button type="submit" class="br-send">Send</button>
+                    </div>
+                </form>
+            </div>
+            <button id="contactToggleBtn" class="br-btn" aria-label="Open contact form" title="Contact">
+                <i class="bi bi-envelope"></i>
+            </button>
+        </div>
+
+        <button id="backTopBtn" class="br-btn br-back" aria-label="Back to top" title="Back to top">
+            <i class="bi bi-arrow-up"></i>
+        </button>
+    </div>
 
     <script>
         // ── Nav scroll state ──
@@ -1754,6 +1792,39 @@
         // Repaint when theme changes
         const themeObserver = new MutationObserver(paintGraphLevels);
         themeObserver.observe(html, { attributes: true, attributeFilter: ['data-theme'] });
+
+        // BOTTOM-RIGHT: contact & back-to-top
+        const contactToggleBtn = document.getElementById('contactToggleBtn');
+        const contactPanel = document.getElementById('contactPanel');
+        const brClose = document.getElementById('brClose');
+        const brContactForm = document.getElementById('brContactForm');
+        const backTopBtn = document.getElementById('backTopBtn');
+
+        contactToggleBtn.addEventListener('click', (e) => { e.stopPropagation(); contactPanel.classList.toggle('open'); });
+        brClose.addEventListener('click', () => contactPanel.classList.remove('open'));
+        document.addEventListener('click', (e) => { if (!contactPanel.contains(e.target) && e.target !== contactToggleBtn) contactPanel.classList.remove('open'); });
+
+        brContactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('brName').value.trim();
+            const email = document.getElementById('brEmail').value.trim();
+            const message = document.getElementById('brMessage').value.trim();
+            const subject = encodeURIComponent(`Portfolio contact from ${name || email}`);
+            const body = encodeURIComponent(`Name: ${name}%0AEmail: ${email}%0A%0A${message}`);
+            window.location.href = `mailto:ogunladedaniel12@gmail.com?subject=${subject}&body=${body}`;
+            contactPanel.classList.remove('open');
+            brContactForm.reset();
+        });
+
+        function updateBackProgress(){
+            const scrolled = window.scrollY || document.documentElement.scrollTop;
+            const h = document.documentElement.scrollHeight - window.innerHeight;
+            const pct = h > 0 ? Math.min(100, Math.round((scrolled / h) * 100)) : 0;
+            backTopBtn.style.setProperty('--progress', pct + '%');
+        }
+        window.addEventListener('scroll', updateBackProgress);
+        updateBackProgress();
+        backTopBtn.addEventListener('click', () => { backTopBtn.style.setProperty('--progress', '0%'); window.scrollTo({ top: 0, behavior: 'smooth' }); });
     </script>
 
 </body>
