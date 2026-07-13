@@ -1377,14 +1377,37 @@
             .br-send { background:var(--orange); color:#fff; border:none; padding:8px 12px; border-radius:8px; cursor:pointer }
             .br-close { position:absolute; top:8px; right:8px; background:none; border:1px solid var(--border); border-radius:8px; padding:6px; cursor:pointer }
 
-            /* back-to-top progress fill */
-            .br-back { position: relative; }
-            .br-back::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:var(--progress,0%); background:linear-gradient(90deg,var(--orange), color-mix(in srgb,var(--orange) 70%, #000)); opacity:0.12; transition:width 0.12s linear; pointer-events:none }
+                /* back-to-top progress fill */
+                .br-back { position: relative; }
+                .br-back::before{ content:''; position:absolute; left:0; top:0; bottom:0; width:var(--progress,0%); background:linear-gradient(90deg,var(--orange), color-mix(in srgb,var(--orange) 70%, #000)); opacity:0.12; transition:width 0.12s linear; pointer-events:none }
 
-    </style>
+                /* FULL-PAGE LOADER */
+                .page-loader{
+                position:fixed; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:14px; background:var(--surface); z-index:1200; transition:opacity .35s ease, visibility .35s; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+                }
+                .loader-wrap{ display:flex; align-items:center; gap:14px }
+                .spinner{ width:84px; height:84px; border-radius:50%; background:conic-gradient(from 0deg, var(--orange), color-mix(in srgb,var(--orange) 60%, #000), var(--orange)); animation:spin 1.6s linear infinite; display:grid; place-items:center; box-shadow:0 12px 40px var(--shadow-md) }
+                .spinner .inner{ width:62px; height:62px; border-radius:50%; background:var(--surface); display:grid; place-items:center; font-weight:700; color:var(--orange); font-family:'Sora',sans-serif; font-size:1.2rem }
+                @keyframes spin{ to{ transform:rotate(360deg) } }
+                .loader-bar{ width:220px; height:8px; border-radius:999px; background:var(--code-bg); overflow:hidden; border:1px solid var(--border) }
+                .loader-fill{ width:0%; height:100%; background:linear-gradient(90deg,var(--orange), color-mix(in srgb,var(--orange) 70%, #000)); transition:width .25s linear }
+                .page-loader.hidden{ opacity:0; visibility:hidden; pointer-events:none }
+
+            </style>
 </head>
 
 <body>
+
+    <!-- PAGE LOADER -->
+    <div class="page-loader" id="pageLoader" role="status" aria-live="polite">
+        <div class="loader-wrap">
+            <div class="spinner"><div class="inner">DO</div></div>
+            <div style="display:flex;flex-direction:column;align-items:flex-start;">
+                <div style="font-weight:700;font-family:'Sora',sans-serif;">Loading portfolio</div>
+                <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+            </div>
+        </div>
+    </div>
 
     <!-- ═══════════════════════ NAV ═══════════════════════ -->
     <nav id="mainNav">
@@ -1971,6 +1994,28 @@
             backTopBtn.style.setProperty('--progress', '0%');
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+
+        // Page loader: simulated progress until real load
+        (function(){
+            const loader = document.getElementById('pageLoader');
+            const fill = document.getElementById('loaderFill');
+            let pct = 0; let raf;
+            function tick(){
+                pct = Math.min(98, pct + Math.random()*8);
+                fill.style.width = pct + '%';
+                if(pct < 98) raf = setTimeout(tick, 180 + Math.random()*120);
+            }
+            tick();
+            window.addEventListener('load', () => {
+                clearTimeout(raf);
+                fill.style.width = '100%';
+                setTimeout(() => loader.classList.add('hidden'), 450);
+            }, { once:true });
+            // if user has reduced motion, hide quickly
+            if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                fill.style.width = '100%'; loader.classList.add('hidden');
+            }
+        })();
     </script>
 
 </body>
