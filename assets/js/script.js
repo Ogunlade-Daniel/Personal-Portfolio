@@ -196,9 +196,11 @@ if (backTopBtn) {
     const height = document.documentElement.scrollHeight - window.innerHeight;
     const percent = height > 0 ? Math.min(100, Math.round((scrolled / height) * 100)) : 0;
     backTopBtn.style.setProperty('--progress', percent + '%');
+    backTopBtn.classList.toggle('is-visible', scrolled > 120);
   }
 
-  window.addEventListener('scroll', updateBackProgress);
+  window.addEventListener('scroll', updateBackProgress, { passive: true });
+  window.addEventListener('resize', updateBackProgress);
   updateBackProgress();
   backTopBtn.addEventListener('click', () => {
     backTopBtn.style.setProperty('--progress', '0%');

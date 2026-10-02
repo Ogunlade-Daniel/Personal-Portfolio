@@ -33,6 +33,25 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--orange);
+  border: 3px solid var(--bg);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--orange-2);
+}
+
 body {
   background: var(--bg);
   color: var(--ink);
@@ -663,10 +682,11 @@ footer {
     
         /* ═══════════════════════ HERO — COMBINED ═══════════════════════ */
         #hero {
-            min-height: 100vh;
+            min-height: calc(100vh - 72px);
+            min-height: calc(100svh - 72px);
             display: flex;
             align-items: center;
-            padding: 6rem 0 3rem;
+            padding: 3rem 0;
             position: relative;
         }
     
@@ -805,32 +825,29 @@ footer {
         /* ─── Stats ─── */
         #stats {
             padding: 1.25rem 0 0;
-            margin-top: -90px;
-            margin-bottom: 50px;
+            margin: 0 0 3rem;
         }
 
         .hero-stats {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
             gap: clamp(1.4rem, 3vw, 3rem);
             align-items: center;
-            justify-content: space-between;
             width: 100%;
             padding: 1.1rem 0 0;
             border-top: 3px solid var(--border);
             opacity: 0;
             transform: translateY(18px);
             animation: fadeUp 0.7s 0.58s forwards;
-            flex-wrap: wrap;
         }
 
         .stat-item {
-            flex: 1 1 150px;
             min-width: 0;
             padding: 0.35rem 0;
         }
 
         .stat-item h3 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 3vw, 2rem);
             font-weight: 800;
             color: var(--ink);
             line-height: 1.1;
@@ -842,7 +859,7 @@ footer {
 
         .stat-item p {
             color: var(--muted-2);
-            font-size: 0.82rem;
+            font-size: clamp(0.7rem, 1.5vw, 0.82rem);
             font-weight: 500;
             margin-top: 4px;
         }
@@ -1515,7 +1532,7 @@ footer {
     
         /* ═══════════════════════ FOOTER ═══════════════════════ */
         footer {
-            padding: 2.2rem 0;
+            padding: 1.75rem 0;
             border-top: 1px solid var(--border);
         }
     
@@ -1525,6 +1542,9 @@ footer {
             align-items: center;
             flex-wrap: wrap;
             gap: 0.8rem;
+            min-height: 2.5rem;
+            border-top: 0;
+            padding-top: 0;
         }
     
         .footer-text {
@@ -1545,6 +1565,16 @@ footer {
     
         /* ═══════════════════════ RESPONSIVE ═══════════════════════ */
         @media (max-width: 992px) {
+            #hero {
+                min-height: 0;
+                padding: 3rem 0 2rem;
+            }
+
+            #stats {
+                padding-top: 0.75rem;
+                margin-bottom: 2.5rem;
+            }
+
             .hero-grid {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -1606,8 +1636,10 @@ footer {
                 justify-content: center;
             }
     
-            .hero-stats {
-                justify-content: center;
+            .footer-row {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
             }
     
             .about-grid {
@@ -1663,13 +1695,22 @@ footer {
                 background: color-mix(in srgb, var(--orange) 12%, transparent) !important;
             }
     
-            .hero-stats {
-                gap: 1.5rem;
-                flex-wrap: wrap;
+            .stat-item {
+                text-align: center;
             }
-    
-            .stat-item h3 {
-                font-size: 1.5rem;
+
+            .hero-stats {
+                gap: 0.5rem;
+            }
+
+            #stats {
+                margin-bottom: 2rem;
+            }
+
+            .footer-text,
+            .footer-link {
+                max-width: 100%;
+                overflow-wrap: anywhere;
             }
     
             .commit-panel {
@@ -1697,8 +1738,8 @@ footer {
         /* ═══════════════════════ BOTTOM-RIGHT UI ═══════════════════════ */
         .br-bottom {
             position: fixed;
-            right: 20px;
-            bottom: 20px;
+            right: clamp(12px, 2vw, 20px);
+            bottom: clamp(12px, 2vw, 20px);
             display: flex;
             flex-direction: column;
             gap: 12px;
@@ -1707,8 +1748,8 @@ footer {
         }
     
         .br-btn {
-            width: 56px;
-            height: 56px;
+            width: clamp(48px, 4vw, 56px);
+            height: clamp(48px, 4vw, 56px);
             border-radius: 12px;
             background: var(--surface);
             border: 1px solid var(--border);
@@ -1806,7 +1847,14 @@ footer {
     
         /* back-to-top progress fill */
         .br-back {
-            position: relative;
+            display: none;
+            position: absolute;
+            right: 0;
+            bottom: calc(100% + 12px);
+        }
+
+        .br-back.is-visible {
+            display: inline-grid;
         }
     
         .br-back::before {
