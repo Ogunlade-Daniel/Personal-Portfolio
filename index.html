@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Daniel Ogunlade is a full-stack web developer in Nigeria, building responsive web experiences with JavaScript, Python, Django, and Node.js." />
+    <meta name="theme-color" content="#F7F6F3" />
     <title>Daniel Ogunlade · Full‑Stack Developer</title>
 
     <!-- ─── FONTS ─── -->
@@ -11,7 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
     <!-- ─── FAVICON ─── -->
-    <link rel="shortcut icon" href="assets/images\logo\favicon.ico" type="image/x-icon">
+    <link rel="icon" href="assets/images/logo/favicon.ico" type="image/x-icon">
 
     <!-- ─── ICONS ─── -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
@@ -35,13 +37,13 @@
     </div> 
 
     <!-- ═══════════════════════ NAV ═══════════════════════ -->
-    <nav id="mainNav">
+    <nav id="mainNav" aria-label="Main navigation">
         <div class="wrap">
             <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
             <ul class="nav-links">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="projects.html">Projects</a></li>
+                <li><a href="#projects">Projects</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#journey">Journey</a></li>
                 <li><a href="#credentials">Credentials</a></li>
@@ -49,27 +51,27 @@
             </ul>
             <div class="nav-right">
                 <div style="position:relative;">
-                    <button class="theme-toggle" id="themeBtn" aria-label="Theme settings">
+                    <button class="theme-toggle" id="themeBtn" aria-label="Theme settings" aria-controls="themeDropdown" aria-expanded="false">
                         <i class="bi bi-circle-half" id="themeIcon"></i>
                     </button>
-                    <div class="theme-dropdown" id="themeDropdown">
+                    <div class="theme-dropdown" id="themeDropdown" aria-hidden="true">
                         <button class="theme-option" data-theme="light"><i class="bi bi-sun"></i> Light <i class="bi bi-check check"></i></button>
                         <button class="theme-option" data-theme="dark"><i class="bi bi-moon-stars"></i> Dark <i class="bi bi-check check"></i></button>
                         <button class="theme-option" data-theme="system"><i class="bi bi-display"></i> System <i class="bi bi-check check"></i></button>
                     </div>
                 </div>
                 <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta"><i class="bi bi-download"></i> <span>Resume</span></a>
-                <button class="nav-toggle" id="navToggle" aria-label="Open menu"><i class="bi bi-list"></i></button>
+                <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="mobileNavPanel" aria-expanded="false"><i class="bi bi-list"></i></button>
             </div>
         </div>
     </nav>
 
     <!-- ─── Mobile drawer ─── -->
-    <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
-    <div class="mobile-nav-panel" id="mobileNavPanel" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true"></div>
+    <div class="mobile-nav-panel" id="mobileNavPanel" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true" inert>
         <div class="mobile-nav-head">
             <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
-            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><i class="bi bi-x-lg"></i></button>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cancel menu"><span>Cancel</span><i class="bi bi-x-lg" aria-hidden="true"></i></button>
         </div>
         <ul class="mobile-nav-links">
             <li><a href="#hero">Home</a></li>
@@ -85,6 +87,8 @@
         </div>
     </div>
 
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <main id="mainContent">
     <!-- ═══════════════════════ HERO — COMBINED ═══════════════════════ -->
     <section id="hero">
         <div class="wrap">
@@ -95,12 +99,11 @@
                     <div class="hero-badge"><i class="bi bi-code-slash"></i> Open for full‑stack roles &amp; freelance</div>
 
                     <h1 class="hero-title">
-                        Hi, I'm <span class="highlight">Daniel Ogunlade</span>
+                        I build thoughtful <span class="highlight">web experiences.</span>
                     </h1>
 
                     <p class="hero-sub">
-                        Full‑stack developer crafting high‑performance web experiences
-                        with a passion for clean code and elegant design.
+                        I'm Daniel Ogunlade, a full-stack developer in Nigeria creating responsive, user-focused applications with JavaScript, Python, Django, and Node.js.
                     </p>
 
                     <div class="hero-actions">
@@ -287,55 +290,50 @@
             <div class="section-head reveal">
                 <div class="eyebrow">SELECTED WORK</div>
                 <h2 class="section-title">Projects</h2>
-                <p class="section-desc">Placeholder cards — swap in your real projects, screenshots, and links as you build them out.</p>
+                <p class="section-desc">A selection of web applications built across food ordering, hospitality, and learning.</p>
             </div>
             <div class="projects-grid">
 
                 <div class="project-card reveal">
-                    <img src="assets/images\project\tastecraft_img.png" alt="tastecraftMe">
-                    <!-- <div class="project-thumb"><i class="bi bi-code-square"></i><span class="placeholder-badge">EDIT ME</span></div> -->
+                    <img src="assets/images/project/tastecraft_img.png" alt="TastecraftMe food ordering website" loading="lazy" decoding="async">
                     <div class="project-body">
-                        <div class="project-title">TastecraftMe</div>
-                        <p class="project-desc">Online restaurant, web app for food ordering network for customers &amp; a very convenient order and payment process.</p>
+                        <h3 class="project-title">TastecraftMe</h3>
+                        <p class="project-desc">A restaurant ordering platform designed to make browsing meals and placing customer orders straightforward.</p>
                         <div class="project-stack">
                             <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">JavaScript</span>
                             <span class="skill-tag">Django</span><span class="skill-tag">MySQL</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">Live demo →</a>
-                            <a href="https://github.com/Ogunlade-Daniel/TastecraftMe" class="project-link">GitHub →</a>
+                            <a href="https://github.com/Ogunlade-Daniel/TastecraftMe" target="_blank" rel="noopener noreferrer" class="project-link">View source <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
 
                 <div class="project-card reveal">
-                    <img src="assets/images\project\marvellan_img.png" alt="tastecraftMe">
-                    <!-- <div class="project-thumb"><i class="bi bi-bar-chart-line"></i><span class="placeholder-badge">EDIT ME</span></div> -->
+                    <img src="assets/images/project/marvellan_img.png" alt="Marvellan Hotel booking website" loading="lazy" decoding="async">
                     <div class="project-body">
-                        <div class="project-title">Marvellan Hotel</div>
-                        <p class="project-desc">An online hotel booking system with a significant process to a new begining</p>
+                        <h3 class="project-title">Marvellan Hotel</h3>
+                        <p class="project-desc">A hotel booking web app built to help guests explore accommodation and make reservations online.</p>
                         <div class="project-stack">
                             <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">JavaScript</span>
                             <span class="skill-tag">Django</span><span class="skill-tag">MySQL</span><span class="skill-tag">Express</span>
                         </div>
                         <div class="project-links">
-                            <a href="#" class="project-link">Live demo →</a>
-                            <a href="https://github.com/Ogunlade-Daniel/Marvellan_Hotel" class="project-link">GitHub →</a>
+                            <a href="https://github.com/Ogunlade-Daniel/Marvellan_Hotel" target="_blank" rel="noopener noreferrer" class="project-link">View source <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </div>
 
                 <div class="project-card reveal">
-                    <div class="project-thumb"><i class="bi bi-basket"></i><span class="placeholder-badge">EDIT ME</span></div>
+                    <div class="project-thumb" role="img" aria-label="KnotWork project preview">
+                        <i class="bi bi-journal-bookmark" aria-hidden="true"></i>
+                        <span class="placeholder-badge">IN PROGRESS</span>
+                    </div>
                     <div class="project-body">
-                        <div class="project-title">Sports Management System</div>
-                        <p class="project-desc">Team and event management dashboard for university sports clubs.</p>
+                        <h3 class="project-title">KnotWork</h3>
+                        <p class="project-desc">An educational web project exploring the idea of connecting learners with useful knowledge.</p>
                         <div class="project-stack">
-                            <span class="skill-tag">Python</span><span class="skill-tag">MySQL</span><span class="skill-tag">Bootstrap</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#" class="project-link">Live demo →</a>
-                            <a href="#" class="project-link">GitHub →</a>
+                            <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">Bootstrap</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Python</span><span class="skill-tag">Django</span><span class="skill-tag">MySQL</span>
                         </div>
                     </div>
                 </div>
@@ -391,22 +389,22 @@
             <div class="certs-grid">
                 <div class="cred-card reveal">
                     <i class="bi bi-patch-check-fill"></i>
-                    <h5>Fullstack Web Development</h5>
+                    <h3>Fullstack Web Development</h3>
                     <p>UpTech Academy · 2025</p>
                 </div>
                 <div class="cred-card reveal" style="transition-delay:0.1s;">
                     <i class="bi bi-code-square"></i>
-                    <h5>JavaScript Certification</h5>
+                    <h3>JavaScript Certification</h3>
                     <p>UpTech Academy · 2025</p>
                 </div>
                 <div class="cred-card reveal" style="transition-delay:0.2s;">
                     <i class="bi bi-award"></i>
-                    <h5>Top Performer</h5>
+                    <h3>Top Performer</h3>
                     <p>UpTech Academy · 2025</p>
                 </div>
                 <div class="cred-card reveal" style="transition-delay:0.3s;">
                     <i class="bi bi-database"></i>
-                    <h5>Database Design &amp; SQL</h5>
+                    <h3>Database Design &amp; SQL</h3>
                     <p>UpTech Academy · 2025</p>
                 </div>
             </div>
@@ -426,14 +424,14 @@
                 </div>
                 <div class="social-row">
                     <a href="https://github.com/Ogunlade-Daniel" target="_blank" rel="noopener" class="social-link" aria-label="GitHub"><i class="bi bi-github"></i></a>
-                    <a href="https://linkedin.com/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
                     <a href="mailto:ogunladedaniel12@gmail.com" class="social-link" aria-label="Email"><i class="bi bi-envelope"></i></a>
-                    <a href="https://wa.me/08166729962" target="_blank" rel="noopener" class="social-link" aria-label="Whatsapp"><i class="bi bi-whatsapp"></i></a>
-                    <a href="tel:+2349125594236" target="_blank" rel="noopener" class="social-link" aria-label="Telephone"><i class="bi bi-telephone-fill"></i></a>
+                    <a href="https://wa.me/2348166729962" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp"><i class="bi bi-whatsapp" aria-hidden="true"></i></a>
+                    <a href="tel:+2349125594236" class="social-link" aria-label="Telephone"><i class="bi bi-telephone-fill" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
     </section>
+    </main>
 
     <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
     <footer class="site-footer">
@@ -454,7 +452,6 @@
                 <p class="footer-copyright">© 2026 Daniel Ogunlade <span>·</span> Made with care</p>
                 <div class="footer-socials" aria-label="Social links">
                     <a href="https://github.com/Ogunlade-Daniel" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
-                    <a href="https://linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin" aria-hidden="true"></i></a>
                     <a href="mailto:ogunladedaniel12@gmail.com" aria-label="Email"><i class="bi bi-envelope" aria-hidden="true"></i></a>
                 </div>
                 <a href="#hero" class="footer-top">Back to top <i class="bi bi-arrow-up" aria-hidden="true"></i></a>
@@ -465,18 +462,18 @@
     <!-- ═══════════════════════ BOTTOM-RIGHT CONTROLS ═══════════════════════ -->
     <div class="br-bottom" aria-hidden="false">
         <div style="position:relative;">
-            <div id="contactPanel" class="br-contact-panel" role="dialog" aria-label="Contact form">
+            <div id="contactPanel" class="br-contact-panel" role="dialog" aria-label="Contact form" aria-hidden="true">
                 <button class="br-close" id="brClose" aria-label="Close"><i class="bi bi-x-lg"></i></button>
                 <form id="brContactForm">
-                    <input type="text" id="brName" name="name" placeholder="Your name" required />
-                    <input type="email" id="brEmail" name="email" placeholder="Your email" required />
-                    <textarea id="brMessage" name="message" placeholder="Message" required></textarea>
+                    <input type="text" id="brName" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" required />
+                    <input type="email" id="brEmail" name="email" placeholder="Your email" aria-label="Your email" autocomplete="email" required />
+                    <textarea id="brMessage" name="message" placeholder="Message" aria-label="Message" required></textarea>
                     <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:6px;">
                         <button type="submit" class="br-send">Send</button>
                     </div>
                 </form>
             </div>
-            <button id="contactToggleBtn" class="br-btn" aria-label="Open contact form" title="Contact">
+            <button id="contactToggleBtn" class="br-btn" aria-label="Open contact form" aria-controls="contactPanel" aria-expanded="false" title="Contact">
                 <i class="bi bi-envelope"></i>
             </button>
         </div>

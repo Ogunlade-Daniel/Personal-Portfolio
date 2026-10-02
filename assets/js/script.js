@@ -31,43 +31,42 @@ function setTheme(pref) {
 
   document.querySelectorAll('.theme-option').forEach((option) => {
     option.classList.toggle('current', option.dataset.theme === pref);
+    option.setAttribute('aria-pressed', String(option.dataset.theme === pref));
   });
 }
 
 const storedTheme = localStorage.getItem(THEME_KEY) || 'system';
 setTheme(storedTheme);
 
-document.querySelectorAll('.theme-toggle').forEach((toggle) => {
-  toggle.addEventListener('click', (event) => {
-    event.stopPropagation();
-    const current = html.getAttribute('data-theme-pref') || 'system';
-    const next = current === 'light' ? 'dark' : current === 'dark' ? 'system' : 'light';
-    setTheme(next);
-  });
-});
-
 document.querySelectorAll('.theme-option').forEach((option) => {
   option.addEventListener('click', () => {
     setTheme(option.dataset.theme);
     const dropdown = option.closest('.theme-dropdown');
     dropdown?.classList.remove('open');
+    dropdown?.setAttribute('aria-hidden', 'true');
+    themeBtn?.setAttribute('aria-expanded', 'false');
   });
 });
 
+const themeBtn = document.getElementById('themeBtn');
+const themeDropdown = document.getElementById('themeDropdown');
+
 document.addEventListener('click', (event) => {
-  const themeDropdown = document.getElementById('themeDropdown');
   if (!themeDropdown) return;
-  if (!themeDropdown.contains(event.target) && event.target !== document.getElementById('themeBtn')) {
+  if (!themeDropdown.contains(event.target) && !themeBtn?.contains(event.target)) {
     themeDropdown.classList.remove('open');
+    themeDropdown.setAttribute('aria-hidden', 'true');
+    themeBtn?.setAttribute('aria-expanded', 'false');
   }
 });
 
-const themeBtn = document.getElementById('themeBtn');
 if (themeBtn) {
   themeBtn.addEventListener('click', (event) => {
     event.stopPropagation();
-    const dropdown = document.getElementById('themeDropdown');
-    dropdown?.classList.toggle('open');
+    const open = !themeDropdown?.classList.contains('open');
+    themeDropdown?.classList.toggle('open', open);
+    themeDropdown?.setAttribute('aria-hidden', String(!open));
+    themeBtn.setAttribute('aria-expanded', String(open));
   });
 }
 
@@ -87,25 +86,33 @@ document.querySelectorAll('.nav-links a, .mobile-nav-links a').forEach((link) =>
   }
 });
 
-const mobileNavToggle = document.getElementById('mobileNavToggle') || document.getElementById('navToggle');
+const mobileNavToggle = document.getElementById('navToggle');
 const mobileNavClose = document.getElementById('mobileNavClose');
 const mobileNavOverlay = document.getElementById('mobileNavOverlay');
 const mobileNavPanel = document.getElementById('mobileNavPanel');
 
 function toggleMobileNav(open) {
   document.body.classList.toggle('mobile-nav-open', open);
-  mobileNavOverlay?.classList.toggle('active', open);
+  mobileNavOverlay?.classList.toggle('open', open);
   mobileNavPanel?.classList.toggle('open', open);
-  mobileNavPanel?.classList.toggle('active', open);
-  if (mobileNavPanel && !('open' in mobileNavPanel.classList)) {
-    mobileNavPanel.classList.toggle('open', open);
+  mobileNavToggle?.setAttribute('aria-expanded', String(open));
+  mobileNavOverlay?.setAttribute('aria-hidden', String(!open));
+  mobileNavPanel?.setAttribute('aria-hidden', String(!open));
+  if (mobileNavPanel) {
+    mobileNavPanel.inert = !open;
+  }
+
+  if (open) {
+    mobileNavClose?.focus();
+  } else if (mobileNavToggle) {
+    mobileNavToggle.focus();
   }
 }
 
 mobileNavToggle?.addEventListener('click', () => toggleMobileNav(true));
 mobileNavClose?.addEventListener('click', () => toggleMobileNav(false));
 mobileNavOverlay?.addEventListener('click', () => toggleMobileNav(false));
-document.querySelectorAll('.mobile-nav-links a').forEach((link) => {
+mobileNavPanel?.querySelectorAll('a').forEach((link) => {
   link.addEventListener('click', () => toggleMobileNav(false));
 });
 
@@ -129,32 +136,37 @@ if (revealEls.length) {
   revealEls.forEach((element) => obs.observe(element));
 }
 
-const navToggle = document.getElementById('navToggle');
-if (navToggle) {
-  navToggle.addEventListener('click', () => {
-    mobileNavPanel?.classList.add('open');
-    mobileNavOverlay?.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  });
-}
-
-const closeMobileNav = () => {
-  mobileNavPanel?.classList.remove('open');
-  mobileNavOverlay?.classList.remove('open');
-  document.body.style.overflow = '';
-};
-
-mobileNavClose?.addEventListener('click', closeMobileNav);
-mobileNavOverlay?.addEventListener('click', closeMobileNav);
-
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    closeMobileNav();
+  if (event.key === 'Escape' && themeDropdown?.classList.contains('open')) {
+    themeDropdown.classList.remove('open');
+    themeDropdown.setAttribute('aria-hidden', 'true');
+    themeBtn?.setAttribute('aria-expanded', 'false');
+    themeBtn?.focus();
+  }
+
+  if (event.key === 'Escape' && mobileNavPanel?.classList.contains('open')) {
+    toggleMobileNav(false);
+  }
+
+  if (event.key === 'Tab' && mobileNavPanel?.classList.contains('open')) {
+    const focusable = [...mobileNavPanel.querySelectorAll('a[href], button:not([disabled])')];
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last?.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first?.focus();
+    }
   }
 });
 
 window.addEventListener('resize', () => {
-  if (window.innerWidth > 900) closeMobileNav();
+  if (window.innerWidth > 992 && mobileNavPanel?.classList.contains('open')) {
+    toggleMobileNav(false);
+  }
 });
 
 const contactToggleBtn = document.getElementById('contactToggleBtn');
@@ -166,15 +178,25 @@ const backTopBtn = document.getElementById('backTopBtn');
 if (contactToggleBtn && contactPanel) {
   contactToggleBtn.addEventListener('click', (event) => {
     event.stopPropagation();
-    contactPanel.classList.toggle('open');
+    const open = !contactPanel.classList.contains('open');
+    contactPanel.classList.toggle('open', open);
+    contactPanel.setAttribute('aria-hidden', String(!open));
+    contactToggleBtn.setAttribute('aria-expanded', String(open));
   });
 }
 
-brClose?.addEventListener('click', () => contactPanel?.classList.remove('open'));
+brClose?.addEventListener('click', () => {
+  contactPanel?.classList.remove('open');
+  contactPanel?.setAttribute('aria-hidden', 'true');
+  contactToggleBtn?.setAttribute('aria-expanded', 'false');
+  contactToggleBtn?.focus();
+});
 document.addEventListener('click', (event) => {
   if (!contactPanel) return;
   if (!contactPanel.contains(event.target) && event.target !== contactToggleBtn) {
     contactPanel.classList.remove('open');
+    contactPanel.setAttribute('aria-hidden', 'true');
+    contactToggleBtn?.setAttribute('aria-expanded', 'false');
   }
 });
 
@@ -184,9 +206,11 @@ brContactForm?.addEventListener('submit', (event) => {
   const email = document.getElementById('brEmail')?.value.trim();
   const message = document.getElementById('brMessage')?.value.trim();
   const subject = encodeURIComponent(`Portfolio contact from ${name || email}`);
-  const body = encodeURIComponent(`Name: ${name}%0AEmail: ${email}%0A%0A${message}`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
   window.location.href = `mailto:ogunladedaniel12@gmail.com?subject=${subject}&body=${body}`;
   contactPanel?.classList.remove('open');
+  contactPanel?.setAttribute('aria-hidden', 'true');
+  contactToggleBtn?.setAttribute('aria-expanded', 'false');
   brContactForm.reset();
 });
 
