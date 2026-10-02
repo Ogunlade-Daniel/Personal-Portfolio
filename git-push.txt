@@ -9,5 +9,6 @@ git remote add origin https://github.com/Ogunlade-Daniel/Personal-Portfolio.git
 
 …or push an existing repository from the command line
 git remote add origin https://github.com/Ogunlade-Daniel/Personal-Portfolio.git
+git add .
 git branch -M main
 git push -u origin main
