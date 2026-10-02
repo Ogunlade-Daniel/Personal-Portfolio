@@ -15,9 +15,15 @@ function iconFor(pref) {
 }
 
 function setTheme(pref) {
-  html.setAttribute('data-theme', resolveTheme(pref));
+  const resolved = resolveTheme(pref);
+  html.setAttribute('data-theme', resolved);
   html.setAttribute('data-theme-pref', pref);
   localStorage.setItem(THEME_KEY, pref);
+
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  if (themeColor) {
+    themeColor.content = resolved === 'dark' ? '#14151A' : '#F7F6F3';
+  }
 
   const mainToggleIcon = document.querySelector('.theme-toggle i');
   if (mainToggleIcon) {
@@ -148,6 +154,10 @@ document.addEventListener('keydown', (event) => {
     toggleMobileNav(false);
   }
 
+  if (event.key === 'Escape' && contactPanel?.classList.contains('open')) {
+    closeContactPanel(true);
+  }
+
   if (event.key === 'Tab' && mobileNavPanel?.classList.contains('open')) {
     const focusable = [...mobileNavPanel.querySelectorAll('a[href], button:not([disabled])')];
     const first = focusable[0];
@@ -181,22 +191,29 @@ if (contactToggleBtn && contactPanel) {
     const open = !contactPanel.classList.contains('open');
     contactPanel.classList.toggle('open', open);
     contactPanel.setAttribute('aria-hidden', String(!open));
+    contactPanel.inert = !open;
     contactToggleBtn.setAttribute('aria-expanded', String(open));
+    if (open) {
+      document.getElementById('brName')?.focus();
+    }
   });
 }
 
-brClose?.addEventListener('click', () => {
+function closeContactPanel(returnFocus = false) {
   contactPanel?.classList.remove('open');
   contactPanel?.setAttribute('aria-hidden', 'true');
+  if (contactPanel) contactPanel.inert = true;
   contactToggleBtn?.setAttribute('aria-expanded', 'false');
-  contactToggleBtn?.focus();
+  if (returnFocus) contactToggleBtn?.focus();
+}
+
+brClose?.addEventListener('click', () => {
+  closeContactPanel(true);
 });
 document.addEventListener('click', (event) => {
   if (!contactPanel) return;
-  if (!contactPanel.contains(event.target) && event.target !== contactToggleBtn) {
-    contactPanel.classList.remove('open');
-    contactPanel.setAttribute('aria-hidden', 'true');
-    contactToggleBtn?.setAttribute('aria-expanded', 'false');
+  if (!contactPanel.contains(event.target) && !contactToggleBtn?.contains(event.target)) {
+    closeContactPanel();
   }
 });
 
@@ -208,9 +225,7 @@ brContactForm?.addEventListener('submit', (event) => {
   const subject = encodeURIComponent(`Portfolio contact from ${name || email}`);
   const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
   window.location.href = `mailto:ogunladedaniel12@gmail.com?subject=${subject}&body=${body}`;
-  contactPanel?.classList.remove('open');
-  contactPanel?.setAttribute('aria-hidden', 'true');
-  contactToggleBtn?.setAttribute('aria-expanded', 'false');
+  closeContactPanel();
   brContactForm.reset();
 });
 

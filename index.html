@@ -239,8 +239,8 @@
                         <div class="skill-card-title">Back‑End</div>
                     </div>
                     <div class="skill-tags">
-                        <span class="skill-tag">Node.js</span><span class="skill-tag">Python</span><span class="skill-tag">REST APIs</span>
-                        <span class="skill-tag">Server‑side Logic</span>
+                        <span class="skill-tag">Node.js</span><span class="skill-tag">Python</span><span class="skill-tag">Django</span>
+                        <span class="skill-tag">REST APIs</span><span class="skill-tag">Server‑side Logic</span>
                     </div>
                 </div>
                 <div class="skill-card reveal">
@@ -249,7 +249,7 @@
                         <div class="skill-card-title">Databases</div>
                     </div>
                     <div class="skill-tags">
-                        <span class="skill-tag">MySQL</span><span class="skill-tag">Django</span><span class="skill-tag">Data Modeling</span>
+                        <span class="skill-tag">MySQL</span><span class="skill-tag">Data Modeling</span>
                     </div>
                 </div>
                 <div class="skill-card reveal">
@@ -462,16 +462,26 @@
     <!-- ═══════════════════════ BOTTOM-RIGHT CONTROLS ═══════════════════════ -->
     <div class="br-bottom" aria-hidden="false">
         <div style="position:relative;">
-            <div id="contactPanel" class="br-contact-panel" role="dialog" aria-label="Contact form" aria-hidden="true">
-                <button class="br-close" id="brClose" aria-label="Close"><i class="bi bi-x-lg"></i></button>
-                <form id="brContactForm">
-                    <input type="text" id="brName" name="name" placeholder="Your name" aria-label="Your name" autocomplete="name" required />
-                    <input type="email" id="brEmail" name="email" placeholder="Your email" aria-label="Your email" autocomplete="email" required />
-                    <textarea id="brMessage" name="message" placeholder="Message" aria-label="Message" required></textarea>
-                    <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:6px;">
-                        <button type="submit" class="br-send">Send</button>
+            <div id="contactPanel" class="br-contact-panel" role="dialog" aria-labelledby="brContactTitle" aria-hidden="true" inert>
+                <div class="br-panel-head">
+                    <div class="br-panel-icon"><i class="bi bi-chat-heart" aria-hidden="true"></i></div>
+                    <div class="br-panel-intro">
+                        <p class="br-panel-kicker">LET'S CONNECT</p>
+                        <h2 id="brContactTitle">How can I help?</h2>
+                        <p>Send me a note and I’ll get back to you soon.</p>
                     </div>
+                    <button class="br-close" id="brClose" aria-label="Close contact form"><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+                </div>
+                <form id="brContactForm">
+                    <label for="brName">Your name</label>
+                    <input type="text" id="brName" name="name" placeholder="e.g. Ada Lovelace" autocomplete="name" required />
+                    <label for="brEmail">Email address</label>
+                    <input type="email" id="brEmail" name="email" placeholder="you@example.com" autocomplete="email" required />
+                    <label for="brMessage">What would you like to talk about?</label>
+                    <textarea id="brMessage" name="message" placeholder="Tell me a little about your project..." required></textarea>
+                    <button type="submit" class="br-send">Send your message <i class="bi bi-arrow-right" aria-hidden="true"></i></button>
                 </form>
+                <a class="br-direct-email" href="mailto:ogunladedaniel12@gmail.com"><i class="bi bi-envelope" aria-hidden="true"></i> Prefer email? Write to me directly</a>
             </div>
             <button id="contactToggleBtn" class="br-btn" aria-label="Open contact form" aria-controls="contactPanel" aria-expanded="false" title="Contact">
                 <i class="bi bi-envelope"></i>
