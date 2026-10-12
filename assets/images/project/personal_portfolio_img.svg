@@ -1,0 +1,41 @@
+<svg width="1200" height="820" viewBox="0 0 1200 820" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="70" y1="40" x2="1110" y2="760" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7F6F3"/>
+      <stop offset="1" stop-color="#EAF4FF"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="215" y1="120" x2="1030" y2="630" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A73E8"/>
+      <stop offset="1" stop-color="#18B0A4"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="820" rx="28" fill="url(#bg)"/>
+  <rect x="72" y="62" width="1056" height="694" rx="26" fill="#101822"/>
+  <rect x="72" y="62" width="1056" height="56" rx="26" fill="#141E2A"/>
+  <circle cx="118" cy="90" r="8" fill="#FF5F57"/>
+  <circle cx="150" cy="90" r="8" fill="#FEBC2E"/>
+  <circle cx="182" cy="90" r="8" fill="#28C840"/>
+  <rect x="118" y="152" width="176" height="28" rx="14" fill="#1A2433"/>
+  <rect x="118" y="192" width="332" height="18" rx="9" fill="#1A2433"/>
+  <rect x="118" y="220" width="290" height="18" rx="9" fill="#1A2433"/>
+  <rect x="118" y="260" width="270" height="154" rx="20" fill="url(#accent)"/>
+  <rect x="430" y="260" width="270" height="20" rx="10" fill="#1A2433"/>
+  <rect x="430" y="292" width="345" height="18" rx="9" fill="#1A2433"/>
+  <rect x="430" y="322" width="315" height="18" rx="9" fill="#1A2433"/>
+  <rect x="430" y="358" width="188" height="42" rx="21" fill="#1FB4A2"/>
+  <rect x="118" y="452" width="210" height="170" rx="18" fill="#141E2A"/>
+  <rect x="350" y="452" width="210" height="170" rx="18" fill="#141E2A"/>
+  <rect x="582" y="452" width="210" height="170" rx="18" fill="#141E2A"/>
+  <rect x="814" y="452" width="210" height="170" rx="18" fill="#141E2A"/>
+  <rect x="118" y="650" width="470" height="18" rx="9" fill="#1A2433"/>
+  <rect x="618" y="650" width="270" height="18" rx="9" fill="#1A2433"/>
+  <text x="140" y="100" fill="#E5EEF8" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="600">daniel@portfolio</text>
+  <text x="118" y="578" fill="#E8F1FF" font-family="Segoe UI, Arial, sans-serif" font-size="28" font-weight="700">My Portfolio</text>
+  <text x="430" y="240" fill="#E8F1FF" font-family="Segoe UI, Arial, sans-serif" font-size="40" font-weight="700">Daniel Ogunlade</text>
+  <text x="430" y="212" fill="#7CD6D1" font-family="Segoe UI, Arial, sans-serif" font-size="16" font-weight="700" letter-spacing="3">FULL-STACK DEVELOPER</text>
+  <text x="150" y="292" fill="#F4FBFF" font-family="Segoe UI, Arial, sans-serif" font-size="46" font-weight="700">DO</text>
+  <text x="138" y="630" fill="#D4E6FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">Projects</text>
+  <text x="370" y="630" fill="#D4E6FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">Skills</text>
+  <text x="602" y="630" fill="#D4E6FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">Experience</text>
+  <text x="834" y="630" fill="#D4E6FF" font-family="Segoe UI, Arial, sans-serif" font-size="14">Contact</text>
+</svg>

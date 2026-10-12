@@ -1,23 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Get to know Daniel Ogunlade, a full-stack web developer in Nigeria, his journey, skills, and approach to building thoughtful digital experiences." />
+    <meta name="theme-color" content="#F7F6F3" />
     <title>About · Daniel Ogunlade</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link rel="shortcut icon" href="images\logo\favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="assets/images/logo/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <link rel="stylesheet" href="assets/css/style.css" />
     <script src="assets/js/theme-init.js"></script>
 </head>
+
 <body>
+    <nav id="mainNav" aria-label="Main navigation">
+        <div class="wrap">
+            <a href="index.html" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" aria-current="page">About</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="dev_dashboard.html" aria-label="Developer dashboard" title="Developer dashboard"><i class="bi bi-code-slash" aria-hidden="true"></i></a></li>
+            </ul>
+            <div class="nav-right">
+                <div style="position:relative;">
+                    <button class="theme-toggle" id="themeBtn" aria-label="Theme settings" aria-controls="themeDropdown" aria-expanded="false">
+                        <i class="bi bi-circle-half" id="themeIcon" aria-hidden="true"></i>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown" aria-hidden="true">
+                        <button class="theme-option" type="button" data-theme="light"><i class="bi bi-sun" aria-hidden="true"></i> Light <i class="bi bi-check check" aria-hidden="true"></i></button>
+                        <button class="theme-option" type="button" data-theme="dark"><i class="bi bi-moon-stars" aria-hidden="true"></i> Dark <i class="bi bi-check check" aria-hidden="true"></i></button>
+                        <button class="theme-option" type="button" data-theme="system"><i class="bi bi-display" aria-hidden="true"></i> System <i class="bi bi-check check" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta"><i class="bi bi-download" aria-hidden="true"></i> <span>Resume</span></a>
+                <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="mobileNavPanel" aria-expanded="false"><i class="bi bi-list" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </nav>
 
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true"></div>
+    <div class="mobile-nav-panel" id="mobileNavPanel" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true" inert>
+        <div class="mobile-nav-head">
+            <a href="index.html" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><span>Close</span><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html" aria-current="page">About</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="dev_dashboard.html" aria-label="Developer dashboard" title="Developer dashboard"><i class="bi bi-code-slash" aria-hidden="true"></i></a></li>
+        </ul>
+        <div class="mobile-nav-footer">
+            <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta" style="justify-content:center;"><i class="bi bi-download" aria-hidden="true"></i> Download Resume</a>
+        </div>
+    </div>
 
-•
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <main id="mainContent">
+        <section class="page-section">
+            <div class="wrap">
+                <div class="hero-card">
+                    <div>
+                        <div class="eyebrow">A LITTLE ABOUT ME</div>
+                        <h1 class="hero-title">Curious by nature. A builder by choice.</h1>
+                        <p class="hero-copy">I’m Daniel Ogunlade, a full-stack web developer based in Nigeria. I enjoy turning ideas into clear, useful digital experiences — from the first interface to the logic and data behind it.</p>
+                        <div class="hero-actions">
+                            <a href="#my-journey" class="btn-primary"><i class="bi bi-arrow-down" aria-hidden="true"></i> My journey</a>
+                            <a href="projects.html" class="btn-secondary"><i class="bi bi-grid" aria-hidden="true"></i> Explore my work</a>
+                        </div>
+                    </div>
+                    <div class="summary-panel">
+                        <div class="eyebrow">HOW I APPROACH THE WORK</div>
+                        <h2>Build with purpose</h2>
+                        <p>I care about responsive interfaces, thoughtful details, and understanding how each part of an application works together.</p>
+                        <div class="project-meta">
+                            <span class="tag">Full-stack development</span>
+                            <span class="tag">Practical problem-solving</span>
+                            <span class="tag">Always learning</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
+        <section class="page-section" id="my-journey">
+            <div class="wrap">
+                <div class="about-grid">
+                    <div>
+                        <div class="eyebrow">MY STORY</div>
+                        <h2 class="section-title">Learning how the whole web fits together.</h2>
+                        <div class="about-text">
+                            <p>My path into development began with a simple curiosity about how websites work behind the screen. That curiosity grew into a hands-on commitment to learning how to build them.</p>
+                            <p>In 2025, I completed an intensive five-month Fullstack Web Development program at UpTech Computer Training Academy. I started with <strong>HTML, CSS, and JavaScript</strong>, then moved into server-side development, REST APIs, and databases with <strong>Python, Django, Node.js, and MySQL</strong>.</p>
+                            <p>Since then, I’ve been putting that foundation into practice through projects like <strong>TastecraftMe</strong>, <strong>Marvellan Hotel</strong>, and this portfolio. I like clean, readable code, useful interfaces, and learning the reasoning behind a solution — not just making it run.</p>
+                            <p>I’m currently open to full-time roles, internships, and freelance opportunities where I can contribute, keep learning, and build products that solve real problems.</p>
+                        </div>
+                    </div>
+                    <aside class="cert-card" aria-label="Fullstack Web Development certificate">
+                        <div class="cert-card-head">
+                            <div class="cert-icon"><i class="bi bi-patch-check-fill" aria-hidden="true"></i></div>
+                            <div>
+                                <h3 class="cert-card-title">Fullstack Web Development</h3>
+                                <p class="cert-card-sub">UpTech Computer Training Academy</p>
+                            </div>
+                        </div>
+                        <div class="cert-detail"><span class="label">Completed</span><span class="value">June 2025</span></div>
+                        <div class="cert-detail"><span class="label">Certificate ID</span><span class="value">UCTA/FSD/2025/11549</span></div>
+                        <div class="cert-detail"><span class="label">Focus</span><span class="value">Full-stack web development</span></div>
+                    </aside>
+                </div>
+            </div>
+        </section>
 
+        <section class="page-section" id="experience">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="eyebrow">THE JOURNEY SO FAR</div>
+                    <h2 class="section-title">Learning, building, and growing.</h2>
+                    <p class="section-desc">A few milestones that shaped the way I approach development.</p>
+                </div>
+                <div class="build-log">
+                    <article class="log-item">
+                        <div class="log-dot"></div>
+                        <div class="log-date">JANUARY 2025</div>
+                        <h3 class="log-title">Started my full-stack training</h3>
+                        <p class="log-desc">Began a structured program at UpTech Computer Training Academy, building a foundation in HTML, CSS, and JavaScript.</p>
+                    </article>
+                    <article class="log-item">
+                        <div class="log-dot" style="background:var(--teal);"></div>
+                        <div class="log-date">MARCH – MAY 2025</div>
+                        <h3 class="log-title">Expanded into back-end and databases</h3>
+                        <p class="log-desc">Learned server-side programming, REST API design, and how to model and query application data.</p>
+                    </article>
+                    <article class="log-item">
+                        <div class="log-dot" style="background:var(--orange);"></div>
+                        <div class="log-date">JUNE 2025</div>
+                        <h3 class="log-title">Completed Fullstack Web Development</h3>
+                        <p class="log-desc">Successfully completed the required program modules and received my certificate of completion.</p>
+                    </article>
+                    <article class="log-item">
+                        <div class="log-dot" style="background:var(--muted-2);"></div>
+                        <div class="log-date">NOW</div>
+                        <h3 class="log-title">Building projects and looking ahead</h3>
+                        <p class="log-desc">Applying my skills to practical projects and looking for opportunities to contribute and grow as a developer.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="wrap">
+                <div class="section-head">
+                    <div class="eyebrow">WHAT MATTERS TO ME</div>
+                    <h2 class="section-title">A thoughtful approach to building.</h2>
+                </div>
+                <div class="skills-grid">
+                    <article class="skill-card">
+                        <div class="skill-card-head">
+                            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i class="bi bi-person-check" aria-hidden="true"></i></div>
+                            <h3 class="skill-card-title">People first</h3>
+                        </div>
+                        <p class="section-desc">I aim for clear, responsive experiences that make sense to the people using them.</p>
+                    </article>
+                    <article class="skill-card">
+                        <div class="skill-card-head">
+                            <div class="skill-icon" style="background:rgba(14,140,127,0.12);color:var(--teal);"><i class="bi bi-braces" aria-hidden="true"></i></div>
+                            <h3 class="skill-card-title">Understand the details</h3>
+                        </div>
+                        <p class="section-desc">I value readable code and understanding why a solution works from interface to data.</p>
+                    </article>
+                    <article class="skill-card">
+                        <div class="skill-card-head">
+                            <div class="skill-icon" style="background:var(--orange-soft);color:var(--orange);"><i class="bi bi-arrow-repeat" aria-hidden="true"></i></div>
+                            <h3 class="skill-card-title">Keep learning</h3>
+                        </div>
+                        <p class="section-desc">Every project is a chance to improve my craft and take on a new challenge.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="page-section">
+            <div class="wrap">
+                <div class="contact-card">
+                    <div class="eyebrow" style="justify-content:center;">LET’S CONNECT</div>
+                    <h2 class="contact-title">Let’s build something useful.</h2>
+                    <p class="contact-desc">I’m open to full-time roles, internships, and freelance projects. If you have an idea or opportunity, I’d be glad to hear from you.</p>
+                    <div class="contact-row">
+                        <a href="mailto:ogunladedaniel12@gmail.com" class="btn-primary"><i class="bi bi-envelope" aria-hidden="true"></i> Email me</a>
+                        <a href="Daniel_Ogunlade_CV.pdf" download class="btn-secondary"><i class="bi bi-download" aria-hidden="true"></i> Download CV</a>
+                    </div>
+                    <div class="social-row">
+                        <a href="https://github.com/Ogunlade-Daniel" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+                        <a href="https://wa.me/2348166729962" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="WhatsApp"><i class="bi bi-whatsapp" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html" class="footer-logo"><span>DO</span> Daniel Ogunlade</a>
+                    <p>Building thoughtful digital experiences, one project at a time.</p>
+                </div>
+                <div class="footer-invitation">
+                    <span class="footer-eyebrow">OPEN TO OPPORTUNITIES</span>
+                    <a href="mailto:ogunladedaniel12@gmail.com" class="footer-cta">Have a project in mind? <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2026 Daniel Ogunlade <span>·</span> Made with care</p>
+                <div class="footer-socials" aria-label="Social links">
+                    <a href="https://github.com/Ogunlade-Daniel" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+                    <a href="mailto:ogunladedaniel12@gmail.com" aria-label="Email"><i class="bi bi-envelope" aria-hidden="true"></i></a>
+                </div>
+                <a href="dev_dashboard.html" class="footer-top" aria-label="Developer dashboard" title="Developer dashboard"><i class="bi bi-code-slash" aria-hidden="true"></i></a>
+                <a href="#mainContent" class="footer-top">Back to top <i class="bi bi-arrow-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </footer>
 
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>
