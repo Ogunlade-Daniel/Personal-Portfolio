@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Contact Daniel Ogunlade about full-stack development roles, freelance projects, and collaborations." />
+    <meta name="theme-color" content="#F7F6F3" />
     <title>Contact · Daniel Ogunlade</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
     <link rel="icon" href="assets/images/logo/favicon.ico" type="image/x-icon" />
@@ -11,12 +15,109 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <script src="assets/js/theme-init.js"></script>
 </head>
+
 <body>
+    <nav id="mainNav" aria-label="Main navigation">
+        <div class="wrap">
+            <a href="index.html#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
+            <ul class="nav-links">
+                <li><a href="index.html#hero">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="index.html#skills">Skills</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="contact.html" aria-current="page">Contact</a></li>
+            </ul>
+            <div class="nav-right">
+                <div style="position:relative;">
+                    <button class="theme-toggle" id="themeBtn" aria-label="Theme settings" aria-controls="themeDropdown" aria-expanded="false">
+                        <i class="bi bi-circle-half" id="themeIcon" aria-hidden="true"></i>
+                    </button>
+                    <div class="theme-dropdown" id="themeDropdown" aria-hidden="true">
+                        <button class="theme-option" type="button" data-theme="light"><i class="bi bi-sun" aria-hidden="true"></i> Light <i class="bi bi-check check" aria-hidden="true"></i></button>
+                        <button class="theme-option" type="button" data-theme="dark"><i class="bi bi-moon-stars" aria-hidden="true"></i> Dark <i class="bi bi-check check" aria-hidden="true"></i></button>
+                        <button class="theme-option" type="button" data-theme="system"><i class="bi bi-display" aria-hidden="true"></i> System <i class="bi bi-check check" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <a class="nav-dashboard" href="dev_dashboard.html" aria-label="Developer dashboard" title="Developer dashboard"><i class="bi bi-code-slash" aria-hidden="true"></i></a>
+                <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta"><i class="bi bi-download" aria-hidden="true"></i> <span>Resume</span></a>
+                <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="mobileNavPanel" aria-expanded="false"><i class="bi bi-list" aria-hidden="true"></i></button>
+            </div>
+        </div>
+    </nav>
 
+    <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true"></div>
+    <div class="mobile-nav-panel" id="mobileNavPanel" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true" inert>
+        <div class="mobile-nav-head">
+            <a href="index.html#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><span>Close</span><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="index.html#hero">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="index.html#skills">Skills</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html" aria-current="page">Contact</a></li>
+        </ul>
+        <div class="mobile-nav-footer">
+            <a class="mobile-dashboard-link" href="dev_dashboard.html"><i class="bi bi-code-slash" aria-hidden="true"></i> Open Developer Dashboard</a>
+            <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta" style="justify-content:center;"><i class="bi bi-download" aria-hidden="true"></i> Download Resume</a>
+        </div>
+    </div>
 
+    <a class="skip-link" href="#mainContent">Skip to content</a>
+    <main id="mainContent">
+        <section class="page-section" id="contact">
+            <div class="wrap">
+                <div class="hero-card">
+                    <div>
+                        <div class="eyebrow">GET IN TOUCH</div>
+                        <h1 class="hero-title">Have a project in mind? Let’s talk.</h1>
+                        <p class="hero-copy">I’m open to full-time roles, internships, freelance projects, and collaborations. Tell me what you’re building and let’s see how I can help.</p>
+                        <div class="hero-actions">
+                            <a href="mailto:ogunladedaniel12@gmail.com" class="btn-primary"><i class="bi bi-envelope" aria-hidden="true"></i> Email me</a>
+                            <a href="Daniel_Ogunlade_CV.pdf" download class="btn-secondary"><i class="bi bi-download" aria-hidden="true"></i> Download CV</a>
+                        </div>
+                    </div>
+                    <div class="summary-panel">
+                        <div class="eyebrow">REACH ME DIRECTLY</div>
+                        <h2>Let’s start a conversation</h2>
+                        <p>Choose whichever channel works best for you. I look forward to hearing about your idea or opportunity.</p>
+                        <div class="project-meta">
+                            <a class="tag" href="mailto:ogunladedaniel12@gmail.com"><i class="bi bi-envelope" aria-hidden="true"></i> Email</a>
+                            <a class="tag" href="https://wa.me/2348166729962" target="_blank" rel="noopener noreferrer"><i class="bi bi-whatsapp" aria-hidden="true"></i> WhatsApp</a>
+                            <a class="tag" href="https://github.com/Ogunlade-Daniel" target="_blank" rel="noopener noreferrer"><i class="bi bi-github" aria-hidden="true"></i> GitHub</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-    
+    <footer class="site-footer">
+        <div class="wrap">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <a href="index.html#hero" class="footer-logo"><span>DO</span> Daniel Ogunlade</a>
+                    <p>Building thoughtful digital experiences, one project at a time.</p>
+                </div>
+                <div class="footer-invitation">
+                    <span class="footer-eyebrow">OPEN TO OPPORTUNITIES</span>
+                    <a href="mailto:ogunladedaniel12@gmail.com" class="footer-cta">Have a project in mind? <i class="bi bi-arrow-up-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="footer-copyright">© 2026 Daniel Ogunlade <span>·</span> Made with care</p>
+                <div class="footer-socials" aria-label="Social links">
+                    <a href="https://github.com/Ogunlade-Daniel" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="bi bi-github" aria-hidden="true"></i></a>
+                    <a href="mailto:ogunladedaniel12@gmail.com" aria-label="Email"><i class="bi bi-envelope" aria-hidden="true"></i></a>
+                </div>
+                <a href="dev_dashboard.html" class="footer-top" aria-label="Developer dashboard" title="Developer dashboard"><i class="bi bi-code-slash" aria-hidden="true"></i></a>
+                <a href="#mainContent" class="footer-top">Back to top <i class="bi bi-arrow-up" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </footer>
 
     <script src="assets/js/script.js"></script>
 </body>
+
 </html>

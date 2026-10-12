@@ -39,26 +39,26 @@
     <!-- ═══════════════════════ NAV ═══════════════════════ -->
     <nav id="mainNav" aria-label="Main navigation">
         <div class="wrap">
-            <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
+            <a href="index.html#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
             <ul class="nav-links">
                 <li><a href="#hero">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="projects.html">Projects</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="dev_dashboard.html" aria-label="Developer dashboard" title="Developer dashboard"><i class="bi bi-code-slash" aria-hidden="true"></i></a></li>
             </ul>
             <div class="nav-right">
                 <div style="position:relative;">
                     <button class="theme-toggle" id="themeBtn" aria-label="Theme settings" aria-controls="themeDropdown" aria-expanded="false">
-                        <i class="bi bi-circle-half" id="themeIcon"></i>
+                        <i class="bi bi-circle-half" id="themeIcon" aria-hidden="true"></i>
                     </button>
                     <div class="theme-dropdown" id="themeDropdown" aria-hidden="true">
-                        <button class="theme-option" data-theme="light"><i class="bi bi-sun"></i> Light <i class="bi bi-check check"></i></button>
-                        <button class="theme-option" data-theme="dark"><i class="bi bi-moon-stars"></i> Dark <i class="bi bi-check check"></i></button>
-                        <button class="theme-option" data-theme="system"><i class="bi bi-display"></i> System <i class="bi bi-check check"></i></button>
+                        <button class="theme-option" type="button" data-theme="light"><i class="bi bi-sun" aria-hidden="true"></i> Light <i class="bi bi-check check" aria-hidden="true"></i></button>
+                        <button class="theme-option" type="button" data-theme="dark"><i class="bi bi-moon-stars" aria-hidden="true"></i> Dark <i class="bi bi-check check" aria-hidden="true"></i></button>
+                        <button class="theme-option" type="button" data-theme="system"><i class="bi bi-display" aria-hidden="true"></i> System <i class="bi bi-check check" aria-hidden="true"></i></button>
                     </div>
                 </div>
+                <a class="nav-dashboard" href="dev_dashboard.html" aria-label="Developer dashboard" title="Developer dashboard"><i class="bi bi-code-slash" aria-hidden="true"></i></a>
                 <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta"><i class="bi bi-download"></i> <span>Resume</span></a>
                 <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-controls="mobileNavPanel" aria-expanded="false"><i class="bi bi-list"></i></button>
             </div>
@@ -69,8 +69,8 @@
     <div class="mobile-nav-overlay" id="mobileNavOverlay" aria-hidden="true"></div>
     <div class="mobile-nav-panel" id="mobileNavPanel" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true" inert>
         <div class="mobile-nav-head">
-            <a href="#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
-            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Cancel menu"><span>Cancel</span><i class="bi bi-x-lg" aria-hidden="true"></i></button>
+            <a href="index.html#hero" class="nav-logo"><span class="bracket">&lt;</span>Daniel<span class="bracket">/&gt;</span></a>
+            <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu"><span>Close</span><i class="bi bi-x-lg" aria-hidden="true"></i></button>
         </div>
         <ul class="mobile-nav-links">
             <li><a href="#hero">Home</a></li>
@@ -78,9 +78,9 @@
             <li><a href="#skills">Skills</a></li>
             <li><a href="projects.html">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="dev_dashboard.html" aria-label="Developer dashboard" title="Developer dashboard"><i class="bi bi-code-slash" aria-hidden="true"></i></a></li>
         </ul>
         <div class="mobile-nav-footer">
+            <a class="mobile-dashboard-link" href="dev_dashboard.html"><i class="bi bi-code-slash" aria-hidden="true"></i> Open Developer Dashboard</a>
             <a href="Daniel_Ogunlade_CV.pdf" download class="nav-cta" style="justify-content:center;"><i class="bi bi-download"></i> Download Resume</a>
         </div>
     </div>
@@ -454,7 +454,7 @@
         <div class="wrap">
             <div class="footer-main">
                 <div class="footer-brand">
-                    <a href="#hero" class="footer-logo"><span>DO</span> Daniel Ogunlade</a>
+                    <a href="index.html#hero" class="footer-logo"><span>DO</span> Daniel Ogunlade</a>
                     <p>Building thoughtful digital experiences, one project at a time.</p>
                 </div>
                 <div class="footer-invitation">
@@ -471,7 +471,7 @@
                     <a href="mailto:ogunladedaniel12@gmail.com" aria-label="Email"><i class="bi bi-envelope" aria-hidden="true"></i></a>
                 </div>
                 <a href="dev_dashboard.html" class="footer-top" aria-label="Developer dashboard" title="Developer dashboard"><i class="bi bi-code-slash" aria-hidden="true"></i></a>
-                <a href="#hero" class="footer-top">Back to top <i class="bi bi-arrow-up" aria-hidden="true"></i></a>
+                <a href="#mainContent" class="footer-top">Back to top <i class="bi bi-arrow-up" aria-hidden="true"></i></a>
             </div>
         </div>
     </footer>
